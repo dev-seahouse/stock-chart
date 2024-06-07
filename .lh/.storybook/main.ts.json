@@ -1,0 +1,18 @@
+{
+    "sourceFile": ".storybook/main.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1717758143010,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1717758143010,
+            "name": "Commit-0",
+            "content": "import type { StorybookConfig } from '@storybook/react-vite';\n\nconst config: StorybookConfig = {\n  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],\n  addons: [\n    '@storybook/addon-onboarding',\n    '@storybook/addon-links',\n    '@storybook/addon-essentials',\n    '@chromatic-com/storybook',\n    '@storybook/addon-interactions',\n  ],\n  staticDirs: ['../public'],\n  framework: {\n    name: '@storybook/react-vite',\n    options: {},\n  },\n};\nexport default config;\n"
+        }
+    ]
+}

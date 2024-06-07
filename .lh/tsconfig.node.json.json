@@ -1,0 +1,38 @@
+{
+    "sourceFile": "tsconfig.node.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1717756199501,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717756216098,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,6 +6,6 @@\n     \"moduleResolution\": \"bundler\",\n     \"allowSyntheticDefaultImports\": true,\n     \"strict\": true\n   },\n-  \"include\": [\"vite.config.ts\", \"tailwind.config.cjs\"]\n+  \"include\": [\"vite.config.ts\", \"tailwind.config.js\"]\n }\n"
+                },
+                {
+                    "date": 1717756385183,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,6 +6,6 @@\n     \"moduleResolution\": \"bundler\",\n     \"allowSyntheticDefaultImports\": true,\n     \"strict\": true\n   },\n-  \"include\": [\"vite.config.ts\", \"tailwind.config.js\"]\n+  \"include\": [\"vite.config.ts\", \"tailwind.config.cjs\"]\n }\n"
+                },
+                {
+                    "date": 1717756429361,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,6 +6,6 @@\n     \"moduleResolution\": \"bundler\",\n     \"allowSyntheticDefaultImports\": true,\n     \"strict\": true\n   },\n-  \"include\": [\"vite.config.ts\", \"tailwind.config.cjs\"]\n+  \"include\": [\"vite.config.ts\", ]\n }\n"
+                },
+                {
+                    "date": 1717756532773,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,6 +6,6 @@\n     \"moduleResolution\": \"bundler\",\n     \"allowSyntheticDefaultImports\": true,\n     \"strict\": true\n   },\n-  \"include\": [\"vite.config.ts\"]\n+  \"include\": [\"vite.config.ts\", \"tailwind.config.cjs\"]\n }\n"
+                },
+                {
+                    "date": 1717756629011,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,6 +6,6 @@\n     \"moduleResolution\": \"bundler\",\n     \"allowSyntheticDefaultImports\": true,\n     \"strict\": true\n   },\n-  \"include\": [\"vite.config.ts\", \"tailwind.config.ts\"]\n+  \"include\": [\"vite.config.ts\", ]\n }\n"
+                }
+            ],
+            "date": 1717756199501,
+            "name": "Commit-0",
+            "content": "{\n  \"compilerOptions\": {\n    \"composite\": true,\n    \"skipLibCheck\": true,\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"allowSyntheticDefaultImports\": true,\n    \"strict\": true\n  },\n  \"include\": [\"vite.config.ts\", \"tailwind.config.cjs\"]\n}\n"
+        }
+    ]
+}

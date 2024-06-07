@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/main.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1717753090683,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717758266072,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,13 @@\n import React from 'react';\n import ReactDOM from 'react-dom/client';\n import App from './App.tsx';\n import './index.css';\n+import AppProvider from './providers/AppProvider.tsx';\n \n ReactDOM.createRoot(document.getElementById('root')!).render(\n   <React.StrictMode>\n-    <App />\n+    <AppProvider>\n+      <App />\n+    </AppProvider>\n   </React.StrictMode>,\n );\n"
+                }
+            ],
+            "date": 1717753090683,
+            "name": "Commit-0",
+            "content": "import React from 'react';\nimport ReactDOM from 'react-dom/client';\nimport App from './App.tsx';\nimport './index.css';\n\nReactDOM.createRoot(document.getElementById('root')!).render(\n  <React.StrictMode>\n    <App />\n  </React.StrictMode>,\n);\n"
+        }
+    ]
+}

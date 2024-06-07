@@ -1,0 +1,46 @@
+{
+    "sourceFile": "src/App.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1717753059904,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717753388682,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,9 @@\n-import { useState } from 'react'\n-import reactLogo from './assets/react.svg'\n-import viteLogo from '/vite.svg'\n+import { useState } from 'react';\n+import reactLogo from './assets/react.svg';\n \n function App() {\n-  const [count, setCount] = useState(0)\n+  const [count, setCount] = useState(0);\n \n   return (\n     <>\n       <div>\n@@ -27,8 +26,8 @@\n       <p className=\"read-the-docs\">\n         Click on the Vite and React logos to learn more\n       </p>\n     </>\n-  )\n+  );\n }\n \n-export default App\n+export default App;\n"
+                },
+                {
+                    "date": 1717753398209,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,31 +3,8 @@\n \n function App() {\n   const [count, setCount] = useState(0);\n \n-  return (\n-    <>\n-      <div>\n-        <a href=\"https://vitejs.dev\" target=\"_blank\">\n-          <img src={viteLogo} className=\"logo\" alt=\"Vite logo\" />\n-        </a>\n-        <a href=\"https://react.dev\" target=\"_blank\">\n-          <img src={reactLogo} className=\"logo react\" alt=\"React logo\" />\n-        </a>\n-      </div>\n-      <h1>Vite + React</h1>\n-      <div className=\"card\">\n-        <button onClick={() => setCount((count) => count + 1)}>\n-          count is {count}\n-        </button>\n-        <p>\n-          Edit <code>src/App.tsx</code> and save to test HMR\n-        </p>\n-      </div>\n-      <p className=\"read-the-docs\">\n-        Click on the Vite and React logos to learn more\n-      </p>\n-    </>\n-  );\n+  return hello;\n }\n \n export default App;\n"
+                },
+                {
+                    "date": 1717753404719,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,8 @@\n import { useState } from 'react';\n import reactLogo from './assets/react.svg';\n \n function App() {\n-  const [count, setCount] = useState(0);\n-\n-  return hello;\n+  return <>hello</>;\n }\n \n export default App;\n"
+                },
+                {
+                    "date": 1717755971238,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n function App() {\n   return <>hello</>;\n }\n \n+\n export default App;\n"
+                },
+                {
+                    "date": 1717756019498,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,5 @@\n-import { useState } from 'react';\n-import reactLogo from './assets/react.svg';\n-\n function App() {\n   return <>hello</>;\n }\n \n-\n export default App;\n"
+                },
+                {
+                    "date": 1717756026328,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,4 +2,5 @@\n   return <>hello</>;\n }\n \n export default App;\n+\n"
+                },
+                {
+                    "date": 1717758248178,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,103 @@\n+import AppLayout from './layouts/AppLayout';\n+import StocksAsyncSelect, {\n+  type StocksSelectOption,\n+} from './components/StocksAsyncSelect';\n+import { useState } from 'react';\n+import Heading from './lib/components/Heading';\n+import { Button } from './lib/components/Button';\n+import { X } from 'lucide-react';\n+\n+const MAX_SELECTABLE_STOCKS = 3;\n function App() {\n-  return <>hello</>;\n+  const [selectedStocks, setSelectedStocks] = useState<StocksSelectOption[]>(\n+    [],\n+  );\n+  function handleStocksChange(newValue: StocksSelectOption | null) {\n+    if (\n+      !newValue ||\n+      selectedStocks?.some((item) => item.value === newValue.value)\n+    )\n+      return;\n+    setSelectedStocks((oldValues) => [newValue, ...oldValues]);\n+  }\n+\n+  const handleDeselectStock = (stock: StocksSelectOption) => {\n+    setSelectedStocks((oldValues) =>\n+      oldValues.filter((s) => s.value !== stock.value),\n+    );\n+  };\n+\n+  return (\n+    <AppLayout>\n+      <main\n+        className={`\n+          flex-1 bg-secondary p-4\n+\n+          md:p-8\n+        `}\n+      >\n+        <div\n+          className={`\n+            grid grid-cols-1 gap-8\n+\n+            md:grid-cols-3\n+          `}\n+        >\n+          <div className=\"col-span-1\">\n+            <Heading as=\"h2\">Select Stocks</Heading>\n+            <StocksAsyncSelect\n+              onChange={handleStocksChange}\n+              isDisabled={selectedStocks?.length >= MAX_SELECTABLE_STOCKS}\n+            />\n+            <div className=\"mt-4\">\n+              <Heading className={`mb-2`} as=\"h2\">\n+                Selected Stocks\n+              </Heading>\n+              {selectedStocks.length === 0 && (\n+                <div\n+                  className={`\n+                    mt-4 text-gray-500\n+\n+                    dark:text-gray-400\n+                  `}\n+                >\n+                  No stocks selected. Please select up to 3 stocks to view the\n+                  price chart.\n+                </div>\n+              )}\n+              <ul className=\"space-y-2\">\n+                {selectedStocks.map((stock) => (\n+                  <li\n+                    key={stock.value}\n+                    className={`\n+                      flex items-center justify-between text-gray-800\n+\n+                      dark:text-gray-200\n+                    `}\n+                  >\n+                    {stock.label}\n+                    <Button\n+                      onClick={() => handleDeselectStock(stock)}\n+                      variant=\"ghost\"\n+                      size=\"icon\"\n+                    >\n+                      <X\n+                        className={`\n+                          size-4 text-gray-500\n+\n+                          dark:text-gray-400\n+                        `}\n+                      />\n+                    </Button>\n+                  </li>\n+                ))}\n+              </ul>\n+            </div>\n+          </div>\n+        </div>\n+      </main>\n+    </AppLayout>\n+  );\n }\n+\n export default App;\n"
+                }
+            ],
+            "date": 1717753059904,
+            "name": "Commit-0",
+            "content": "import { useState } from 'react'\nimport reactLogo from './assets/react.svg'\nimport viteLogo from '/vite.svg'\n\nfunction App() {\n  const [count, setCount] = useState(0)\n\n  return (\n    <>\n      <div>\n        <a href=\"https://vitejs.dev\" target=\"_blank\">\n          <img src={viteLogo} className=\"logo\" alt=\"Vite logo\" />\n        </a>\n        <a href=\"https://react.dev\" target=\"_blank\">\n          <img src={reactLogo} className=\"logo react\" alt=\"React logo\" />\n        </a>\n      </div>\n      <h1>Vite + React</h1>\n      <div className=\"card\">\n        <button onClick={() => setCount((count) => count + 1)}>\n          count is {count}\n        </button>\n        <p>\n          Edit <code>src/App.tsx</code> and save to test HMR\n        </p>\n      </div>\n      <p className=\"read-the-docs\">\n        Click on the Vite and React logos to learn more\n      </p>\n    </>\n  )\n}\n\nexport default App\n"
+        }
+    ]
+}

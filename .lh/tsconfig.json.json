@@ -1,0 +1,26 @@
+{
+    "sourceFile": "tsconfig.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1717755279914,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717756083969,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,16 +17,14 @@\n     /* Linting */\n     \"strict\": true,\n     \"noUnusedLocals\": true,\n     \"noUnusedParameters\": true,\n-    \"noFallthroughCasesInSwitch\": true\n+    \"noFallthroughCasesInSwitch\": true,\n \n     /* ShadCn*/\n-        \"baseUrl\": \".\",\n+    \"baseUrl\": \".\",\n     \"paths\": {\n-      \"@/*\": [\n-        \"./src/*\"\n-      ]\n+      \"@/*\": [\"./src/*\"]\n     }\n   },\n   \"include\": [\"src\"],\n   \"references\": [{ \"path\": \"./tsconfig.node.json\" }]\n"
+                },
+                {
+                    "date": 1717756358178,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,10 @@\n     \"resolveJsonModule\": true,\n     \"isolatedModules\": true,\n     \"noEmit\": true,\n     \"jsx\": \"react-jsx\",\n+    \"esModuleInterop\": true,\n+    \"allowSyntheticDefaultImports\": true,\n \n     /* Linting */\n     \"strict\": true,\n     \"noUnusedLocals\": true,\n"
+                }
+            ],
+            "date": 1717755279913,
+            "name": "Commit-0",
+            "content": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2020\",\n    \"useDefineForClassFields\": true,\n    \"lib\": [\"ES2020\", \"DOM\", \"DOM.Iterable\"],\n    \"module\": \"ESNext\",\n    \"skipLibCheck\": true,\n\n    /* Bundler mode */\n    \"moduleResolution\": \"bundler\",\n    \"allowImportingTsExtensions\": true,\n    \"resolveJsonModule\": true,\n    \"isolatedModules\": true,\n    \"noEmit\": true,\n    \"jsx\": \"react-jsx\",\n\n    /* Linting */\n    \"strict\": true,\n    \"noUnusedLocals\": true,\n    \"noUnusedParameters\": true,\n    \"noFallthroughCasesInSwitch\": true\n\n    /* ShadCn*/\n        \"baseUrl\": \".\",\n    \"paths\": {\n      \"@/*\": [\n        \"./src/*\"\n      ]\n    }\n  },\n  \"include\": [\"src\"],\n  \"references\": [{ \"path\": \"./tsconfig.node.json\" }]\n}\n"
+        }
+    ]
+}

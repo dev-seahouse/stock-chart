@@ -1,0 +1,46 @@
+{
+    "sourceFile": "vite.config.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1717752898450,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717752959967,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,5 +7,8 @@\n   server: {\n     host: 'localhost',\n     port: 3000,\n   },\n+  test: {\n+    global: true,\n+  },\n });\n"
+                },
+                {
+                    "date": 1717752976777,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import { defineConfig } from 'vite';\n+/// <reference types=\"vitest\" />\n import react from '@vitejs/plugin-react-swc';\n \n // https://vitejs.dev/config/\n export default defineConfig({\n"
+                },
+                {
+                    "date": 1717752995327,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n+/// <reference types=\"vitest\" />\n import { defineConfig } from 'vite';\n-/// <reference types=\"vitest\" />\n import react from '@vitejs/plugin-react-swc';\n \n // https://vitejs.dev/config/\n export default defineConfig({\n"
+                },
+                {
+                    "date": 1717753014885,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,7 +9,9 @@\n     host: 'localhost',\n     port: 3000,\n   },\n   test: {\n-    global: true,\n+    globals: true,\n+    environment: 'happy-dom',\n+    setupFiles: ['./src/testing/setup-tests.ts'],\n   },\n });\n"
+                },
+                {
+                    "date": 1717753491622,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,12 +4,9 @@\n \n // https://vitejs.dev/config/\n export default defineConfig({\n   plugins: [react()],\n-  server: {\n-    host: 'localhost',\n-    port: 3000,\n-  },\n+\n   test: {\n     globals: true,\n     environment: 'happy-dom',\n     setupFiles: ['./src/testing/setup-tests.ts'],\n"
+                },
+                {
+                    "date": 1717755243308,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,12 @@\n /// <reference types=\"vitest\" />\n import { defineConfig } from 'vite';\n+import path from \"path\"\n import react from '@vitejs/plugin-react-swc';\n \n // https://vitejs.dev/config/\n export default defineConfig({\n   plugins: [react()],\n-\n   test: {\n     globals: true,\n     environment: 'happy-dom',\n     setupFiles: ['./src/testing/setup-tests.ts'],\n"
+                },
+                {
+                    "date": 1717755249476,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n /// <reference types=\"vitest\" />\n import { defineConfig } from 'vite';\n-import path from \"path\"\n+import path from 'path';\n import react from '@vitejs/plugin-react-swc';\n \n // https://vitejs.dev/config/\n export default defineConfig({\n@@ -10,5 +10,10 @@\n     globals: true,\n     environment: 'happy-dom',\n     setupFiles: ['./src/testing/setup-tests.ts'],\n   },\n+  resolve: {\n+    alias: {\n+      '@': path.resolve(__dirname, './src'),\n+    },\n+  },\n });\n"
+                }
+            ],
+            "date": 1717752898450,
+            "name": "Commit-0",
+            "content": "import { defineConfig } from 'vite';\nimport react from '@vitejs/plugin-react-swc';\n\n// https://vitejs.dev/config/\nexport default defineConfig({\n  plugins: [react()],\n  server: {\n    host: 'localhost',\n    port: 3000,\n  },\n});\n"
+        }
+    ]
+}

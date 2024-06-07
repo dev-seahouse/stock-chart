@@ -1,0 +1,54 @@
+{
+    "sourceFile": "src/App.test.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1717753290593,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717753301467,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n-import { it } from \"node:test\";\n \n+\n it('should render without')\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1717753331391,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,6 @@\n+import { render } from 'react-dom';\n+import { it } from 'vitest';\n \n\\ No newline at end of file\n-\n-it('should render without')\n+it('should render without', () => {\n+  render();\n+});\n"
+                },
+                {
+                    "date": 1717753353280,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n-import { render } from 'react-dom';\n import { it } from 'vitest';\n+import { render } from '@testing-library/react';\n+import App from './App';\n \n it('should render without', () => {\n\\ No newline at end of file\n-  render();\n-});\n+  render(<App />);\n+});\n"
+                },
+                {
+                    "date": 1717753475558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n-import { it } from 'vitest';\n-import { render } from '@testing-library/react';\n+import { expect, it } from 'vitest';\n+import { render, screen } from '@testing-library/react';\n import App from './App';\n \n it('should render without', () => {\n\\ No newline at end of file\n   render(<App />);\n-});\n+  expect(screen.getAllByText('test')).toBeInTheDocument();\n+});\n"
+                },
+                {
+                    "date": 1717753480895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,5 +4,5 @@\n \n it('should render without', () => {\n   render(<App />);\n   expect(screen.getAllByText('test')).toBeInTheDocument();\n-});\n\\ No newline at end of file\n+});\n"
+                },
+                {
+                    "date": 1717758482849,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,24 @@\n import { expect, it } from 'vitest';\n-import { render, screen } from '@testing-library/react';\n import App from './App';\n+import renderWithProviders from './testing/renderWithProviders';\n+import { act, screen } from '@testing-library/react';\n \n-it('should render without', () => {\n-  render(<App />);\n-  expect(screen.getAllByText('test')).toBeInTheDocument();\n+// smoke test\n+it('should render without error', async () => {\n+  // eslint-disable-next-line @typescript-eslint/require-await\n+  await act(async () => {\n+    // it is wrapped in act and async because otherwise\n+    // Warning: An update to ForwardRef inside a test was not wrapped in act(...).\n+    renderWithProviders(<App />);\n+  });\n });\n+\n+it('should have stock price chart text', async () => {\n+  // eslint-disable-next-line @typescript-eslint/require-await\n+  await act(async () => {\n+    // it is wrapped in act and async because otherwise\n+    // Warning: An update to ForwardRef inside a test was not wrapped in act(...).\n+    renderWithProviders(<App />);\n+  });\n+  expect(screen.getByText(/stock price chart/i)).toBeVisible();\n+});\n"
+                },
+                {
+                    "date": 1717758540841,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,20 +5,16 @@\n \n // smoke test\n it('should render without error', async () => {\n   // eslint-disable-next-line @typescript-eslint/require-await\n-  await act(async () => {\n     // it is wrapped in act and async because otherwise\n     // Warning: An update to ForwardRef inside a test was not wrapped in act(...).\n     renderWithProviders(<App />);\n-  });\n });\n \n it('should have stock price chart text', async () => {\n   // eslint-disable-next-line @typescript-eslint/require-await\n-  await act(async () => {\n     // it is wrapped in act and async because otherwise\n     // Warning: An update to ForwardRef inside a test was not wrapped in act(...).\n     renderWithProviders(<App />);\n-  });\n   expect(screen.getByText(/stock price chart/i)).toBeVisible();\n });\n"
+                },
+                {
+                    "date": 1717758564676,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { expect, it } from 'vitest';\n import App from './App';\n import renderWithProviders from './testing/renderWithProviders';\n-import { act, screen } from '@testing-library/react';\n+import {  screen } from '@testing-library/react';\n \n // smoke test\n it('should render without error', async () => {\n   // eslint-disable-next-line @typescript-eslint/require-await\n"
+                },
+                {
+                    "date": 1717758571257,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,17 +4,11 @@\n import { screen } from '@testing-library/react';\n \n // smoke test\n it('should render without error', async () => {\n-  // eslint-disable-next-line @typescript-eslint/require-await\n-  // it is wrapped in act and async because otherwise\n-  // Warning: An update to ForwardRef inside a test was not wrapped in act(...).\n   renderWithProviders(<App />);\n });\n \n it('should have stock price chart text', async () => {\n-  // eslint-disable-next-line @typescript-eslint/require-await\n-  // it is wrapped in act and async because otherwise\n-  // Warning: An update to ForwardRef inside a test was not wrapped in act(...).\n   renderWithProviders(<App />);\n   expect(screen.getByText(/stock price chart/i)).toBeVisible();\n });\n"
+                }
+            ],
+            "date": 1717753290593,
+            "name": "Commit-0",
+            "content": "import { it } from \"node:test\";\n\nit('should render without')"
+        }
+    ]
+}

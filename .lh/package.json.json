@@ -1,0 +1,38 @@
+{
+    "sourceFile": "package.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1717752561276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717752601146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,14 +15,14 @@\n   },\n   \"devDependencies\": {\n     \"@types/react\": \"^18.3.3\",\n     \"@types/react-dom\": \"^18.3.0\",\n-    \"@typescript-eslint/eslint-plugin\": \"^7.2.0\",\n-    \"@typescript-eslint/parser\": \"^7.2.0\",\n-    \"@vitejs/plugin-react-swc\": \"^3.5.0\",\n+    \"@typescript-eslint/eslint-plugin\": \"^7.12.0\",\n+    \"@typescript-eslint/parser\": \"^7.12.0\",\n+    \"@vitejs/plugin-react-swc\": \"^3.7.0\",\n     \"eslint\": \"^8.57.0\",\n-    \"eslint-plugin-react-hooks\": \"^4.6.0\",\n-    \"eslint-plugin-react-refresh\": \"^0.4.6\",\n-    \"typescript\": \"^5.2.2\",\n-    \"vite\": \"^5.2.0\"\n+    \"eslint-plugin-react-hooks\": \"^4.6.2\",\n+    \"eslint-plugin-react-refresh\": \"^0.4.7\",\n+    \"typescript\": \"^5.4.5\",\n+    \"vite\": \"^5.2.12\"\n   }\n }\n"
+                },
+                {
+                    "date": 1717752857340,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,16 +13,29 @@\n     \"react\": \"^18.3.1\",\n     \"react-dom\": \"^18.3.1\"\n   },\n   \"devDependencies\": {\n+    \"@testing-library/jest-dom\": \"^6.4.5\",\n+    \"@testing-library/react\": \"^16.0.0\",\n+    \"@testing-library/user-event\": \"^14.5.2\",\n+    \"@types/node\": \"^20.14.2\",\n     \"@types/react\": \"^18.3.3\",\n     \"@types/react-dom\": \"^18.3.0\",\n     \"@typescript-eslint/eslint-plugin\": \"^7.12.0\",\n     \"@typescript-eslint/parser\": \"^7.12.0\",\n     \"@vitejs/plugin-react-swc\": \"^3.7.0\",\n+    \"@vitest/coverage-v8\": \"^1.6.0\",\n+    \"@vitest/ui\": \"^1.6.0\",\n     \"eslint\": \"^8.57.0\",\n+    \"eslint-config-prettier\": \"^9.1.0\",\n+    \"eslint-plugin-jsx-a11y\": \"^6.8.0\",\n+    \"eslint-plugin-react\": \"^7.34.2\",\n     \"eslint-plugin-react-hooks\": \"^4.6.2\",\n     \"eslint-plugin-react-refresh\": \"^0.4.7\",\n+    \"eslint-plugin-readable-tailwind\": \"^1.5.1\",\n+    \"eslint-plugin-tailwindcss\": \"^3.17.3\",\n+    \"happy-dom\": \"^14.12.0\",\n     \"typescript\": \"^5.4.5\",\n-    \"vite\": \"^5.2.12\"\n+    \"vite\": \"^5.2.12\",\n+    \"vitest\": \"^1.6.0\"\n   }\n }\n"
+                },
+                {
+                    "date": 1717752873278,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n   \"private\": true,\n   \"version\": \"0.0.0\",\n   \"type\": \"module\",\n   \"scripts\": {\n+    \"start\": \"vite\",\n     \"dev\": \"vite\",\n     \"build\": \"tsc && vite build\",\n     \"lint\": \"eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0\",\n     \"preview\": \"vite preview\"\n"
+                },
+                {
+                    "date": 1717753240487,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,10 @@\n   \"type\": \"module\",\n   \"scripts\": {\n     \"start\": \"vite\",\n     \"dev\": \"vite\",\n+    \"test\": \"vitest --run\",\n+    \"test:ui\": \"vitest --ui\",\n     \"build\": \"tsc && vite build\",\n     \"lint\": \"eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0\",\n     \"preview\": \"vite preview\"\n   },\n"
+                },
+                {
+                    "date": 1717757976862,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n {\n   \"name\": \"stocks-chart\",\n+  \"author\":\"sayhi.kenan@gmail.com\",\n   \"private\": true,\n   \"version\": \"0.0.0\",\n   \"type\": \"module\",\n   \"scripts\": {\n"
+                }
+            ],
+            "date": 1717752561276,
+            "name": "Commit-0",
+            "content": "{\n  \"name\": \"stocks-chart\",\n  \"private\": true,\n  \"version\": \"0.0.0\",\n  \"type\": \"module\",\n  \"scripts\": {\n    \"dev\": \"vite\",\n    \"build\": \"tsc && vite build\",\n    \"lint\": \"eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0\",\n    \"preview\": \"vite preview\"\n  },\n  \"dependencies\": {\n    \"react\": \"^18.3.1\",\n    \"react-dom\": \"^18.3.1\"\n  },\n  \"devDependencies\": {\n    \"@types/react\": \"^18.3.3\",\n    \"@types/react-dom\": \"^18.3.0\",\n    \"@typescript-eslint/eslint-plugin\": \"^7.2.0\",\n    \"@typescript-eslint/parser\": \"^7.2.0\",\n    \"@vitejs/plugin-react-swc\": \"^3.5.0\",\n    \"eslint\": \"^8.57.0\",\n    \"eslint-plugin-react-hooks\": \"^4.6.0\",\n    \"eslint-plugin-react-refresh\": \"^0.4.6\",\n    \"typescript\": \"^5.2.2\",\n    \"vite\": \"^5.2.0\"\n  }\n}\n"
+        }
+    ]
+}

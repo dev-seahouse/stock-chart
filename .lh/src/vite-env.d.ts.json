@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/vite-env.d.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1717753065641,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1717753065640,
+            "name": "Commit-0",
+            "content": "/// <reference types=\"vite/client\" />\n\ninterface ImportMetaEnv {\n  readonly VITE_APP_TITLE: string;\n  readonly VITE_POLYGON_API_URL: string;\n  readonly VITE_POLYGON_API_KEY: string;\n  // more env variables...\n}\n\ninterface ImportMeta {\n  readonly env: ImportMetaEnv;\n}\n"
+        }
+    ]
+}
