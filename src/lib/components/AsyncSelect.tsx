@@ -23,9 +23,6 @@ const customStyles: StylesConfig<any, any, any> = {
     borderRadius: '0.5rem',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
     backgroundColor: 'hsl(var(--popover))',
-    '.dark &': {
-      backgroundColor: 'hsl(var(--popover))',
-    },
   }),
   option: (provided, state) => ({
     ...provided,
@@ -39,20 +36,6 @@ const customStyles: StylesConfig<any, any, any> = {
       : 'hsl(var(--foreground))',
     '&:hover': {
       backgroundColor: 'hsl(var(--muted-light))',
-    },
-    '.dark &': {
-      backgroundColor: state.isSelected
-        ? 'hsl(var(--accent))'
-        : state.isFocused
-          ? 'hsl(var(--muted))' /* Adjusted for better contrast in dark mode */
-          : 'hsl(var(--background))',
-      color: state.isSelected
-        ? 'hsl(var(--accent-foreground))'
-        : 'hsl(var(--foreground))',
-      '&:hover': {
-        backgroundColor:
-          'hsl(var(--muted))' /* Adjusted for better contrast in dark mode */,
-      },
     },
   }),
   singleValue: (provided) => ({
@@ -74,14 +57,6 @@ const customStyles: StylesConfig<any, any, any> = {
       : 'hsl(var(--muted-foreground))',
     '&:hover': {
       color: 'hsl(var(--ring))',
-    },
-    '.dark &': {
-      color: state.isFocused
-        ? 'hsl(var(--ring))'
-        : 'hsl(var(--muted-foreground))',
-      '&:hover': {
-        color: 'hsl(var(--ring))',
-      },
     },
   }),
 };

@@ -25,7 +25,7 @@ const fetchTickers = async (
   const queryParams = {
     search,
     locale: 'us',
-    limit: 10,
+    limit: 20, // max 20 results
     market: 'stocks',
     type: 'CS',
   };
@@ -45,6 +45,8 @@ const useFetchTickers = (search: string) => {
     queryKey: ['tickers', search],
     queryFn: ({ signal }) => fetchTickers(search, signal),
     enabled: !!search,
+    retry: false,
+    retryOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     staleTime: 5 * 60 * 1000, // 5 minutes

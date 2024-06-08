@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/SelectedStocksList.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1717778458874,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1717778458874,
+            "name": "Commit-0",
+            "content": "import { X } from 'lucide-react';\nimport { Button } from '@/lib/components/Button.tsx';\nimport { StocksSelectOption } from '@/components/StocksAsyncSelect.tsx';\n\ninterface SelectedStocksListProps {\n  selectedStocks: StocksSelectOption[];\n  handleDeselectStock: (stock: StocksSelectOption) => void;\n}\n\nfunction NoStocksSelected() {\n  return (\n    <div\n      className={`\n        mt-5 text-gray-500\n\n        dark:text-gray-400\n      `}\n    >\n      No stocks selected.\n    </div>\n  );\n}\n\nfunction SelectedStocksList({\n  selectedStocks,\n  handleDeselectStock,\n}: SelectedStocksListProps) {\n  if (!selectedStocks?.length) return <NoStocksSelected />;\n\n  return (\n    <ul className=\"space-y-2\">\n      {selectedStocks.map((stock) => (\n        <li\n          key={stock.value}\n          className={`\n            flex items-center justify-between text-gray-800\n\n            dark:text-gray-200\n          `}\n        >\n          {stock.label}\n          <Button\n            onClick={() => handleDeselectStock(stock)}\n            variant=\"ghost\"\n            size=\"icon\"\n          >\n            <X\n              className={`\n                size-4 text-gray-500\n\n                dark:text-gray-400\n              `}\n            />\n          </Button>\n        </li>\n      ))}\n    </ul>\n  );\n}\n\nexport default SelectedStocksList;\n"
+        }
+    ]
+}

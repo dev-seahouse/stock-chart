@@ -21,7 +21,7 @@ module.exports = {
       callees: ["cn", "classnames", "clsx", "ctl", "cva", "tv", "tw"],
     }
   },
-  ignorePatterns: ['dist', '.eslintrc.cjs', "public"],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'public/mockServiceWorker.js',],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
@@ -31,6 +31,7 @@ module.exports = {
   },
   plugins: ['react-refresh', "readable-tailwind"],
   rules: {
+    'react/prop-types': 'off',
     "@typescript-eslint/require-await": "warn",
     "readable-tailwind/multiline": ["warn", { "printWidth": 80 }],
     "@typescript-eslint/no-explicit-any": ["warn"],

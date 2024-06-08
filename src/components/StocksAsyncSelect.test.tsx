@@ -2,7 +2,6 @@ import renderWithProviders from '@/testing/renderWithProviders';
 import { expect, it, vi } from 'vitest';
 import StocksAsyncSelect from './StocksAsyncSelect';
 import { screen, waitFor } from '@testing-library/react';
-import { act } from 'react';
 import userEvent from '@testing-library/user-event';
 
 // smoke test

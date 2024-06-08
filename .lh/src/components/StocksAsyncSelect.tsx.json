@@ -1,0 +1,42 @@
+{
+    "sourceFile": "src/components/StocksAsyncSelect.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1717815941674,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717815955163,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n ): Promise<StocksSelectOption[]> => {\n   const queryParams = {\n     search,\n     locale: 'us',\n-    limit: 20,\n+    limit: 10,\n     market: 'stocks',\n     type: 'CS',\n   };\n   try {\n"
+                },
+                {
+                    "date": 1717815991354,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n ): Promise<StocksSelectOption[]> => {\n   const queryParams = {\n     search,\n     locale: 'us',\n-    limit: 10,\n+    limit: 20,\n     market: 'stocks',\n     type: 'CS',\n   };\n   try {\n"
+                },
+                {
+                    "date": 1717816000282,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n ): Promise<StocksSelectOption[]> => {\n   const queryParams = {\n     search,\n     locale: 'us',\n-    limit: 20,\n+    limit: 20, // max 20 results\n     market: 'stocks',\n     type: 'CS',\n   };\n   try {\n"
+                },
+                {
+                    "date": 1717816029578,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,8 +44,9 @@\n   return useQuery({\n     queryKey: ['tickers', search],\n     queryFn: ({ signal }) => fetchTickers(search, signal),\n     enabled: !!search,\n+    retry:false,\n     refetchOnWindowFocus: false,\n     refetchOnMount: false,\n     staleTime: 5 * 60 * 1000, // 5 minutes\n     gcTime: 10 * 60 * 1000, // 10 minutes\n"
+                },
+                {
+                    "date": 1717816039696,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n   return useQuery({\n     queryKey: ['tickers', search],\n     queryFn: ({ signal }) => fetchTickers(search, signal),\n     enabled: !!search,\n-    retry:false,\n+    retry: false,\n     refetchOnWindowFocus: false,\n     refetchOnMount: false,\n     staleTime: 5 * 60 * 1000, // 5 minutes\n     gcTime: 10 * 60 * 1000, // 10 minutes\n"
+                },
+                {
+                    "date": 1717816066247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,8 +45,9 @@\n     queryKey: ['tickers', search],\n     queryFn: ({ signal }) => fetchTickers(search, signal),\n     enabled: !!search,\n     retry: false,\n+    retryOnMount: false,\n     refetchOnWindowFocus: false,\n     refetchOnMount: false,\n     staleTime: 5 * 60 * 1000, // 5 minutes\n     gcTime: 10 * 60 * 1000, // 10 minutes\n"
+                }
+            ],
+            "date": 1717815941674,
+            "name": "Commit-0",
+            "content": "import React, { useState } from 'react';\nimport TickersService from '@/api/services/Tickers';\nimport { useQueryClient, useQuery } from '@tanstack/react-query';\nimport { useDebounce } from 'use-debounce';\nimport AsyncSelect from '@/lib/components/AsyncSelect';\nimport type { ActionMeta, SingleValue } from 'react-select';\n\nexport interface StocksSelectOption {\n  label: string;\n  value: string;\n}\n\ninterface StocksAsyncSelectProps {\n  onChange: (\n    newValue: SingleValue<StocksSelectOption>,\n    actionMeta: ActionMeta<StocksSelectOption>,\n  ) => void;\n  isDisabled?: boolean;\n}\n\nconst fetchTickers = async (\n  search: string,\n  signal?: AbortSignal,\n): Promise<StocksSelectOption[]> => {\n  const queryParams = {\n    search,\n    locale: 'us',\n    limit: 20,\n    market: 'stocks',\n    type: 'CS',\n  };\n  try {\n    const response = await TickersService.tickers(queryParams, signal);\n    return response.data.results.map((ticker) => ({\n      label: `${ticker.name} (${ticker.ticker})`,\n      value: ticker.ticker,\n    }));\n  } catch (e) {\n    throw new Error(e as string);\n  }\n};\n\nconst useFetchTickers = (search: string) => {\n  return useQuery({\n    queryKey: ['tickers', search],\n    queryFn: ({ signal }) => fetchTickers(search, signal),\n    enabled: !!search,\n    refetchOnWindowFocus: false,\n    refetchOnMount: false,\n    staleTime: 5 * 60 * 1000, // 5 minutes\n    gcTime: 10 * 60 * 1000, // 10 minutes\n  });\n};\n\nconst StocksAsyncSelect: React.FC<StocksAsyncSelectProps> = ({\n  onChange,\n  isDisabled,\n}) => {\n  const [inputValue, setInputValue] = useState('');\n  const [debouncedInputValue] = useDebounce(inputValue, 500); // 500ms debounce\n  const queryClient = useQueryClient();\n\n  const { data: cachedData, isError } = useFetchTickers(debouncedInputValue);\n\n  const loadOptions = async (inputValue: string) => {\n    if (!inputValue?.length) return [];\n\n    // update input value to trigger debounce\n    setInputValue(inputValue);\n\n    // get cached data if found\n    const queryKey = ['tickers', inputValue];\n    const cachedData = queryClient.getQueryData<StocksSelectOption[]>(queryKey);\n    if (cachedData) return cachedData;\n\n    return await queryClient.fetchQuery({\n      queryKey,\n      queryFn: ({ signal }) => fetchTickers(inputValue, signal),\n    });\n  };\n\n  const noOptionsMessage = () => {\n    if (isError) {\n      return 'Please wait before searching again.';\n    }\n    return 'No stocks found';\n  };\n\n  return (\n    <AsyncSelect\n      placeholder=\"Type to search stocks ...\"\n      defaultOptions={cachedData ?? []}\n      noOptionsMessage={noOptionsMessage}\n      onChange={onChange}\n      loadOptions={loadOptions}\n      isMulti={false}\n      isDisabled={isDisabled}\n    />\n  );\n};\n\nexport default StocksAsyncSelect;\n"
+        }
+    ]
+}

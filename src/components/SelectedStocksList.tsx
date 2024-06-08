@@ -16,7 +16,7 @@ function NoStocksSelected() {
         dark:text-gray-400
       `}
     >
-      No stocks selected. Please select up to 3 stocks to view the price chart.
+      No stocks selected.
     </div>
   );
 }

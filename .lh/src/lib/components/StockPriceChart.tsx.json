@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/lib/components/StockPriceChart.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1717776383216,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717776582224,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,14 @@\n   dateRange: { start: string; end: string },\n   priceType: string,\n ) => {\n   const { start, end } = dateRange;\n-  const params = { multiplier: 1, timespan: 'day', from: start, to: end };\n+  const params = {\n+    multiplier: 1,\n+    timespan: 'day' as const,\n+    from: start,\n+    to: end,\n+  };\n   const response = await AggregatesService.getAggregates(stock, params);\n   return response.data.results.map((point) => ({\n     x: point.t,\n     y: point[priceType],\n"
+                },
+                {
+                    "date": 1717776602098,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,21 +12,23 @@\n \n const fetchStockData = async (\n   stock: string,\n   dateRange: { start: string; end: string },\n-  priceType: string,\n+  priceType: 'open' | 'high' | 'low' | 'close',\n ) => {\n   const { start, end } = dateRange;\n-  const params = {\n-    multiplier: 1,\n-    timespan: 'day' as const,\n-    from: start,\n-    to: end,\n+  const params = { multiplier: 1, timespan: 'day', from: start, to: end };\n+  const response = await AggregatesService.getAggregates(stock, params);\n+  const priceKeyMap = {\n+    open: 'o',\n+    high: 'h',\n+    low: 'l',\n+    close: 'c',\n   };\n-  const response = await AggregatesService.getAggregates(stock, params);\n+  const priceKey = priceKeyMap[priceType];\n   return response.data.results.map((point) => ({\n     x: point.t,\n-    y: point[priceType],\n+    y: point[priceKey],\n   }));\n };\n \n const StockPriceChart: React.FC<StockPriceChartProps> = ({\n"
+                },
+                {
+                    "date": 1717776614090,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,14 @@\n   dateRange: { start: string; end: string },\n   priceType: 'open' | 'high' | 'low' | 'close',\n ) => {\n   const { start, end } = dateRange;\n-  const params = { multiplier: 1, timespan: 'day', from: start, to: end };\n+  const params = {\n+    multiplier: 1,\n+    timespan: 'day' as const,\n+    from: start,\n+    to: end,\n+  };\n   const response = await AggregatesService.getAggregates(stock, params);\n   const priceKeyMap = {\n     open: 'o',\n     high: 'h',\n"
+                }
+            ],
+            "date": 1717776383216,
+            "name": "Commit-0",
+            "content": "import React from 'react';\nimport Highcharts from 'highcharts';\nimport HighchartsReact from 'highcharts-react-official';\nimport { useQuery } from '@tanstack/react-query';\nimport AggregatesService from '@/api/services/Aggregates';\n\ninterface StockPriceChartProps {\n  selectedStocks: string[];\n  dateRange: { start: string; end: string };\n  priceType: 'open' | 'high' | 'low' | 'close';\n}\n\nconst fetchStockData = async (\n  stock: string,\n  dateRange: { start: string; end: string },\n  priceType: string,\n) => {\n  const { start, end } = dateRange;\n  const params = { multiplier: 1, timespan: 'day', from: start, to: end };\n  const response = await AggregatesService.getAggregates(stock, params);\n  return response.data.results.map((point) => ({\n    x: point.t,\n    y: point[priceType],\n  }));\n};\n\nconst StockPriceChart: React.FC<StockPriceChartProps> = ({\n  selectedStocks,\n  dateRange,\n  priceType,\n}) => {\n  const { data, isLoading, isError } = useQuery({\n    queryKey: ['aggregates', selectedStocks, dateRange, priceType],\n    queryFn: () =>\n      Promise.all(\n        selectedStocks.map((stock) =>\n          fetchStockData(stock, dateRange, priceType),\n        ),\n      ),\n    enabled: selectedStocks.length > 0,\n  });\n\n  const chartOptions = {\n    title: { text: 'Stock Prices' },\n    xAxis: { type: 'datetime' },\n    series: data?.map((stockData, index) => ({\n      name: selectedStocks[index],\n      data: stockData,\n    })),\n  };\n\n  if (isLoading) return <div>Loading...</div>;\n  if (isError) return <div>Error loading data</div>;\n\n  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n};\n\nexport default StockPriceChart;\n"
+        }
+    ]
+}

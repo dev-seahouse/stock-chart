@@ -1,0 +1,82 @@
+{
+    "sourceFile": "src/lib/components/DropdownMenu.stories.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 16,
+            "patches": [
+                {
+                    "date": 1717774260829,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717774269017,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,24 +2,24 @@\n import { Meta, Story } from '@storybook/react';\n import { DropdownMenu, DropdownMenuProps } from '../DropdownMenu';\n \n export default {\n-    title: 'Components/DropdownMenu',\n-    component: DropdownMenu,\n+  title: 'Components/DropdownMenu',\n+  component: DropdownMenu,\n } as Meta;\n \n const Template: Story<DropdownMenuProps> = (args) => <DropdownMenu {...args} />;\n \n export const Default = Template.bind({});\n Default.args = {\n-    // Add your default props here\n+  // Add your default props here\n };\n \n export const WithOptions = Template.bind({});\n WithOptions.args = {\n-    options: [\n-        { label: 'Option 1', value: 'option1' },\n-        { label: 'Option 2', value: 'option2' },\n-        { label: 'Option 3', value: 'option3' },\n\\ No newline at end of file\n-    ],\n-    // Add any other props you want to showcase here\n-};\n+  options: [\n+    { label: 'Option 1', value: 'option1' },\n+    { label: 'Option 2', value: 'option2' },\n+    { label: 'Option 3', value: 'option3' },\n+  ],\n+  // Add any other props you want to showcase here\n+};\n"
+                },
+                {
+                    "date": 1717774294763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,25 +0,0 @@\n-import React from 'react';\n-import { Meta, Story } from '@storybook/react';\n-import { DropdownMenu, DropdownMenuProps } from '../DropdownMenu';\n-\n-export default {\n-  title: 'Components/DropdownMenu',\n-  component: DropdownMenu,\n-} as Meta;\n-\n-const Template: Story<DropdownMenuProps> = (args) => <DropdownMenu {...args} />;\n-\n-export const Default = Template.bind({});\n-Default.args = {\n-  // Add your default props here\n-};\n-\n-export const WithOptions = Template.bind({});\n-WithOptions.args = {\n-  options: [\n-    { label: 'Option 1', value: 'option1' },\n-    { label: 'Option 2', value: 'option2' },\n-    { label: 'Option 3', value: 'option3' },\n-  ],\n-  // Add any other props you want to showcase here\n-};\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1717774588653,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +0,0 @@\n-\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1717774748890,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +0,0 @@\n-\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1717774766478,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,2 @@\n-\n+export default {};\n+import { StoryObj, Meta } from '@storybook/react';\n"
+                },
+                {
+                    "date": 1717774822018,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,12 @@\n-export default {};\n import { StoryObj, Meta } from '@storybook/react';\n+\n+\n+export default {\n+    title:\"lib/components/DropdownMenu\"\n+}\n+\n+type Story = StoryObj<typeof  >\n+\n+export const Default = {\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1717774835156,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n \n export default {\n     title:\"lib/components/DropdownMenu\"\n+    compo\n }\n \n type Story = StoryObj<typeof  >\n \n"
+                },
+                {
+                    "date": 1717774854870,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,11 @@\n import { StoryObj, Meta } from '@storybook/react';\n+import { DropdownMenu } from './DropdownMenu';\n \n-\n export default {\n-    title:\"lib/components/DropdownMenu\"\n-    compo\n-}\n+  title: 'lib/components/DropdownMenu',\n+  component: DropdownMenu,\n+};\n \n-type Story = StoryObj<typeof  >\n\\ No newline at end of file\n+type Story = StoryObj<typeof DropdownMenu>;\n \n-export const Default = {\n-\n-}\n+export const Default = {};\n"
+                },
+                {
+                    "date": 1717774867827,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,5 +7,7 @@\n };\n \n type Story = StoryObj<typeof DropdownMenu>;\n \n-export const Default = {};\n+export const Default: Story = {\n+  render: () => {},\n+};\n"
+                },
+                {
+                    "date": 1717774890142,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,6 +8,12 @@\n \n type Story = StoryObj<typeof DropdownMenu>;\n \n export const Default: Story = {\n-  render: () => {},\n+  render: () => (\n+    <DropdownMenu>\n+\n+    </DropdownMenu>\n+  )\n+\n+  ,\n };\n"
+                },
+                {
+                    "date": 1717774906283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,16 @@\n \n export const Default: Story = {\n   render: () => (\n     <DropdownMenu>\n-\n+      <DropdownMenuTrigger>Open</DropdownMenuTrigger>\n+      <DropdownMenuContent>\n+        <DropdownMenuLabel>My Account</DropdownMenuLabel>\n+        <DropdownMenuSeparator />\n+        <DropdownMenuItem>Profile</DropdownMenuItem>\n+        <DropdownMenuItem>Billing</DropdownMenuItem>\n+        <DropdownMenuItem>Team</DropdownMenuItem>\n+        <DropdownMenuItem>Subscription</DropdownMenuItem>\n+      </DropdownMenuContent>\n     </DropdownMenu>\n-  )\n-\n-  ,\n+  ),\n };\n"
+                },
+                {
+                    "date": 1717774927889,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { StoryObj, Meta } from '@storybook/react';\n-import { DropdownMenu } from './DropdownMenu';\n+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './DropdownMenu';\n \n export default {\n   title: 'lib/components/DropdownMenu',\n   component: DropdownMenu,\n"
+                },
+                {
+                    "date": 1717774942500,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,18 @@\n import { StoryObj, Meta } from '@storybook/react';\n-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './DropdownMenu';\n+import {\n+  DropdownMenu,\n+  DropdownMenuContent,\n+  DropdownMenuItem,\n+  DropdownMenuLabel,\n+  DropdownMenuSeparator,\n+  DropdownMenuTrigger,\n+} from './DropdownMenu';\n \n export default {\n   title: 'lib/components/DropdownMenu',\n   component: DropdownMenu,\n-};\n+} as Meta<typeof DropdownMenu>;\n \n type Story = StoryObj<typeof DropdownMenu>;\n \n export const Default: Story = {\n"
+                },
+                {
+                    "date": 1717774984670,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,11 @@\n \n export const Default: Story = {\n   render: () => (\n     <DropdownMenu>\n-      <DropdownMenuTrigger>Open</DropdownMenuTrigger>\n+      <DropdownMenuTrigger>\n+        <Button>Open</Button>\n+      </DropdownMenuTrigger>\n       <DropdownMenuContent>\n         <DropdownMenuLabel>My Account</DropdownMenuLabel>\n         <DropdownMenuSeparator />\n         <DropdownMenuItem>Profile</DropdownMenuItem>\n"
+                },
+                {
+                    "date": 1717774990684,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n   DropdownMenuLabel,\n   DropdownMenuSeparator,\n   DropdownMenuTrigger,\n } from './DropdownMenu';\n+import { Button } from './Button';\n \n export default {\n   title: 'lib/components/DropdownMenu',\n   component: DropdownMenu,\n"
+                },
+                {
+                    "date": 1717775000855,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n export const Default: Story = {\n   render: () => (\n     <DropdownMenu>\n-      <DropdownMenuTrigger>\n+      <DropdownMenuTrigger asChild>\n         <Button>Open</Button>\n       </DropdownMenuTrigger>\n       <DropdownMenuContent>\n         <DropdownMenuLabel>My Account</DropdownMenuLabel>\n"
+                }
+            ],
+            "date": 1717774260829,
+            "name": "Commit-0",
+            "content": "import React from 'react';\nimport { Meta, Story } from '@storybook/react';\nimport { DropdownMenu, DropdownMenuProps } from '../DropdownMenu';\n\nexport default {\n    title: 'Components/DropdownMenu',\n    component: DropdownMenu,\n} as Meta;\n\nconst Template: Story<DropdownMenuProps> = (args) => <DropdownMenu {...args} />;\n\nexport const Default = Template.bind({});\nDefault.args = {\n    // Add your default props here\n};\n\nexport const WithOptions = Template.bind({});\nWithOptions.args = {\n    options: [\n        { label: 'Option 1', value: 'option1' },\n        { label: 'Option 2', value: 'option2' },\n        { label: 'Option 3', value: 'option3' },\n    ],\n    // Add any other props you want to showcase here\n};"
+        }
+    ]
+}

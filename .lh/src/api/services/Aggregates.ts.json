@@ -1,0 +1,42 @@
+{
+    "sourceFile": "src/api/services/Aggregates.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1717776778764,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717776923438,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,19 @@\n   adjusted?: boolean; // adjust for splits (true/false) defualt true\n   limit?: number; // max 50000 or default 5000\n }\n \n+interface AggregatesResult {\n+  c: number; // close price\n+  h: number; // high price\n+  l: number; // low price\n+  n: number; // number of transactions\n+  o: number; // open price\n+  t: number; // timestamp\n+  v: number; // trading volume\n+  vw: number; // volume weighted average price\n+}\n+\n interface AggregatesResponse {\n   ticker: string;\n   results: {\n     c: number; // close price\n"
+                },
+                {
+                    "date": 1717776950492,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,18 +30,9 @@\n }\n \n interface AggregatesResponse {\n   ticker: string;\n-  results: {\n-    c: number; // close price\n-    h: number; // high price\n-    l: number; // low price\n-    n: number; // number of transactions\n-    o: number; // open price\n-    t: number; // timestamp\n-    v: number; // trading volume\n-    vw: number; // volume weighted average price\n-  }[];\n+  results: AggregatesResult[];\n   status: string; // response status\n   queryCount: number; // number of results returned\n   resultsCount: number; // total results for query\n   adjusted: boolean; // results adjusted for splits\n"
+                },
+                {
+                    "date": 1717776978911,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n   v: number; // trading volume\n   vw: number; // volume weighted average price\n }\n \n-interface AggregatesResponse {\n+export interface AggregatesResponse {\n   ticker: string;\n   results: AggregatesResult[];\n   status: string; // response status\n   queryCount: number; // number of results returned\n"
+                },
+                {
+                    "date": 1717776989760,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import client from '../client';\n \n-interface AggregatesParams {\n+export interface AggregatesParams {\n   // For example, if timespan = ‘minute’ and multiplier = ‘5’ then 5-minute bars will be returned.\n   multiplier: number; // size of timespan multiplier (e.g., 1, 5, 15)\n   timespan:\n     | 'second'\n@@ -17,9 +17,9 @@\n   adjusted?: boolean; // adjust for splits (true/false) defualt true\n   limit?: number; // max 50000 or default 5000\n }\n \n-interface AggregatesResult {\n+export interface AggregatesResult {\n   c: number; // close price\n   h: number; // high price\n   l: number; // low price\n   n: number; // number of transactions\n"
+                },
+                {
+                    "date": 1717776997737,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,46 +1,7 @@\n import client from '../client';\n \n-export interface AggregatesParams {\n-  // For example, if timespan = ‘minute’ and multiplier = ‘5’ then 5-minute bars will be returned.\n-  multiplier: number; // size of timespan multiplier (e.g., 1, 5, 15)\n-  timespan:\n-    | 'second'\n-    | 'minute'\n-    | 'hour'\n-    | 'day'\n-    | 'week'\n-    | 'month'\n-    | 'quarter'\n-    | 'year'; // Size of timespan\n-  from: string; //  (YYYY-MM-DD or timestamp)\n-  to: string; // (YYYY-MM-DD or timestamp)\n-  adjusted?: boolean; // adjust for splits (true/false) defualt true\n-  limit?: number; // max 50000 or default 5000\n-}\n \n-export interface AggregatesResult {\n-  c: number; // close price\n-  h: number; // high price\n-  l: number; // low price\n-  n: number; // number of transactions\n-  o: number; // open price\n-  t: number; // timestamp\n-  v: number; // trading volume\n-  vw: number; // volume weighted average price\n-}\n-\n-export interface AggregatesResponse {\n-  ticker: string;\n-  results: AggregatesResult[];\n-  status: string; // response status\n-  queryCount: number; // number of results returned\n-  resultsCount: number; // total results for query\n-  adjusted: boolean; // results adjusted for splits\n-  next_url: string; // next URL for results, pagination?\n-  request_id: string;\n-}\n-\n export default {\n   getAggregates: (\n     ticker: string,\n     params: AggregatesParams,\n"
+                },
+                {
+                    "date": 1717777007097,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import client from '../client';\n+import type { AggregatesParams, AggregatesResponse } from './Aggregates.types';\n \n-\n export default {\n   getAggregates: (\n     ticker: string,\n     params: AggregatesParams,\n"
+                }
+            ],
+            "date": 1717776778764,
+            "name": "Commit-0",
+            "content": "import client from '../client';\n\ninterface AggregatesParams {\n  // For example, if timespan = ‘minute’ and multiplier = ‘5’ then 5-minute bars will be returned.\n  multiplier: number; // size of timespan multiplier (e.g., 1, 5, 15)\n  timespan:\n    | 'second'\n    | 'minute'\n    | 'hour'\n    | 'day'\n    | 'week'\n    | 'month'\n    | 'quarter'\n    | 'year'; // Size of timespan\n  from: string; //  (YYYY-MM-DD or timestamp)\n  to: string; // (YYYY-MM-DD or timestamp)\n  adjusted?: boolean; // adjust for splits (true/false) defualt true\n  limit?: number; // max 50000 or default 5000\n}\n\ninterface AggregatesResponse {\n  ticker: string;\n  results: {\n    c: number; // close price\n    h: number; // high price\n    l: number; // low price\n    n: number; // number of transactions\n    o: number; // open price\n    t: number; // timestamp\n    v: number; // trading volume\n    vw: number; // volume weighted average price\n  }[];\n  status: string; // response status\n  queryCount: number; // number of results returned\n  resultsCount: number; // total results for query\n  adjusted: boolean; // results adjusted for splits\n  next_url: string; // next URL for results, pagination?\n  request_id: string;\n}\n\nexport default {\n  getAggregates: (\n    ticker: string,\n    params: AggregatesParams,\n    signal?: AbortSignal,\n  ) => {\n    const encodedTicker = encodeURIComponent(ticker);\n    const encodedMultiplier = encodeURIComponent(params.multiplier);\n    const encodedTimespan = encodeURIComponent(params.timespan);\n    const encodedFrom = encodeURIComponent(params.from);\n    const encodedTo = encodeURIComponent(params.to);\n\n    const url = `/v2/aggs/ticker/${encodedTicker}/range/${encodedMultiplier}/${encodedTimespan}/${encodedFrom}/${encodedTo}`;\n\n    return client.get<AggregatesResponse>(url, {\n      params: params,\n      signal,\n    });\n  },\n};\n"
+        }
+    ]
+}

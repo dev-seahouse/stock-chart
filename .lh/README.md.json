@@ -1,0 +1,186 @@
+{
+    "sourceFile": "README.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 42,
+            "patches": [
+                {
+                    "date": 1717814087608,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717814104561,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,10 @@\n    ![alt text](screenshots/image.png)\n    This issue is fixed by\n \n \n-### \n+### Stock Range Date Picker\n+1. \n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n"
+                },
+                {
+                    "date": 1717814135461,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,10 @@\n    This issue is fixed by\n \n \n ### Stock Range Date Picker\n-1. \n+1. free polygon sub does not allow same day aggregates therefore:\n+   1.  \n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n"
+                },
+                {
+                    "date": 1717814495554,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,10 +32,10 @@\n    This issue is fixed by\n \n \n ### Stock Range Date Picker\n-1. free polygon sub does not allow same day aggregates therefore:\n-   1.  \n+1. if user choose a from date greater than end date, end date will be changed to from date.\n+2. ![alt text](image.png)\n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n"
+                },
+                {
+                    "date": 1717814529969,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,12 +30,12 @@\n    The initial implementation has an issue, that is, after user have made a selection , close the dropdown, and open it again, the dropdown items disappears.\n    ![alt text](screenshots/image.png)\n    This issue is fixed by\n \n+### Stock Range Date Picker\n \n-### Stock Range Date Picker\n 1. if user choose a from date greater than end date, end date will be changed to from date.\n-2. ![alt text](image.png)\n+2. ![alt text](screenshots/image1.png)\n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n"
+                },
+                {
+                    "date": 1717814538668,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,10 +32,9 @@\n    This issue is fixed by\n \n ### Stock Range Date Picker\n \n-1. if user choose a from date greater than end date, end date will be changed to from date.\n-2. ![alt text](screenshots/image1.png)\n+1. if user choose a from date greater than end date, end date will be changed to from date. ![alt text](screenshots/image1.png)\n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n"
+                },
+                {
+                    "date": 1717814548032,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \n 1. Caching\n    The initial implementation has an issue, that is, after user have made a selection , close the dropdown, and open it again, the dropdown items disappears.\n    ![alt text](screenshots/image.png)\n-   This issue is fixed by\n+   This issue is fixed by \n \n ### Stock Range Date Picker\n \n 1. if user choose a from date greater than end date, end date will be changed to from date. ![alt text](screenshots/image1.png)\n"
+                },
+                {
+                    "date": 1717814599771,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \n ### Select Stocks Combobox\n \n 1. Caching\n-   The initial implementation has an issue, that is, after user have made a selection , close the dropdown, and open it again, the dropdown items disappears.\n+   The initial implementation has an issue, that is, after user have made a selection , close the dropdown, and open it again, the dropdown items disappears because \n    ![alt text](screenshots/image.png)\n    This issue is fixed by \n \n ### Stock Range Date Picker\n"
+                },
+                {
+                    "date": 1717814634140,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \n ### Select Stocks Combobox\n \n 1. Caching\n-   The initial implementation has an issue, that is, after user have made a selection , close the dropdown, and open it again, the dropdown items disappears because \n+   The initial implementation has an issue, that is, after user have made a selection , close the dropdown, and open it again, the dropdown items disappears because React-Select library considers \n    ![alt text](screenshots/image.png)\n    This issue is fixed by \n \n ### Stock Range Date Picker\n"
+                },
+                {
+                    "date": 1717814650546,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \n ### Select Stocks Combobox\n \n 1. Caching\n-   The initial implementation has an issue, that is, after user have made a selection , close the dropdown, and open it again, the dropdown items disappears because React-Select library considers \n+   The initial implementation has an issue, that is, after user have made a selection , close the dropdown, and open it again, the dropdown items disappears because React-Select library considers user input as empty and try to \n    ![alt text](screenshots/image.png)\n    This issue is fixed by \n \n ### Stock Range Date Picker\n"
+                },
+                {
+                    "date": 1717814672544,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \n ### Select Stocks Combobox\n \n 1. Caching\n-   The initial implementation has an issue, that is, after user have made a selection , close the dropdown, and open it again, the dropdown items disappears because React-Select library considers user input as empty and try to \n+   The initial implementation has an issue, that is, after user have made a selection , close the dropdown, and open it again, the dropdown items disappears because React-Select library considers user input as empty when user opened the dropdown again.\n    ![alt text](screenshots/image.png)\n    This issue is fixed by \n \n ### Stock Range Date Picker\n"
+                },
+                {
+                    "date": 1717814729012,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \n 1. Caching\n    The initial implementation has an issue, that is, after user have made a selection , close the dropdown, and open it again, the dropdown items disappears because React-Select library considers user input as empty when user opened the dropdown again.\n    ![alt text](screenshots/image.png)\n-   This issue is fixed by \n+   This issue is fixed by manually caching \n \n ### Stock Range Date Picker\n \n 1. if user choose a from date greater than end date, end date will be changed to from date. ![alt text](screenshots/image1.png)\n"
+                },
+                {
+                    "date": 1717814739149,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \n 1. Caching\n    The initial implementation has an issue, that is, after user have made a selection , close the dropdown, and open it again, the dropdown items disappears because React-Select library considers user input as empty when user opened the dropdown again.\n    ![alt text](screenshots/image.png)\n-   This issue is fixed by manually caching \n+   This issue is fixed by manually caching fetched data \n \n ### Stock Range Date Picker\n \n 1. if user choose a from date greater than end date, end date will be changed to from date. ![alt text](screenshots/image1.png)\n"
+                },
+                {
+                    "date": 1717814783859,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \n 1. Caching\n    The initial implementation has an issue, that is, after user have made a selection , close the dropdown, and open it again, the dropdown items disappears because React-Select library considers user input as empty when user opened the dropdown again.\n    ![alt text](screenshots/image.png)\n-   This issue is fixed by manually caching fetched data \n+   This issue is fixed by manually caching fetched data and set it to defaultOptions such that the next time user opened the dropdown, they will see previous search results as 'default options'\n \n ### Stock Range Date Picker\n \n 1. if user choose a from date greater than end date, end date will be changed to from date. ![alt text](screenshots/image1.png)\n"
+                },
+                {
+                    "date": 1717815003808,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,8 +29,9 @@\n 1. Caching\n    The initial implementation has an issue, that is, after user have made a selection , close the dropdown, and open it again, the dropdown items disappears because React-Select library considers user input as empty when user opened the dropdown again.\n    ![alt text](screenshots/image.png)\n    This issue is fixed by manually caching fetched data and set it to defaultOptions such that the next time user opened the dropdown, they will see previous search results as 'default options'\n+   ![alt text](screenshots/image3.png)\n \n ### Stock Range Date Picker\n \n 1. if user choose a from date greater than end date, end date will be changed to from date. ![alt text](screenshots/image1.png)\n"
+                },
+                {
+                    "date": 1717815140654,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,8 +34,9 @@\n \n ### Stock Range Date Picker\n \n 1. if user choose a from date greater than end date, end date will be changed to from date. ![alt text](screenshots/image1.png)\n+   ![alt text](image.png)\n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n"
+                },
+                {
+                    "date": 1717815156485,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,10 +34,11 @@\n \n ### Stock Range Date Picker\n \n 1. if user choose a from date greater than end date, end date will be changed to from date. ![alt text](screenshots/image1.png)\n-   ![alt text](image.png)\n \n+![alt text](image.png)\n+\n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n 2. msw is linked to storybook to provide mocked response\n"
+                },
+                {
+                    "date": 1717815197065,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,8 +35,10 @@\n ### Stock Range Date Picker\n \n 1. if user choose a from date greater than end date, end date will be changed to from date. ![alt text](screenshots/image1.png)\n \n+---\n+\n ![alt text](image.png)\n \n ## Testing\n \n"
+                },
+                {
+                    "date": 1717815240115,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,10 @@\n ---\n \n ![alt text](image.png)\n \n+2. similarly, if end date is earlier than start date, start date will be set to end date\n+\n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n 2. msw is linked to storybook to provide mocked response\n"
+                },
+                {
+                    "date": 1717815329418,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,8 +41,11 @@\n ![alt text](image.png)\n \n 2. similarly, if end date is earlier than start date, start date will be set to end date\n \n+### Stock price chart\n+\n+\n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n 2. msw is linked to storybook to provide mocked response\n"
+                },
+                {
+                    "date": 1717815335860,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,15 +43,13 @@\n 2. similarly, if end date is earlier than start date, start date will be set to end date\n \n ### Stock price chart\n \n-\n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n 2. msw is linked to storybook to provide mocked response\n 3. all components are created with being testable in mind, for example stock-chart/src/providers/ReactQueryProvider.tsx is reusable in tests to allow overriding the app queryClient\n-4.\n \n ## Folder structure\n \n stock-chart/\n"
+                },
+                {
+                    "date": 1717815448814,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n \n 2. similarly, if end date is earlier than start date, start date will be set to end date\n \n ### Stock price chart\n-\n+- useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n 2. msw is linked to storybook to provide mocked response\n"
+                },
+                {
+                    "date": 1717815538837,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n ---\n \n ![alt text](image.png)\n \n-2. similarly, if end date is earlier than start date, start date will be set to end date\n+2. similarly, if end date is earlier than start date, start date will be set to end date fetch price data for each stock in parallel ()\n \n ### Stock price chart\n - useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to \n ## Testing\n"
+                },
+                {
+                    "date": 1717815546719,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n ---\n \n ![alt text](image.png)\n \n-2. similarly, if end date is earlier than start date, start date will be set to end date fetch price data for each stock in parallel ()\n+2. similarly, if end date is earlier than start date, start date will be set to end date fetch price data for each stock in parallel\n \n ### Stock price chart\n - useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to \n ## Testing\n"
+                },
+                {
+                    "date": 1717816227607,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,9 +68,12 @@\n │ ├── index.tsx\n ├── components.json # used by ShadCn\n \n ## Misc notes\n-\n 1. index.html have <noscript> tag added\n 2. types and utils are co-located by default and extracted into separate file only if\n    1. a single file is too long and becoming unreadable,\n    2. the type/util is shared/duplicated 3 times (following duplicate twice rule)\n+3. The following react-query options are set considering api rate limit:\n+```\n+\n+```\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1717816261500,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,11 @@\n \n 2. similarly, if end date is earlier than start date, start date will be set to end date fetch price data for each stock in parallel\n \n ### Stock price chart\n-- useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to \n+\n+- useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to\n+\n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n 2. msw is linked to storybook to provide mocked response\n@@ -68,12 +70,18 @@\n │ ├── index.tsx\n ├── components.json # used by ShadCn\n \n ## Misc notes\n+\n 1. index.html have <noscript> tag added\n 2. types and utils are co-located by default and extracted into separate file only if\n    1. a single file is too long and becoming unreadable,\n    2. the type/util is shared/duplicated 3 times (following duplicate twice rule)\n 3. The following react-query options are set considering api rate limit:\n+\n ```\n\\ No newline at end of file\n-\n-```\n+      refetchOnMount: false,\n+      refetchOnWindowFocus: false,\n+      retryOnMount: false,\n+      staleTime: 5 * 60 * 1000, // 5 minutes\n+      gcTime: 10 * 60 * 1000, // 10 minutes\n+```\n"
+                },
+                {
+                    "date": 1717816303459,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -71,9 +71,9 @@\n ├── components.json # used by ShadCn\n \n ## Misc notes\n \n-1. index.html have <noscript> tag added\n+1. index.html have `<noscript>` tag added\n 2. types and utils are co-located by default and extracted into separate file only if\n    1. a single file is too long and becoming unreadable,\n    2. the type/util is shared/duplicated 3 times (following duplicate twice rule)\n 3. The following react-query options are set considering api rate limit:\n@@ -83,5 +83,5 @@\n       refetchOnWindowFocus: false,\n       retryOnMount: false,\n       staleTime: 5 * 60 * 1000, // 5 minutes\n       gcTime: 10 * 60 * 1000, // 10 minutes\n-```\n\\ No newline at end of file\n+```\n"
+                },
+                {
+                    "date": 1717816346965,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,13 +39,13 @@\n ---\n \n ![alt text](image.png)\n \n-2. similarly, if end date is earlier than start date, start date will be set to end date fetch price data for each stock in parallel\n+2. similarly, if end date is earlier than start date, start date will be set to end date.\n \n ### Stock price chart\n \n-- useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to\n+- useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to fetch \n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n"
+                },
+                {
+                    "date": 1717816366858,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n 2. similarly, if end date is earlier than start date, start date will be set to end date.\n \n ### Stock price chart\n \n-- useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to fetch \n+- useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to fetch stocks price data in parrellel. \n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n"
+                },
+                {
+                    "date": 1717816375547,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,10 @@\n 2. similarly, if end date is earlier than start date, start date will be set to end date.\n \n ### Stock price chart\n \n-- useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to fetch stocks price data in parrellel. \n+- useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to fetch stocks price data in parallel. \n+- \n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n"
+                },
+                {
+                    "date": 1717816495389,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,10 +43,10 @@\n 2. similarly, if end date is earlier than start date, start date will be set to end date.\n \n ### Stock price chart\n \n-- useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to fetch stocks price data in parallel. \n-- \n+- useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to fetch stocks price data in parallel.\n+- when user add a new stock e.g now he have Apple, and added Google, \n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n"
+                },
+                {
+                    "date": 1717816538499,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n \n ### Stock price chart\n \n - useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to fetch stocks price data in parallel.\n-- when user add a new stock e.g now he have Apple, and added Google, \n+- when user add a new stock e.g now he have Apple, and added Google, api will only call Google.\n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n"
+                },
+                {
+                    "date": 1717816590327,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n \n ### Stock price chart\n \n - useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to fetch stocks price data in parallel.\n-- when user add a new stock e.g now he have Apple, and added Google, api will only call Google.\n+- when user add a new stock e.g now he have Apple, and added Google, api will only make a new api call for Google and use cached result \n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n"
+                },
+                {
+                    "date": 1717816603687,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n \n ### Stock price chart\n \n - useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to fetch stocks price data in parallel.\n-- when user add a new stock e.g now he have Apple, and added Google, api will only make a new api call for Google and use cached result \n+- when user add a new stock e.g now we have Apple, and added Google, api will only make a new api call for Google and use cached result \n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n"
+                },
+                {
+                    "date": 1717816616769,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n \n ### Stock price chart\n \n - useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to fetch stocks price data in parallel.\n-- when user add a new stock e.g now we have Apple, and added Google, api will only make a new api call for Google and use cached result \n+- when user add a new stock e.g now we have Apple, and added Google,  a new api call for Google and use cached result \n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n"
+                },
+                {
+                    "date": 1717816706635,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n \n ### Stock price chart\n \n - useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to fetch stocks price data in parallel.\n-- when user add a new stock e.g now we have Apple, and added Google,  a new api call for Google and use cached result \n+- when user add a new stock e.g now we have Apple, and added Google, a new api call will be made to fetch Google data, but no api call will be made to fetch Apple data since Tanstack Query already have cached result for Apple, unless parameters changed (date, price type etc)\n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n"
+                },
+                {
+                    "date": 1717817624959,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,8 +49,9 @@\n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n+![alt text](image.png)\n 2. msw is linked to storybook to provide mocked response\n 3. all components are created with being testable in mind, for example stock-chart/src/providers/ReactQueryProvider.tsx is reusable in tests to allow overriding the app queryClient\n \n ## Folder structure\n"
+                },
+                {
+                    "date": 1717817927120,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,9 +49,9 @@\n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n-![alt text](image.png)\n+   ![alt text](image.png)\n 2. msw is linked to storybook to provide mocked response\n 3. all components are created with being testable in mind, for example stock-chart/src/providers/ReactQueryProvider.tsx is reusable in tests to allow overriding the app queryClient\n \n ## Folder structure\n"
+                },
+                {
+                    "date": 1717817967911,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,8 @@\n \n ---\n \n ![alt text](image.png)\n-\n 2. similarly, if end date is earlier than start date, start date will be set to end date.\n \n ### Stock price chart\n \n"
+                },
+                {
+                    "date": 1717817981737,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,10 +37,9 @@\n 1. if user choose a from date greater than end date, end date will be changed to from date. ![alt text](screenshots/image1.png)\n \n ---\n \n-![alt text](image.png)\n-2. similarly, if end date is earlier than start date, start date will be set to end date.\n+![alt text](screenshots/image5.png) 2. similarly, if end date is earlier than start date, start date will be set to end date.\n \n ### Stock price chart\n \n - useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to fetch stocks price data in parallel.\n"
+                },
+                {
+                    "date": 1717817997728,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,10 @@\n 1. if user choose a from date greater than end date, end date will be changed to from date. ![alt text](screenshots/image1.png)\n \n ---\n \n-![alt text](screenshots/image5.png) 2. similarly, if end date is earlier than start date, start date will be set to end date.\n+![alt text](screenshots/image5.png)  \n+ 2. similarly, if end date is earlier than start date, start date will be set to end date.\n \n ### Stock price chart\n \n - useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to fetch stocks price data in parallel.\n"
+                },
+                {
+                    "date": 1717818139543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,18 +35,22 @@\n ### Stock Range Date Picker\n \n 1. if user choose a from date greater than end date, end date will be changed to from date. ![alt text](screenshots/image1.png)\n \n----\n+## ![alt text](screenshots/image5.png)\n \n-![alt text](screenshots/image5.png)  \n- 2. similarly, if end date is earlier than start date, start date will be set to end date.\n+2.  similarly, if end date is earlier than start date, start date will be set to end date.\n \n ### Stock price chart\n \n - useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to fetch stocks price data in parallel.\n - when user add a new stock e.g now we have Apple, and added Google, a new api call will be made to fetch Google data, but no api call will be made to fetch Apple data since Tanstack Query already have cached result for Apple, unless parameters changed (date, price type etc)\n \n+\n+### UI/UX\n+1. dark mode has been implemented\n+2. efforts have been made to \n+\n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n    ![alt text](image.png)\n"
+                },
+                {
+                    "date": 1717818166295,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n \n \n ### UI/UX\n 1. dark mode has been implemented\n-2. efforts have been made to \n+2. efforts have been made to tweak color theme to have sufficient contrast\n \n ## Testing\n \n 1. msw is setup to mock http request/response, stock-chart/src/mocks\n"
+                }
+            ],
+            "date": 1717814087608,
+            "name": "Commit-0",
+            "content": "## how to start\n\n```\nnpm start\n```\n\n## how to start storybook\n\n```\nnpm run storybook\n```\n\n## how to run test\n\n```\nnpm run test\n```\n\nor\n\n```\nnpm run test:ui\n```\n\n## Component features and behaviour\n\n### Select Stocks Combobox\n\n1. Caching\n   The initial implementation has an issue, that is, after user have made a selection , close the dropdown, and open it again, the dropdown items disappears.\n   ![alt text](screenshots/image.png)\n   This issue is fixed by\n\n\n### \n\n## Testing\n\n1. msw is setup to mock http request/response, stock-chart/src/mocks\n2. msw is linked to storybook to provide mocked response\n3. all components are created with being testable in mind, for example stock-chart/src/providers/ReactQueryProvider.tsx is reusable in tests to allow overriding the app queryClient\n4.\n\n## Folder structure\n\nstock-chart/\n├── .storybook/\n├── public/\n├── screenshots/\n├── src/ #\n│ ├── components/ # feature specific components, often contains business logic\n│ ├── api/ # api client.File name corresponds to api documentation, e.g Tickers=>Tickers.ts,\n│ ├── lib/ # shared code used by different features, need to be generic, can't import from features\n│ ├── layouts/ # layout components are containers that arrange/group components in some pattern\n│ ├── mocks/ # msw handlers and server\n│ ├── providers/ # context providers\n│ ├── testing/ # testing utilities\n│ ├── utils/  \n│ ├── index.tsx\n├── components.json # used by ShadCn\n\n## Misc notes\n\n1. index.html have <noscript> tag added\n2. types and utils are co-located by default and extracted into separate file only if\n   1. a single file is too long and becoming unreadable,\n   2. the type/util is shared/duplicated 3 times (following duplicate twice rule)\n"
+        }
+    ]
+}

@@ -1,0 +1,58 @@
+{
+    "sourceFile": "src/lib/components/Seleton.stories.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1717780555642,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717780566186,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,11 @@\n import { StoryObj, Meta } from '@storybook/react';\n+import { Skeleton } from './Seleton';\n \n-import Skeleton from './Seleton';\n-\n export default {\n   title: 'Seleton',\n   component: Skeleton,\n-  args: {\n-    //TODO: Add args here\n-  },\n+  args: {},\n } as Meta<typeof Skeleton>;\n \n type Story = StoryObj<typeof Skeleton>;\n \n"
+                },
+                {
+                    "date": 1717780579438,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,12 +3,13 @@\n \n export default {\n   title: 'Seleton',\n   component: Skeleton,\n-  args: {},\n } as Meta<typeof Skeleton>;\n \n type Story = StoryObj<typeof Skeleton>;\n \n export const Default: Story = {\n-  args: {},\n+  args: {\n+    children: \n+  },\n };\n"
+                },
+                {
+                    "date": 1717780603589,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,8 @@\n \n type Story = StoryObj<typeof Skeleton>;\n \n export const Default: Story = {\n-  args: {\n-    children: \n-  },\n+  render: ()=> (\n+    \n+  )\n };\n"
+                },
+                {
+                    "date": 1717780632551,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,21 @@\n import { StoryObj, Meta } from '@storybook/react';\n import { Skeleton } from './Seleton';\n \n export default {\n-  title: 'Seleton',\n+  title: 'lib/components/Seleton',\n   component: Skeleton,\n } as Meta<typeof Skeleton>;\n \n type Story = StoryObj<typeof Skeleton>;\n \n export const Default: Story = {\n-  render: ()=> (\n-    \n-  )\n+  render: () => (\n+    <div className=\"flex items-center space-x-4\">\n+      <Skeleton className=\"size-12 rounded-full\" />\n+      <div className=\"space-y-2\">\n+        <Skeleton className=\"h-4 w-[250px]\" />\n+        <Skeleton className=\"h-4 w-[200px]\" />\n+      </div>\n+    </div>\n+  ),\n };\n"
+                },
+                {
+                    "date": 1717780670957,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { StoryObj, Meta } from '@storybook/react';\n import { Skeleton } from './Seleton';\n \n export default {\n-  title: 'lib/components/Seleton',\n+  title: 'lib/components/Skeleton',\n   component: Skeleton,\n } as Meta<typeof Skeleton>;\n \n type Story = StoryObj<typeof Skeleton>;\n"
+                },
+                {
+                    "date": 1717780699572,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,14 +8,6 @@\n \n type Story = StoryObj<typeof Skeleton>;\n \n export const Default: Story = {\n-  render: () => (\n-    <div className=\"flex items-center space-x-4\">\n-      <Skeleton className=\"size-12 rounded-full\" />\n-      <div className=\"space-y-2\">\n-        <Skeleton className=\"h-4 w-[250px]\" />\n-        <Skeleton className=\"h-4 w-[200px]\" />\n-      </div>\n-    </div>\n-  ),\n+  render: () => <Skeleton className=\"h-[20px] w-[100px] rounded-full\" />,\n };\n"
+                },
+                {
+                    "date": 1717780767813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,6 +8,14 @@\n \n type Story = StoryObj<typeof Skeleton>;\n \n export const Default: Story = {\n-  render: () => <Skeleton className=\"h-[20px] w-[100px] rounded-full\" />,\n+  render: () => (\n+    <div className=\"flex flex-col space-y-3\">\n+      <Skeleton className=\"h-[125px] w-[250px] rounded-xl\" />\n+      <div className=\"space-y-2\">\n+        <Skeleton className=\"h-4 w-[250px]\" />\n+        <Skeleton className=\"h-4 w-[200px]\" />\n+      </div>\n+    </div>\n+  ),\n };\n"
+                },
+                {
+                    "date": 1717780782376,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { StoryObj, Meta } from '@storybook/react';\n-import { Skeleton } from './Seleton';\n+import { Skeleton } from './Skeleton';\n \n export default {\n   title: 'lib/components/Skeleton',\n   component: Skeleton,\n"
+                },
+                {
+                    "date": 1717780918855,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n \n export const Default: Story = {\n   render: () => (\n     <div className=\"flex flex-col space-y-3\">\n+      hello\n       <Skeleton className=\"h-[125px] w-[250px] rounded-xl\" />\n       <div className=\"space-y-2\">\n         <Skeleton className=\"h-4 w-[250px]\" />\n         <Skeleton className=\"h-4 w-[200px]\" />\n"
+                },
+                {
+                    "date": 1717780937599,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,8 @@\n \n export const Default: Story = {\n   render: () => (\n     <div className=\"flex flex-col space-y-3\">\n-      hello\n       <Skeleton className=\"h-[125px] w-[250px] rounded-xl\" />\n       <div className=\"space-y-2\">\n         <Skeleton className=\"h-4 w-[250px]\" />\n         <Skeleton className=\"h-4 w-[200px]\" />\n"
+                }
+            ],
+            "date": 1717780555642,
+            "name": "Commit-0",
+            "content": "import { StoryObj, Meta } from '@storybook/react';\n\nimport Skeleton from './Seleton';\n\nexport default {\n  title: 'Seleton',\n  component: Skeleton,\n  args: {\n    //TODO: Add args here\n  },\n} as Meta<typeof Skeleton>;\n\ntype Story = StoryObj<typeof Skeleton>;\n\nexport const Default: Story = {\n  args: {},\n};\n"
+        }
+    ]
+}

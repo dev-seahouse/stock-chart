@@ -1,0 +1,246 @@
+{
+    "sourceFile": "src/components/StockPriceChart.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 57,
+            "patches": [
+                {
+                    "date": 1717776816552,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717777030162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n import Highcharts from 'highcharts';\n import HighchartsReact from 'highcharts-react-official';\n import { useQuery } from '@tanstack/react-query';\n import AggregatesService from '@/api/services/Aggregates';\n+import type { AggregatesResult } from '@/api/services/Aggregates.types';\n \n interface StockPriceChartProps {\n   selectedStocks: string[];\n   dateRange: { start: string; end: string };\n"
+                },
+                {
+                    "date": 1717777103992,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,12 +4,14 @@\n import { useQuery } from '@tanstack/react-query';\n import AggregatesService from '@/api/services/Aggregates';\n import type { AggregatesResult } from '@/api/services/Aggregates.types';\n \n+type StockPriceType = 'open' | 'high' | 'low' | 'close';\n+\n interface StockPriceChartProps {\n   selectedStocks: string[];\n   dateRange: { start: string; end: string };\n-  priceType: 'open' | 'high' | 'low' | 'close';\n+  priceType: StockPriceType;\n }\n \n const fetchStockData = async (\n   stock: string,\n"
+                },
+                {
+                    "date": 1717777123930,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \n const fetchStockData = async (\n   stock: string,\n   dateRange: { start: string; end: string },\n-  priceType: 'open' | 'high' | 'low' | 'close',\n+  priceType: StockPriceType,\n ) => {\n   const { start, end } = dateRange;\n   const params = {\n     multiplier: 1,\n@@ -25,12 +25,9 @@\n     from: start,\n     to: end,\n   };\n   const response = await AggregatesService.getAggregates(stock, params);\n-  const priceKeyMap: Record<\n-    'open' | 'high' | 'low' | 'close',\n-    keyof AggregatesResult\n-  > = {\n+  const priceKeyMap: Record<StockPriceType, keyof AggregatesResult> = {\n     open: 'o',\n     high: 'h',\n     low: 'l',\n     close: 'c',\n"
+                },
+                {
+                    "date": 1717777805060,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import { useQuery } from '@tanstack/react-query';\n import AggregatesService from '@/api/services/Aggregates';\n import type { AggregatesResult } from '@/api/services/Aggregates.types';\n \n-type StockPriceType = 'open' | 'high' | 'low' | 'close';\n+export type StockPriceType = 'open' | 'high' | 'low' | 'close';\n \n interface StockPriceChartProps {\n   selectedStocks: string[];\n   dateRange: { start: string; end: string };\n"
+                },
+                {
+                    "date": 1717778126723,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,8 +52,9 @@\n           fetchStockData(stock, dateRange, priceType),\n         ),\n       ),\n     enabled: selectedStocks.length > 0,\n+    refetch\n   });\n \n   const chartOptions = {\n     title: { text: 'Stock Prices' },\n"
+                },
+                {
+                    "date": 1717778139181,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,9 @@\n           fetchStockData(stock, dateRange, priceType),\n         ),\n       ),\n     enabled: selectedStocks.length > 0,\n-    refetch\n+    refetchOnWindowFocus: false,\n   });\n \n   const chartOptions = {\n     title: { text: 'Stock Prices' },\n"
+                },
+                {
+                    "date": 1717778188569,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,8 @@\n     refetchOnWindowFocus: false,\n   });\n \n   const chartOptions = {\n-    title: { text: 'Stock Prices' },\n     xAxis: { type: 'datetime' },\n     series: data?.map((stockData, index) => ({\n       name: selectedStocks[index],\n       data: stockData,\n"
+                },
+                {
+                    "date": 1717778202241,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,8 +56,9 @@\n     refetchOnWindowFocus: false,\n   });\n \n   const chartOptions = {\n+    title: { text: '' },\n     xAxis: { type: 'datetime' },\n     series: data?.map((stockData, index) => ({\n       name: selectedStocks[index],\n       data: stockData,\n"
+                },
+                {
+                    "date": 1717779382307,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React from 'react';\n import Highcharts from 'highcharts';\n import HighchartsReact from 'highcharts-react-official';\n-import { useQuery } from '@tanstack/react-query';\n+import { useQueries } from '@tanstack/react-query';\n import AggregatesService from '@/api/services/Aggregates';\n import type { AggregatesResult } from '@/api/services/Aggregates.types';\n \n export type StockPriceType = 'open' | 'high' | 'low' | 'close';\n@@ -43,27 +43,35 @@\n   selectedStocks,\n   dateRange,\n   priceType,\n }) => {\n-  const { data, isLoading, isError } = useQuery({\n-    queryKey: ['aggregates', selectedStocks, dateRange, priceType],\n-    queryFn: () =>\n-      Promise.all(\n-        selectedStocks.map((stock) =>\n-          fetchStockData(stock, dateRange, priceType),\n-        ),\n-      ),\n-    enabled: selectedStocks.length > 0,\n-    refetchOnWindowFocus: false,\n+  const queries = useQueries({\n+    queries: selectedStocks.map((stock) => ({\n+      queryKey: ['aggregates', stock, dateRange, priceType],\n+      queryFn: () => fetchStockData(stock, dateRange, priceType),\n+    })),\n   });\n \n+  const isLoading = queries.some((query) => query.isLoading);\n+  const isError = queries.some((query) => query.isError);\n+\n+  const chartData = queries.reduce(\n+    (acc, query, index) => {\n+      if (query.data) {\n+        acc.push({\n+          name: selectedStocks[index],\n+          data: query.data,\n+        });\n+      }\n+      return acc;\n+    },\n+    [] as { name: string; data: { x: number; y: number }[] }[],\n+  );\n+\n   const chartOptions = {\n-    title: { text: '' },\n+    title: { text: 'Stock Prices' },\n     xAxis: { type: 'datetime' },\n-    series: data?.map((stockData, index) => ({\n-      name: selectedStocks[index],\n-      data: stockData,\n-    })),\n+    series: chartData,\n   };\n \n   if (isLoading) return <div>Loading...</div>;\n   if (isError) return <div>Error loading data</div>;\n"
+                },
+                {
+                    "date": 1717779569545,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,8 +47,9 @@\n   const queries = useQueries({\n     queries: selectedStocks.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n+      staleTime: 1000 * 60 * 5,\n     })),\n   });\n \n   const isLoading = queries.some((query) => query.isLoading);\n"
+                },
+                {
+                    "date": 1717779580160,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,8 +48,9 @@\n     queries: selectedStocks.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n       staleTime: 1000 * 60 * 5,\n+      retry: false,\n     })),\n   });\n \n   const isLoading = queries.some((query) => query.isLoading);\n"
+                },
+                {
+                    "date": 1717779598412,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,8 +47,9 @@\n   const queries = useQueries({\n     queries: selectedStocks.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n+      fetch\n       staleTime: 1000 * 60 * 5,\n       retry: false,\n     })),\n   });\n"
+                },
+                {
+                    "date": 1717779612712,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,10 @@\n   const queries = useQueries({\n     queries: selectedStocks.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n-      fetch\n+      fetchOnMount: false,\n+      fetchOnWindowFocus: false,\n       staleTime: 1000 * 60 * 5,\n       retry: false,\n     })),\n   });\n"
+                },
+                {
+                    "date": 1717779621363,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,8 +50,9 @@\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n       fetchOnMount: false,\n       fetchOnWindowFocus: false,\n       staleTime: 1000 * 60 * 5,\n+      gcTime: 1000 * 60 * 60,\n       retry: false,\n     })),\n   });\n \n"
+                },
+                {
+                    "date": 1717780153263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \n export type StockPriceType = 'open' | 'high' | 'low' | 'close';\n \n interface StockPriceChartProps {\n-  selectedStocks: string[];\n+  selectedStocks: string[]; // array of ticker symbol\n   dateRange: { start: string; end: string };\n   priceType: StockPriceType;\n }\n \n"
+                },
+                {
+                    "date": 1717780235452,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,10 +49,8 @@\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n       fetchOnMount: false,\n       fetchOnWindowFocus: false,\n-      staleTime: 1000 * 60 * 5,\n-      gcTime: 1000 * 60 * 60,\n       retry: false,\n     })),\n   });\n \n"
+                },
+                {
+                    "date": 1717780270233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -76,9 +76,9 @@\n     series: chartData,\n   };\n \n   if (isLoading) return <div>Loading...</div>;\n-  if (isError) return <div>Error loading data</div>;\n+  if (isError) return <div>Error loading data, please try again later</div>;\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n \n"
+                },
+                {
+                    "date": 1717780299642,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,8 +49,10 @@\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n       fetchOnMount: false,\n       fetchOnWindowFocus: false,\n+      staleTime: 1000 * 60 * 5,\n+      gcTime: 1000 * 60 * 60,\n       retry: false,\n     })),\n   });\n \n@@ -76,9 +78,9 @@\n     series: chartData,\n   };\n \n   if (isLoading) return <div>Loading...</div>;\n-  if (isError) return <div>Error loading data, please try again later</div>;\n+  if (isError) return <div>Error loading data</div>;\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n \n"
+                },
+                {
+                    "date": 1717780347543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,10 +49,8 @@\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n       fetchOnMount: false,\n       fetchOnWindowFocus: false,\n-      staleTime: 1000 * 60 * 5,\n-      gcTime: 1000 * 60 * 60,\n       retry: false,\n     })),\n   });\n \n"
+                },
+                {
+                    "date": 1717780390480,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -76,9 +76,9 @@\n     series: chartData,\n   };\n \n   if (isLoading) return <div>Loading...</div>;\n-  if (isError) return <div>Error loading data</div>;\n+  if (isError) return <div>Error loading data, please try again later</div>;\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n \n"
+                },
+                {
+                    "date": 1717781085232,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import HighchartsReact from 'highcharts-react-official';\n import { useQueries } from '@tanstack/react-query';\n import AggregatesService from '@/api/services/Aggregates';\n import type { AggregatesResult } from '@/api/services/Aggregates.types';\n+import { Skeleton } from '@/lib/components/Skeleton';\n \n export type StockPriceType = 'open' | 'high' | 'low' | 'close';\n \n interface StockPriceChartProps {\n@@ -75,9 +76,9 @@\n     xAxis: { type: 'datetime' },\n     series: chartData,\n   };\n \n-  if (isLoading) return <div>Loading...</div>;\n+  if (isLoading) return <Skeleton>Loading...</Skeleton>;\n   if (isError) return <div>Error loading data, please try again later</div>;\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n"
+                },
+                {
+                    "date": 1717781122142,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -76,9 +76,9 @@\n     xAxis: { type: 'datetime' },\n     series: chartData,\n   };\n \n-  if (isLoading) return <Skeleton>Loading...</Skeleton>;\n+  if (isLoading) return <Skeleton className=\"size-full\">Loading...</Skeleton>;\n   if (isError) return <div>Error loading data, please try again later</div>;\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n"
+                },
+                {
+                    "date": 1717781128966,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -76,9 +76,9 @@\n     xAxis: { type: 'datetime' },\n     series: chartData,\n   };\n \n-  if (isLoading) return <Skeleton className=\"size-full\">Loading...</Skeleton>;\n+  if (isLoading) return <Skeleton className=\"size-full\"></Skeleton>;\n   if (isError) return <div>Error loading data, please try again later</div>;\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n"
+                },
+                {
+                    "date": 1717781184780,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -76,9 +76,18 @@\n     xAxis: { type: 'datetime' },\n     series: chartData,\n   };\n \n-  if (isLoading) return <Skeleton className=\"size-full\"></Skeleton>;\n+  if (isLoading)\n+    return (\n+      <div className=\"flex items-center space-x-4\">\n+        <Skeleton className=\"size-12 rounded-full\" />\n+        <div className=\"space-y-2\">\n+          <Skeleton className=\"h-4 w-[250px]\" />\n+          <Skeleton className=\"h-4 w-[200px]\" />\n+        </div>\n+      </div>\n+    );\n   if (isError) return <div>Error loading data, please try again later</div>;\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n"
+                },
+                {
+                    "date": 1717781202641,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -78,9 +78,9 @@\n   };\n \n   if (isLoading)\n     return (\n-      <div className=\"flex items-center space-x-4\">\n+      <div className=\"flex w-full items-center space-x-4\">\n         <Skeleton className=\"size-12 rounded-full\" />\n         <div className=\"space-y-2\">\n           <Skeleton className=\"h-4 w-[250px]\" />\n           <Skeleton className=\"h-4 w-[200px]\" />\n"
+                },
+                {
+                    "date": 1717781247636,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -76,18 +76,16 @@\n     xAxis: { type: 'datetime' },\n     series: chartData,\n   };\n \n-  if (isLoading)\n     return (\n       <div className=\"flex w-full items-center space-x-4\">\n         <Skeleton className=\"size-12 rounded-full\" />\n         <div className=\"space-y-2\">\n           <Skeleton className=\"h-4 w-[250px]\" />\n           <Skeleton className=\"h-4 w-[200px]\" />\n         </div>\n       </div>\n-    );\n   if (isError) return <div>Error loading data, please try again later</div>;\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n"
+                },
+                {
+                    "date": 1717781253780,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -76,16 +76,17 @@\n     xAxis: { type: 'datetime' },\n     series: chartData,\n   };\n \n-    return (\n-      <div className=\"flex w-full items-center space-x-4\">\n-        <Skeleton className=\"size-12 rounded-full\" />\n-        <div className=\"space-y-2\">\n-          <Skeleton className=\"h-4 w-[250px]\" />\n-          <Skeleton className=\"h-4 w-[200px]\" />\n-        </div>\n+  return (\n+    <div className=\"flex w-full items-center space-x-4\">\n+      <Skeleton className=\"size-12 rounded-full\" />\n+      <div className=\"space-y-2\">\n+        <Skeleton className=\"h-4 w-[250px]\" />\n+        <Skeleton className=\"h-4 w-[200px]\" />\n       </div>\n+    </div>\n+  );\n   if (isError) return <div>Error loading data, please try again later</div>;\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n"
+                },
+                {
+                    "date": 1717781358400,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -77,9 +77,9 @@\n     series: chartData,\n   };\n \n   return (\n-    <div className=\"flex w-full items-center space-x-4\">\n+    <div className=\"flex w-full items-center justify-center space-x-4\">\n       <Skeleton className=\"size-12 rounded-full\" />\n       <div className=\"space-y-2\">\n         <Skeleton className=\"h-4 w-[250px]\" />\n         <Skeleton className=\"h-4 w-[200px]\" />\n"
+                },
+                {
+                    "date": 1717781384196,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -76,17 +76,19 @@\n     xAxis: { type: 'datetime' },\n     series: chartData,\n   };\n \n-  return (\n-    <div className=\"flex w-full items-center justify-center space-x-4\">\n-      <Skeleton className=\"size-12 rounded-full\" />\n-      <div className=\"space-y-2\">\n-        <Skeleton className=\"h-4 w-[250px]\" />\n-        <Skeleton className=\"h-4 w-[200px]\" />\n+  if (isLoading) {\n+    return (\n+      <div className=\"flex w-full items-center justify-center space-x-4\">\n+        <Skeleton className=\"size-12 rounded-full\" />\n+        <div className=\"space-y-2\">\n+          <Skeleton className=\"h-4 w-[250px]\" />\n+          <Skeleton className=\"h-4 w-[200px]\" />\n+        </div>\n       </div>\n-    </div>\n-  );\n+    );\n+  }\n   if (isError) return <div>Error loading data, please try again later</div>;\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n"
+                },
+                {
+                    "date": 1717781404530,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -87,9 +87,14 @@\n         </div>\n       </div>\n     );\n   }\n-  if (isError) return <div>Error loading data, please try again later</div>;\n+  if (isError)\n+    return (\n+      <div className=\"flex w-full justify-center\">\n+        Error loading data, please try again later\n+      </div>\n+    );\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n \n"
+                },
+                {
+                    "date": 1717781438771,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,9 +89,9 @@\n     );\n   }\n   if (isError)\n     return (\n-      <div className=\"flex w-full justify-center\">\n+      <div className=\"flex w-full justify-center text-muted\">\n         Error loading data, please try again later\n       </div>\n     );\n \n"
+                },
+                {
+                    "date": 1717781452393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,9 +89,9 @@\n     );\n   }\n   if (isError)\n     return (\n-      <div className=\"flex w-full justify-center text-muted\">\n+      <div className=\"flex w-full justify-center text-gray-800\">\n         Error loading data, please try again later\n       </div>\n     );\n \n"
+                },
+                {
+                    "date": 1717781458753,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,9 +89,9 @@\n     );\n   }\n   if (isError)\n     return (\n-      <div className=\"flex w-full justify-center text-gray-800\">\n+      <div className=\"flex w-full justify-center text-gray-400\">\n         Error loading data, please try again later\n       </div>\n     );\n \n"
+                },
+                {
+                    "date": 1717781962047,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,14 +3,13 @@\n import HighchartsReact from 'highcharts-react-official';\n import { useQueries } from '@tanstack/react-query';\n import AggregatesService from '@/api/services/Aggregates';\n import type { AggregatesResult } from '@/api/services/Aggregates.types';\n-import { Skeleton } from '@/lib/components/Skeleton';\n \n export type StockPriceType = 'open' | 'high' | 'low' | 'close';\n \n interface StockPriceChartProps {\n-  selectedStocks: string[]; // array of ticker symbol\n+  selectedStocks: string[];\n   dateRange: { start: string; end: string };\n   priceType: StockPriceType;\n }\n \n@@ -36,8 +35,9 @@\n   const priceKey = priceKeyMap[priceType];\n   return response.data.results.map((point) => ({\n     x: point.t,\n     y: point[priceKey],\n+    stock,\n   }));\n };\n \n const StockPriceChart: React.FC<StockPriceChartProps> = ({\n@@ -48,53 +48,30 @@\n   const queries = useQueries({\n     queries: selectedStocks.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n-      fetchOnMount: false,\n-      fetchOnWindowFocus: false,\n-      retry: false,\n     })),\n   });\n \n   const isLoading = queries.some((query) => query.isLoading);\n   const isError = queries.some((query) => query.isError);\n \n-  const chartData = queries.reduce(\n-    (acc, query, index) => {\n-      if (query.data) {\n-        acc.push({\n-          name: selectedStocks[index],\n-          data: query.data,\n-        });\n-      }\n-      return acc;\n-    },\n-    [] as { name: string; data: { x: number; y: number }[] }[],\n-  );\n+  const chartData = selectedStocks.map((stock) => {\n+    const query = queries.find((q) => q.data && q.data[0]?.stock === stock);\n+    return {\n+      name: stock,\n+      data: query?.data?.map((point) => ({ x: point.x, y: point.y })) || [],\n+    };\n+  });\n \n   const chartOptions = {\n     title: { text: 'Stock Prices' },\n     xAxis: { type: 'datetime' },\n     series: chartData,\n   };\n \n-  if (isLoading) {\n-    return (\n-      <div className=\"flex w-full items-center justify-center space-x-4\">\n-        <Skeleton className=\"size-12 rounded-full\" />\n-        <div className=\"space-y-2\">\n-          <Skeleton className=\"h-4 w-[250px]\" />\n-          <Skeleton className=\"h-4 w-[200px]\" />\n-        </div>\n-      </div>\n-    );\n-  }\n-  if (isError)\n-    return (\n-      <div className=\"flex w-full justify-center text-gray-400\">\n-        Error loading data, please try again later\n-      </div>\n-    );\n+  if (isLoading) return <div>Loading...</div>;\n+  if (isError) return <div>Error loading data</div>;\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n \n"
+                },
+                {
+                    "date": 1717781968669,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,9 +58,9 @@\n   const chartData = selectedStocks.map((stock) => {\n     const query = queries.find((q) => q.data && q.data[0]?.stock === stock);\n     return {\n       name: stock,\n-      data: query?.data?.map((point) => ({ x: point.x, y: point.y })) || [],\n+      data: query?.data?.map((point) => ({ x: point.x, y: point.y })) ?? [],\n     };\n   });\n \n   const chartOptions = {\n"
+                },
+                {
+                    "date": 1717810927527,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,10 +19,10 @@\n   priceType: StockPriceType,\n ) => {\n   const { start, end } = dateRange;\n   const params = {\n-    multiplier: 1,\n-    timespan: 'day' as const,\n+    multiplier: 30,\n+    timespan: 'minute' as const,\n     from: start,\n     to: end,\n   };\n   const response = await AggregatesService.getAggregates(stock, params);\n"
+                },
+                {
+                    "date": 1717810958550,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,10 +19,10 @@\n   priceType: StockPriceType,\n ) => {\n   const { start, end } = dateRange;\n   const params = {\n-    multiplier: 30,\n-    timespan: 'minute' as const,\n+    multiplier: 1,\n+    timespan: 'day' as const,\n     from: start,\n     to: end,\n   };\n   const response = await AggregatesService.getAggregates(stock, params);\n"
+                },
+                {
+                    "date": 1717812133299,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n     close: 'c',\n   };\n   const priceKey = priceKeyMap[priceType];\n   return response.data.results.map((point) => ({\n-    x: point.t,\n+    x: point.t, // time\n     y: point[priceKey],\n     stock,\n   }));\n };\n"
+                },
+                {
+                    "date": 1717812279154,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n   };\n   const priceKey = priceKeyMap[priceType];\n   return response.data.results.map((point) => ({\n     x: point.t, // time\n-    y: point[priceKey],\n+    y: point[priceKey], // price\n     stock,\n   }));\n };\n \n@@ -54,12 +54,12 @@\n \n   const isLoading = queries.some((query) => query.isLoading);\n   const isError = queries.some((query) => query.isError);\n \n-  const chartData = selectedStocks.map((stock) => {\n-    const query = queries.find((q) => q.data && q.data[0]?.stock === stock);\n+  const chartData = selectedStocks.map((stockTicker) => {\n+    const query = queries.find((q) => q.data && q.data[0]?.stock === stockTicker);\n     return {\n-      name: stock,\n+      name: stockTicker,\n       data: query?.data?.map((point) => ({ x: point.x, y: point.y })) ?? [],\n     };\n   });\n \n"
+                },
+                {
+                    "date": 1717812312597,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \n export type StockPriceType = 'open' | 'high' | 'low' | 'close';\n \n interface StockPriceChartProps {\n-  selectedStocks: string[];\n+  selectedTickers: string[];\n   dateRange: { start: string; end: string };\n   priceType: StockPriceType;\n }\n \n@@ -40,9 +40,9 @@\n   }));\n };\n \n const StockPriceChart: React.FC<StockPriceChartProps> = ({\n-  selectedStocks,\n+  selectedTickers: selectedStocks,\n   dateRange,\n   priceType,\n }) => {\n   const queries = useQueries({\n@@ -55,9 +55,11 @@\n   const isLoading = queries.some((query) => query.isLoading);\n   const isError = queries.some((query) => query.isError);\n \n   const chartData = selectedStocks.map((stockTicker) => {\n-    const query = queries.find((q) => q.data && q.data[0]?.stock === stockTicker);\n+    const query = queries.find(\n+      (q) => q.data && q.data[0]?.stock === stockTicker,\n+    );\n     return {\n       name: stockTicker,\n       data: query?.data?.map((point) => ({ x: point.x, y: point.y })) ?? [],\n     };\n"
+                },
+                {
+                    "date": 1717812347686,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,23 +40,23 @@\n   }));\n };\n \n const StockPriceChart: React.FC<StockPriceChartProps> = ({\n-  selectedTickers: selectedStocks,\n+  selectedTickers,\n   dateRange,\n   priceType,\n }) => {\n   const queries = useQueries({\n-    queries: selectedStocks.map((stock) => ({\n+    queries: selectedTickers.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n     })),\n   });\n \n   const isLoading = queries.some((query) => query.isLoading);\n   const isError = queries.some((query) => query.isError);\n \n-  const chartData = selectedStocks.map((stockTicker) => {\n+  const chartData = selectedTickers.map((stockTicker) => {\n     const query = queries.find(\n       (q) => q.data && q.data[0]?.stock === stockTicker,\n     );\n     return {\n"
+                },
+                {
+                    "date": 1717812597945,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,9 @@\n     multiplier: 1,\n     timespan: 'day' as const,\n     from: start,\n     to: end,\n+    limit: 10000,\n   };\n   const response = await AggregatesService.getAggregates(stock, params);\n   const priceKeyMap: Record<StockPriceType, keyof AggregatesResult> = {\n     open: 'o',\n"
+                },
+                {
+                    "date": 1717812786876,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,8 @@\n     multiplier: 1,\n     timespan: 'day' as const,\n     from: start,\n     to: end,\n-    limit: 10000,\n   };\n   const response = await AggregatesService.getAggregates(stock, params);\n   const priceKeyMap: Record<StockPriceType, keyof AggregatesResult> = {\n     open: 'o',\n"
+                },
+                {
+                    "date": 1717812834593,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n ) => {\n   const { start, end } = dateRange;\n   const params = {\n     multiplier: 1,\n-    timespan: 'day' as const,\n+    timespan: 'hour' as const,\n     from: start,\n     to: end,\n   };\n   const response = await AggregatesService.getAggregates(stock, params);\n"
+                },
+                {
+                    "date": 1717812936265,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,9 +70,16 @@\n     xAxis: { type: 'datetime' },\n     series: chartData,\n   };\n \n-  if (isLoading) return <div>Loading...</div>;\n+  if (isLoading) return  <div className=\"flex items-center space-x-4\">\n+      <Skeleton className=\"h-12 w-12 rounded-full\" />\n+      <div className=\"space-y-2\">\n+        <Skeleton className=\"h-4 w-[250px]\" />\n+        <Skeleton className=\"h-4 w-[200px]\" />\n+      </div>\n+    </div>\n+  );\n   if (isError) return <div>Error loading data</div>;\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n"
+                },
+                {
+                    "date": 1717812942030,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,16 +70,9 @@\n     xAxis: { type: 'datetime' },\n     series: chartData,\n   };\n \n-  if (isLoading) return  <div className=\"flex items-center space-x-4\">\n-      <Skeleton className=\"h-12 w-12 rounded-full\" />\n-      <div className=\"space-y-2\">\n-        <Skeleton className=\"h-4 w-[250px]\" />\n-        <Skeleton className=\"h-4 w-[200px]\" />\n-      </div>\n-    </div>\n-  );\n+  if (isLoading) return <div>Loading...</div>;\n   if (isError) return <div>Error loading data</div>;\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n"
+                },
+                {
+                    "date": 1717812951642,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import HighchartsReact from 'highcharts-react-official';\n import { useQueries } from '@tanstack/react-query';\n import AggregatesService from '@/api/services/Aggregates';\n import type { AggregatesResult } from '@/api/services/Aggregates.types';\n+import { Skeleton } from '@/lib/components/Skeleton';\n \n export type StockPriceType = 'open' | 'high' | 'low' | 'close';\n \n interface StockPriceChartProps {\n@@ -70,9 +71,18 @@\n     xAxis: { type: 'datetime' },\n     series: chartData,\n   };\n \n-  if (isLoading) return <div>Loading...</div>;\n+  if (isLoading)\n+    return (\n+      <div className=\"flex items-center space-x-4\">\n+        <Skeleton className=\"size-12 rounded-full\" />\n+        <div className=\"space-y-2\">\n+          <Skeleton className=\"h-4 w-[250px]\" />\n+          <Skeleton className=\"h-4 w-[200px]\" />\n+        </div>\n+      </div>\n+    );\n   if (isError) return <div>Error loading data</div>;\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n"
+                },
+                {
+                    "date": 1717812964679,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,9 @@\n           <Skeleton className=\"h-4 w-[200px]\" />\n         </div>\n       </div>\n     );\n-  if (isError) return <div>Error loading data</div>;\n+  if (isError) return <div className=\"\">Error loading data</div>;\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n \n"
+                },
+                {
+                    "date": 1717812974970,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,9 +73,9 @@\n   };\n \n   if (isLoading)\n     return (\n-      <div className=\"flex items-center space-x-4\">\n+      <div className=\"flex items-center justify-center space-x-4\">\n         <Skeleton className=\"size-12 rounded-full\" />\n         <div className=\"space-y-2\">\n           <Skeleton className=\"h-4 w-[250px]\" />\n           <Skeleton className=\"h-4 w-[200px]\" />\n"
+                },
+                {
+                    "date": 1717812986412,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,9 @@\n           <Skeleton className=\"h-4 w-[200px]\" />\n         </div>\n       </div>\n     );\n-  if (isError) return <div className=\"\">Error loading data</div>;\n+  if (isError) return <div className=\"text-center\">Error loading data</div>;\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n \n"
+                },
+                {
+                    "date": 1717813016089,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,14 @@\n           <Skeleton className=\"h-4 w-[200px]\" />\n         </div>\n       </div>\n     );\n-  if (isError) return <div className=\"text-center\">Error loading data</div>;\n+  if (isError)\n+    return (\n+      <div className=\"text-center text-muted-foreground\">\n+        Error loading data\n+      </div>\n+    );\n \n   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n };\n \n"
+                },
+                {
+                    "date": 1717813362439,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,8 +49,10 @@\n   const queries = useQueries({\n     queries: selectedTickers.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n+      retryOnMount: false,\n+      \n     })),\n   });\n \n   const isLoading = queries.some((query) => query.isLoading);\n"
+                },
+                {
+                    "date": 1717813374955,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,8 +50,9 @@\n     queries: selectedTickers.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n       retryOnMount: false,\n+      retry:false,\n       \n     })),\n   });\n \n"
+                },
+                {
+                    "date": 1717813406677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,11 +49,12 @@\n   const queries = useQueries({\n     queries: selectedTickers.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n+      refetchOnMount: false,\n+      refecthOnWindowFocus: false,\n       retryOnMount: false,\n-      retry:false,\n-      \n+      retry: false,\n     })),\n   });\n \n   const isLoading = queries.some((query) => query.isLoading);\n"
+                },
+                {
+                    "date": 1717814177190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n ) => {\n   const { start, end } = dateRange;\n   const params = {\n     multiplier: 1,\n-    timespan: 'hour' as const,\n+    timespan: 'day' as const,\n     from: start,\n     to: end,\n   };\n   const response = await AggregatesService.getAggregates(stock, params);\n"
+                },
+                {
+                    "date": 1717816098832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,12 +49,14 @@\n   const queries = useQueries({\n     queries: selectedTickers.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n+      retry: false,\n       refetchOnMount: false,\n       refecthOnWindowFocus: false,\n       retryOnMount: false,\n-      retry: false,\n+      staleTime: 5 * 60 * 1000, // 5 minutes\n+      gcTime: 10 * 60 * 1000, // 10 minutes\n     })),\n   });\n \n   const isLoading = queries.some((query) => query.isLoading);\n"
+                },
+                {
+                    "date": 1717816120501,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,9 @@\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n       retry: false,\n       refetchOnMount: false,\n-      refecthOnWindowFocus: false,\n+      refetchOnWindowFocus: false,\n       retryOnMount: false,\n       staleTime: 5 * 60 * 1000, // 5 minutes\n       gcTime: 10 * 60 * 1000, // 10 minutes\n     })),\n"
+                }
+            ],
+            "date": 1717776816551,
+            "name": "Commit-0",
+            "content": "import React from 'react';\nimport Highcharts from 'highcharts';\nimport HighchartsReact from 'highcharts-react-official';\nimport { useQuery } from '@tanstack/react-query';\nimport AggregatesService from '@/api/services/Aggregates';\n\ninterface StockPriceChartProps {\n  selectedStocks: string[];\n  dateRange: { start: string; end: string };\n  priceType: 'open' | 'high' | 'low' | 'close';\n}\n\nconst fetchStockData = async (\n  stock: string,\n  dateRange: { start: string; end: string },\n  priceType: 'open' | 'high' | 'low' | 'close',\n) => {\n  const { start, end } = dateRange;\n  const params = {\n    multiplier: 1,\n    timespan: 'day' as const,\n    from: start,\n    to: end,\n  };\n  const response = await AggregatesService.getAggregates(stock, params);\n  const priceKeyMap: Record<\n    'open' | 'high' | 'low' | 'close',\n    keyof AggregatesResult\n  > = {\n    open: 'o',\n    high: 'h',\n    low: 'l',\n    close: 'c',\n  };\n  const priceKey = priceKeyMap[priceType];\n  return response.data.results.map((point) => ({\n    x: point.t,\n    y: point[priceKey],\n  }));\n};\n\nconst StockPriceChart: React.FC<StockPriceChartProps> = ({\n  selectedStocks,\n  dateRange,\n  priceType,\n}) => {\n  const { data, isLoading, isError } = useQuery({\n    queryKey: ['aggregates', selectedStocks, dateRange, priceType],\n    queryFn: () =>\n      Promise.all(\n        selectedStocks.map((stock) =>\n          fetchStockData(stock, dateRange, priceType),\n        ),\n      ),\n    enabled: selectedStocks.length > 0,\n  });\n\n  const chartOptions = {\n    title: { text: 'Stock Prices' },\n    xAxis: { type: 'datetime' },\n    series: data?.map((stockData, index) => ({\n      name: selectedStocks[index],\n      data: stockData,\n    })),\n  };\n\n  if (isLoading) return <div>Loading...</div>;\n  if (isError) return <div>Error loading data</div>;\n\n  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n};\n\nexport default StockPriceChart;\n"
+        }
+    ]
+}

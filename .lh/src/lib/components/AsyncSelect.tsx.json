@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/lib/components/AsyncSelect.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1717818059183,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1717818059183,
+            "name": "Commit-0",
+            "content": "import type { GroupBase, StylesConfig } from 'react-select';\nimport AsyncReactSelect, { type AsyncProps } from 'react-select/async';\nexport type AsyncSelectProps<\n  Option = unknown,\n  IsMulti extends boolean = false,\n  Group extends GroupBase<Option> = GroupBase<Option>,\n> = AsyncProps<Option, IsMulti, Group>;\n\nconst customStyles: StylesConfig<any, any, any> = {\n  control: (provided, state) => ({\n    ...provided,\n    borderColor: state.isFocused ? 'hsl(var(--ring))' : 'hsl(var(--border))',\n    borderRadius: '0.5rem',\n    boxShadow: state.isFocused ? '0 0 0 1px hsl(var(--ring))' : '',\n    '&:hover': {\n      borderColor: 'hsl(var(--ring))',\n    },\n    backgroundColor: 'hsl(var(--background))',\n    color: 'hsl(var(--foreground))',\n  }),\n  menu: (provided) => ({\n    ...provided,\n    borderRadius: '0.5rem',\n    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',\n    backgroundColor: 'hsl(var(--popover))',\n  }),\n  option: (provided, state) => ({\n    ...provided,\n    backgroundColor: state.isSelected\n      ? 'hsl(var(--accent))'\n      : state.isFocused\n        ? 'hsl(var(--muted-light))'\n        : 'hsl(var(--background))',\n    color: state.isSelected\n      ? 'hsl(var(--accent-foreground))'\n      : 'hsl(var(--foreground))',\n    '&:hover': {\n      backgroundColor: 'hsl(var(--muted-light))',\n    },\n  }),\n  singleValue: (provided) => ({\n    ...provided,\n    color: 'hsl(var(--foreground))',\n  }),\n  input: (provided) => ({\n    ...provided,\n    color: 'hsl(var(--foreground))',\n  }),\n  placeholder: (provided) => ({\n    ...provided,\n    color: 'hsl(var(--muted-foreground))',\n  }),\n  dropdownIndicator: (provided, state) => ({\n    ...provided,\n    color: state.isFocused\n      ? 'hsl(var(--ring))'\n      : 'hsl(var(--muted-foreground))',\n    '&:hover': {\n      color: 'hsl(var(--ring))',\n    },\n  }),\n};\nfunction AsyncSelect<\n  Option,\n  IsMulti extends boolean,\n  Group extends GroupBase<Option>,\n>(props: AsyncSelectProps<Option, IsMulti, Group>) {\n  return <AsyncReactSelect {...props} styles={customStyles} />;\n}\n\nexport default AsyncSelect;\n"
+        }
+    ]
+}

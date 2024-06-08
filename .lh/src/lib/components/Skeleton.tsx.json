@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/lib/components/Skeleton.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1717780778761,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717780877534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   ...props\n }: React.HTMLAttributes<HTMLDivElement>) {\n   return (\n     <div\n-      className={cn('animate-pulse rounded-md bg-muted', className)}\n+      className={cn('bg-red animate-pulse rounded-md', className)}\n       {...props}\n     />\n   );\n }\n"
+                },
+                {
+                    "date": 1717780895874,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   ...props\n }: React.HTMLAttributes<HTMLDivElement>) {\n   return (\n     <div\n-      className={cn('bg-red animate-pulse rounded-md', className)}\n+      className={cn('animate-pulse rounded-md bg-red-400', className)}\n       {...props}\n     />\n   );\n }\n"
+                },
+                {
+                    "date": 1717781006556,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   ...props\n }: React.HTMLAttributes<HTMLDivElement>) {\n   return (\n     <div\n-      className={cn('animate-pulse rounded-md bg-red-400', className)}\n+      className={cn('animate-pulse rounded-md bg-muted', className)}\n       {...props}\n     />\n   );\n }\n"
+                }
+            ],
+            "date": 1717780778761,
+            "name": "Commit-0",
+            "content": "import { cn } from '@/lib/utils';\n\nfunction Skeleton({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      className={cn('animate-pulse rounded-md bg-muted', className)}\n      {...props}\n    />\n  );\n}\n\nexport { Skeleton };\n"
+        }
+    ]
+}
