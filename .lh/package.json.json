@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 7,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1717752561276,
@@ -36,6 +36,14 @@
                 {
                     "date": 1717780737803,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,9 @@\n     \"storybook\": \"storybook dev -p 6006\",\n     \"build-storybook\": \"storybook build\"\n   },\n   \"dependencies\": {\n+    \"@radix-ui/react-dropdown-menu\": \"^2.0.6\",\n     \"@radix-ui/react-popover\": \"^1.0.7\",\n     \"@radix-ui/react-slot\": \"^1.0.2\",\n     \"@tanstack/react-query\": \"^5.40.1\",\n     \"@tanstack/react-query-devtools\": \"^5.40.1\",\n"
+                },
+                {
+                    "date": 1717829566253,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,8 +37,10 @@\n     \"tailwindcss-animate\": \"^1.0.7\",\n     \"use-debounce\": \"^10.0.1\"\n   },\n   \"devDependencies\": {\n+    \"@storybook/addon-a11y\": \"^8.1.6\",\n+    \"@storybook/addon-themes\": \"^8.1.6\",\n     \"@chromatic-com/storybook\": \"^1.5.0\",\n     \"@storybook/addon-essentials\": \"^8.1.6\",\n     \"@storybook/addon-interactions\": \"^8.1.6\",\n     \"@storybook/addon-links\": \"^8.1.6\",\n@@ -74,11 +76,18 @@\n     \"happy-dom\": \"^14.12.0\",\n     \"msw\": \"^2.3.1\",\n     \"msw-storybook-addon\": \"^2.0.2\",\n     \"postcss\": \"^8.4.38\",\n+    \"rollup-plugin-visualizer\": \"^5.12.0\",\n     \"storybook\": \"^8.1.6\",\n     \"tailwindcss\": \"^3.4.4\",\n     \"typescript\": \"^5.4.5\",\n     \"vite\": \"^5.2.12\",\n+    \"vite-plugin-chunk-split\": \"^0.5.0\",\n     \"vitest\": \"^1.6.0\"\n+  },\n+  \"msw\": {\n+    \"workerDirectory\": [\n+      \"public\"\n+    ]\n   }\n }\n"
+                },
+                {
+                    "date": 1717829613739,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,9 +68,9 @@\n     \"eslint-plugin-jsx-a11y\": \"^6.8.0\",\n     \"eslint-plugin-react\": \"^7.34.2\",\n     \"eslint-plugin-react-hooks\": \"^4.6.2\",\n     \"eslint-plugin-react-refresh\": \"^0.4.7\",\n-    \"eslint-plugin-readable-tailwind\": \"^1.5.1\",\n+    \"eslint-plugin-readable-tailwind\": \"^1.5.2\",\n     \"eslint-plugin-storybook\": \"^0.8.0\",\n     \"eslint-plugin-tailwindcss\": \"^3.17.3\",\n     \"eslint-plugin-testing-library\": \"^6.2.2\",\n     \"happy-dom\": \"^14.12.0\",\n"
                 }
             ],
             "date": 1717752561276,

@@ -37,6 +37,19 @@ const customStyles: StylesConfig<any, any, any> = {
     '&:hover': {
       backgroundColor: 'hsl(var(--muted-light))',
     },
+    '.dark &': {
+      backgroundColor: state.isSelected
+        ? 'hsl(var(--accent))'
+        : state.isFocused
+          ? 'hsl(var(--muted))'
+          : 'hsl(var(--background))',
+      color: state.isSelected
+        ? 'hsl(var(--accent-foreground))'
+        : 'hsl(var(--foreground))',
+      '&:hover': {
+        backgroundColor: 'hsl(var(--muted))',
+      },
+    },
   }),
   singleValue: (provided) => ({
     ...provided,
@@ -57,6 +70,14 @@ const customStyles: StylesConfig<any, any, any> = {
       : 'hsl(var(--muted-foreground))',
     '&:hover': {
       color: 'hsl(var(--ring))',
+    },
+    '.dark &': {
+      color: state.isFocused
+        ? 'hsl(var(--ring))'
+        : 'hsl(var(--muted-foreground))',
+      '&:hover': {
+        color: 'hsl(var(--ring))',
+      },
     },
   }),
 };

@@ -3,11 +3,19 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1717758143010,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717828906013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n     '@storybook/addon-links',\n     '@storybook/addon-essentials',\n     '@chromatic-com/storybook',\n     '@storybook/addon-interactions',\n+    '@storybook/addon-a11y',\n   ],\n   staticDirs: ['../public'],\n   framework: {\n     name: '@storybook/react-vite',\n"
+                },
+                {
+                    "date": 1717829533694,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n     '@storybook/addon-essentials',\n     '@chromatic-com/storybook',\n     '@storybook/addon-interactions',\n     '@storybook/addon-a11y',\n+    '@storybook/addon-themes',\n   ],\n   staticDirs: ['../public'],\n   framework: {\n     name: '@storybook/react-vite',\n"
                 }
             ],
             "date": 1717758143010,

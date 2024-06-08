@@ -1,0 +1,154 @@
+{
+    "sourceFile": "src/components/StockPriceChart.hooks.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 34,
+            "patches": [
+                {
+                    "date": 1717827422195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717827429446,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,41 +0,0 @@\n-import React, { useState } from 'react';\n-import { render } from 'react-dom';\n-import HighchartsReact from 'highcharts-react-official';\n-import Highcharts from 'highcharts';\n-\n-const LineChart = () => {\n-  const [hoverData, setHoverData] = useState(null);\n-  const [chartOptions, setChartOptions] = useState({\n-    xAxis: {\n-      categories: ['A', 'B', 'C'],\n-    },\n-    series: [{ data: [1, 2, 3] }],\n-    plotOptions: {\n-      series: {\n-        point: {\n-          events: {\n-            mouseOver(e) {\n-              setHoverData(e.target.category);\n-            },\n-          },\n-        },\n-      },\n-    },\n-  });\n-\n-  const updateSeries = () => {\n-    setChartOptions({\n-      series: [{ data: [Math.random() * 5, 2, 1] }],\n-    });\n-  };\n-\n-  return (\n-    <div>\n-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />\n-      <h3>Hovering over {hoverData}</h3>\n-      <button onClick={updateSeries}>Update Series</button>\n-    </div>\n-  );\n-};\n-\n-render(<LineChart />, document.getElementById('root'));\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1717827480868,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,54 @@\n+import { useQueries } from '@tanstack/react-query';\n+import AggregatesService from '@/api/services/Aggregates';\n+import type { AggregatesResult } from '@/api/services/Aggregates.types';\n+import type { StockPriceType } from './StockPriceChart';\n \n+const fetchStockData = async (\n+  stock: string,\n+  dateRange: { start: string; end: string },\n+  priceType: StockPriceType,\n+) => {\n+  const { start, end } = dateRange;\n+  const params = {\n+    multiplier: 1,\n+    timespan: 'day' as const,\n+    from: start,\n+    to: end,\n+  };\n+  const response = await AggregatesService.getAggregates(stock, params);\n+  const priceKeyMap: Record<StockPriceType, keyof AggregatesResult> = {\n+    open: 'o',\n+    high: 'h',\n+    low: 'l',\n+    close: 'c',\n+  };\n+  const priceKey = priceKeyMap[priceType];\n+  return response.data.results.map((point) => ({\n+    x: point.t,\n+    y: point[priceKey],\n+    stock,\n+  }));\n+};\n+\n+export const useStockData = (\n+  selectedStocks: string[],\n+  dateRange: { start: string; end: string },\n+  priceType: StockPriceType,\n+  onSuccessCallback: (\n+    data: { name: string; data: { x: number; y: number }[] }[],\n+  ) => void,\n+) => {\n+  return useQueries({\n+    queries: selectedStocks.map((stock) => ({\n+      queryKey: ['aggregates', stock, dateRange, priceType],\n+      queryFn: () => fetchStockData(stock, dateRange, priceType),\n+      onSuccess: (data) => {\n+        const seriesData = data.map((point) => ({\n+          x: point.x,\n+          y: point.y,\n+        }));\n+        onSuccessCallback([{ name: stock, data: seriesData }]);\n+      },\n+    })),\n+  });\n+};\n"
+                },
+                {
+                    "date": 1717827547215,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,10 +41,10 @@\n   return useQueries({\n     queries: selectedStocks.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n-      onSuccess: (data) => {\n-        const seriesData = data.map((point) => ({\n+      onSuccess: (data: any[]) => {\n+        const seriesData = data.map((point: { x: any; y: any; }) => ({\n           x: point.x,\n           y: point.y,\n         }));\n         onSuccessCallback([{ name: stock, data: seriesData }]);\n"
+                },
+                {
+                    "date": 1717827554204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,10 +41,10 @@\n   return useQueries({\n     queries: selectedStocks.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n-      onSuccess: (data: any[]) => {\n-        const seriesData = data.map((point: { x: any; y: any; }) => ({\n+      onSuccess: (data) => {\n+        const seriesData = data.map((point) => ({\n           x: point.x,\n           y: point.y,\n         }));\n         onSuccessCallback([{ name: stock, data: seriesData }]);\n"
+                },
+                {
+                    "date": 1717827565744,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,11 @@\n   return useQueries({\n     queries: selectedStocks.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n-      onSuccess: (data) => {\n+      onSuccess: (\n+        data: { name: string; data: { x: number; y: number }[] }[],\n+      ) => {\n         const seriesData = data.map((point) => ({\n           x: point.x,\n           y: point.y,\n         }));\n"
+                },
+                {
+                    "date": 1717827653034,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,11 +41,9 @@\n   return useQueries({\n     queries: selectedStocks.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n-      onSuccess: (\n-        data: { name: string; data: { x: number; y: number }[] }[],\n-      ) => {\n+      onSuccess: (data: { x: number; y: number }) => {\n         const seriesData = data.map((point) => ({\n           x: point.x,\n           y: point.y,\n         }));\n"
+                },
+                {
+                    "date": 1717827674753,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n   return useQueries({\n     queries: selectedStocks.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n-      onSuccess: (data: { x: number; y: number }) => {\n+      onSuccess: (data: { x: number; y: number }[]) => {\n         const seriesData = data.map((point) => ({\n           x: point.x,\n           y: point.y,\n         }));\n"
+                },
+                {
+                    "date": 1717827714431,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,10 @@\n import AggregatesService from '@/api/services/Aggregates';\n import type { AggregatesResult } from '@/api/services/Aggregates.types';\n import type { StockPriceType } from './StockPriceChart';\n \n+\n+interface  \n const fetchStockData = async (\n   stock: string,\n   dateRange: { start: string; end: string },\n   priceType: StockPriceType,\n"
+                },
+                {
+                    "date": 1717827726046,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,8 @@\n import AggregatesService from '@/api/services/Aggregates';\n import type { AggregatesResult } from '@/api/services/Aggregates.types';\n import type { StockPriceType } from './StockPriceChart';\n \n-\n-interface  \n const fetchStockData = async (\n   stock: string,\n   dateRange: { start: string; end: string },\n   priceType: StockPriceType,\n"
+                },
+                {
+                    "date": 1717827733658,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,10 @@\n import AggregatesService from '@/api/services/Aggregates';\n import type { AggregatesResult } from '@/api/services/Aggregates.types';\n import type { StockPriceType } from './StockPriceChart';\n \n+\n+\n const fetchStockData = async (\n   stock: string,\n   dateRange: { start: string; end: string },\n   priceType: StockPriceType,\n"
+                },
+                {
+                    "date": 1717827768027,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,15 +2,13 @@\n import AggregatesService from '@/api/services/Aggregates';\n import type { AggregatesResult } from '@/api/services/Aggregates.types';\n import type { StockPriceType } from './StockPriceChart';\n \n-\n-\n-const fetchStockData = async (\n+async function fetchStockData(\n   stock: string,\n   dateRange: { start: string; end: string },\n   priceType: StockPriceType,\n-) => {\n+) {\n   const { start, end } = dateRange;\n   const params = {\n     multiplier: 1,\n     timespan: 'day' as const,\n@@ -29,9 +27,9 @@\n     x: point.t,\n     y: point[priceKey],\n     stock,\n   }));\n-};\n+}\n \n export const useStockData = (\n   selectedStocks: string[],\n   dateRange: { start: string; end: string },\n"
+                },
+                {
+                    "date": 1717827786251,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,16 +29,16 @@\n     stock,\n   }));\n }\n \n-export const useStockData = (\n+export function useStockData(\n   selectedStocks: string[],\n   dateRange: { start: string; end: string },\n   priceType: StockPriceType,\n   onSuccessCallback: (\n     data: { name: string; data: { x: number; y: number }[] }[],\n   ) => void,\n-) => {\n+) {\n   return useQueries({\n     queries: selectedStocks.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n@@ -50,5 +50,5 @@\n         onSuccessCallback([{ name: stock, data: seriesData }]);\n       },\n     })),\n   });\n-};\n+}\n"
+                },
+                {
+                    "date": 1717827847778,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,17 +38,17 @@\n     data: { name: string; data: { x: number; y: number }[] }[],\n   ) => void,\n ) {\n   return useQueries({\n-    queries: selectedStocks.map((stock) => ({\n-      queryKey: ['aggregates', stock, dateRange, priceType],\n-      queryFn: () => fetchStockData(stock, dateRange, priceType),\n+    queries: selectedStocks.map((stockTicker) => ({\n+      queryKey: ['aggregates', stockTicker, dateRange, priceType],\n+      queryFn: () => fetchStockData(stockTicker, dateRange, priceType),\n       onSuccess: (data: { x: number; y: number }[]) => {\n         const seriesData = data.map((point) => ({\n           x: point.x,\n           y: point.y,\n         }));\n-        onSuccessCallback([{ name: stock, data: seriesData }]);\n+        onSuccessCallback([{ name: stockTicker, data: seriesData }]);\n       },\n     })),\n   });\n }\n"
+                },
+                {
+                    "date": 1717827870993,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n   selectedStocks: string[],\n   dateRange: { start: string; end: string },\n   priceType: StockPriceType,\n   onSuccessCallback: (\n-    data: { name: string; data: { x: number; y: number }[] }[],\n+    data: { ticker: string; data: { x: number; y: number }[] }[],\n   ) => void,\n ) {\n   return useQueries({\n     queries: selectedStocks.map((stockTicker) => ({\n@@ -46,9 +46,9 @@\n         const seriesData = data.map((point) => ({\n           x: point.x,\n           y: point.y,\n         }));\n-        onSuccessCallback([{ name: stockTicker, data: seriesData }]);\n+        onSuccessCallback([{ ticker: stockTicker, data: seriesData }]);\n       },\n     })),\n   });\n }\n"
+                },
+                {
+                    "date": 1717827899546,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,17 +30,17 @@\n   }));\n }\n \n export function useStockData(\n-  selectedStocks: string[],\n+  selectedStockTickers: string[],\n   dateRange: { start: string; end: string },\n   priceType: StockPriceType,\n   onSuccessCallback: (\n     data: { ticker: string; data: { x: number; y: number }[] }[],\n   ) => void,\n ) {\n   return useQueries({\n-    queries: selectedStocks.map((stockTicker) => ({\n+    queries: selectedStockTickers.map((stockTicker) => ({\n       queryKey: ['aggregates', stockTicker, dateRange, priceType],\n       queryFn: () => fetchStockData(stockTicker, dateRange, priceType),\n       onSuccess: (data: { x: number; y: number }[]) => {\n         const seriesData = data.map((point) => ({\n"
+                },
+                {
+                    "date": 1717827916474,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,17 +30,17 @@\n   }));\n }\n \n export function useStockData(\n-  selectedStockTickers: string[],\n+  selectedTickers: string[],\n   dateRange: { start: string; end: string },\n   priceType: StockPriceType,\n   onSuccessCallback: (\n     data: { ticker: string; data: { x: number; y: number }[] }[],\n   ) => void,\n ) {\n   return useQueries({\n-    queries: selectedStockTickers.map((stockTicker) => ({\n+    queries: selectedTickers.map((stockTicker) => ({\n       queryKey: ['aggregates', stockTicker, dateRange, priceType],\n       queryFn: () => fetchStockData(stockTicker, dateRange, priceType),\n       onSuccess: (data: { x: number; y: number }[]) => {\n         const seriesData = data.map((point) => ({\n"
+                },
+                {
+                    "date": 1717827927305,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,17 +38,17 @@\n     data: { ticker: string; data: { x: number; y: number }[] }[],\n   ) => void,\n ) {\n   return useQueries({\n-    queries: selectedTickers.map((stockTicker) => ({\n-      queryKey: ['aggregates', stockTicker, dateRange, priceType],\n-      queryFn: () => fetchStockData(stockTicker, dateRange, priceType),\n+    queries: selectedTickers.map((ticker) => ({\n+      queryKey: ['aggregates', ticker, dateRange, priceType],\n+      queryFn: () => fetchStockData(ticker, dateRange, priceType),\n       onSuccess: (data: { x: number; y: number }[]) => {\n         const seriesData = data.map((point) => ({\n           x: point.x,\n           y: point.y,\n         }));\n-        onSuccessCallback([{ ticker: stockTicker, data: seriesData }]);\n+        onSuccessCallback([{ ticker, data: seriesData }]);\n       },\n     })),\n   });\n }\n"
+                },
+                {
+                    "date": 1717827955971,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import type { AggregatesResult } from '@/api/services/Aggregates.types';\n import type { StockPriceType } from './StockPriceChart';\n \n async function fetchStockData(\n-  stock: string,\n+  ticker: string,\n   dateRange: { start: string; end: string },\n   priceType: StockPriceType,\n ) {\n   const { start, end } = dateRange;\n@@ -14,9 +14,9 @@\n     timespan: 'day' as const,\n     from: start,\n     to: end,\n   };\n-  const response = await AggregatesService.getAggregates(stock, params);\n+  const response = await AggregatesService.getAggregates(ticker, params);\n   const priceKeyMap: Record<StockPriceType, keyof AggregatesResult> = {\n     open: 'o',\n     high: 'h',\n     low: 'l',\n@@ -25,9 +25,9 @@\n   const priceKey = priceKeyMap[priceType];\n   return response.data.results.map((point) => ({\n     x: point.t,\n     y: point[priceKey],\n-    stock,\n+    stock: ticker,\n   }));\n }\n \n export function useStockData(\n"
+                },
+                {
+                    "date": 1717827965429,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n   const priceKey = priceKeyMap[priceType];\n   return response.data.results.map((point) => ({\n     x: point.t,\n     y: point[priceKey],\n-    stock: ticker,\n+    ticker,\n   }));\n }\n \n export function useStockData(\n"
+                },
+                {
+                    "date": 1717830586117,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,4 +51,6 @@\n       },\n     })),\n   });\n }\n+\n+export default useStockData;\n"
+                },
+                {
+                    "date": 1717830593656,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n import { useQueries } from '@tanstack/react-query';\n import AggregatesService from '@/api/services/Aggregates';\n import type { AggregatesResult } from '@/api/services/Aggregates.types';\n-import type { StockPriceType } from './StockPriceChart';\n \n async function fetchStockData(\n   ticker: string,\n   dateRange: { start: string; end: string },\n"
+                },
+                {
+                    "date": 1717830605071,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import { useQueries } from '@tanstack/react-query';\n import AggregatesService from '@/api/services/Aggregates';\n import type { AggregatesResult } from '@/api/services/Aggregates.types';\n+import type { StockPriceType } from './StockPriceChart';\n \n async function fetchStockData(\n   ticker: string,\n   dateRange: { start: string; end: string },\n"
+                },
+                {
+                    "date": 1717830912755,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,9 @@\n     high: 'h',\n     low: 'l',\n     close: 'c',\n   };\n+\n   const priceKey = priceKeyMap[priceType];\n   return response.data.results.map((point) => ({\n     x: point.t,\n     y: point[priceKey],\n"
+                },
+                {
+                    "date": 1717830919661,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,8 @@\n     high: 'h',\n     low: 'l',\n     close: 'c',\n   };\n-\n   const priceKey = priceKeyMap[priceType];\n   return response.data.results.map((point) => ({\n     x: point.t,\n     y: point[priceKey],\n"
+                },
+                {
+                    "date": 1717830937426,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,15 +15,15 @@\n     from: start,\n     to: end,\n   };\n   const response = await AggregatesService.getAggregates(ticker, params);\n-  const priceKeyMap: Record<StockPriceType, keyof AggregatesResult> = {\n+  const priceTypeKeyMap: Record<StockPriceType, keyof AggregatesResult> = {\n     open: 'o',\n     high: 'h',\n     low: 'l',\n     close: 'c',\n   };\n-  const priceKey = priceKeyMap[priceType];\n+  const priceKey = priceTypeKeyMap[priceType];\n   return response.data.results.map((point) => ({\n     x: point.t,\n     y: point[priceKey],\n     ticker,\n"
+                },
+                {
+                    "date": 1717830943879,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,12 +21,12 @@\n     high: 'h',\n     low: 'l',\n     close: 'c',\n   };\n-  const priceKey = priceTypeKeyMap[priceType];\n+  const priceTypeKey = priceTypeKeyMap[priceType];\n   return response.data.results.map((point) => ({\n     x: point.t,\n-    y: point[priceKey],\n+    y: point[priceTypeKey],\n     ticker,\n   }));\n }\n \n"
+                },
+                {
+                    "date": 1717830949935,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,15 +15,18 @@\n     from: start,\n     to: end,\n   };\n   const response = await AggregatesService.getAggregates(ticker, params);\n+\n   const priceTypeKeyMap: Record<StockPriceType, keyof AggregatesResult> = {\n     open: 'o',\n     high: 'h',\n     low: 'l',\n     close: 'c',\n   };\n+\n   const priceTypeKey = priceTypeKeyMap[priceType];\n+\n   return response.data.results.map((point) => ({\n     x: point.t,\n     y: point[priceTypeKey],\n     ticker,\n"
+                },
+                {
+                    "date": 1717830963548,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,18 +15,15 @@\n     from: start,\n     to: end,\n   };\n   const response = await AggregatesService.getAggregates(ticker, params);\n-\n   const priceTypeKeyMap: Record<StockPriceType, keyof AggregatesResult> = {\n     open: 'o',\n     high: 'h',\n     low: 'l',\n     close: 'c',\n   };\n-\n   const priceTypeKey = priceTypeKeyMap[priceType];\n-\n   return response.data.results.map((point) => ({\n     x: point.t,\n     y: point[priceTypeKey],\n     ticker,\n"
+                },
+                {
+                    "date": 1717831009898,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n     ticker,\n   }));\n }\n \n-export function useStockData(\n+export function useStockChartData(\n   selectedTickers: string[],\n   dateRange: { start: string; end: string },\n   priceType: StockPriceType,\n   onSuccessCallback: (\n@@ -52,5 +52,5 @@\n     })),\n   });\n }\n \n-export default useStockData;\n+export default useStockChartData;\n"
+                },
+                {
+                    "date": 1717831021071,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n     ticker,\n   }));\n }\n \n-export function useStockChartData(\n+export function useStockPriceChartData(\n   selectedTickers: string[],\n   dateRange: { start: string; end: string },\n   priceType: StockPriceType,\n   onSuccessCallback: (\n@@ -52,5 +52,5 @@\n     })),\n   });\n }\n \n-export default useStockChartData;\n+export default useStockPriceChartData;\n"
+                },
+                {
+                    "date": 1717831034110,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import AggregatesService from '@/api/services/Aggregates';\n import type { AggregatesResult } from '@/api/services/Aggregates.types';\n import type { StockPriceType } from './StockPriceChart';\n \n-async function fetchStockData(\n+async function fetchStockPriceChartData(\n   ticker: string,\n   dateRange: { start: string; end: string },\n   priceType: StockPriceType,\n ) {\n@@ -40,9 +40,9 @@\n ) {\n   return useQueries({\n     queries: selectedTickers.map((ticker) => ({\n       queryKey: ['aggregates', ticker, dateRange, priceType],\n-      queryFn: () => fetchStockData(ticker, dateRange, priceType),\n+      queryFn: () => fetchStockPriceChartData(ticker, dateRange, priceType),\n       onSuccess: (data: { x: number; y: number }[]) => {\n         const seriesData = data.map((point) => ({\n           x: point.x,\n           y: point.y,\n"
+                },
+                {
+                    "date": 1717831052804,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,8 +29,11 @@\n     ticker,\n   }));\n }\n \n+/**\n+ * \n+ */\n export function useStockPriceChartData(\n   selectedTickers: string[],\n   dateRange: { start: string; end: string },\n   priceType: StockPriceType,\n"
+                },
+                {
+                    "date": 1717831060369,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,8 +30,9 @@\n   }));\n }\n \n /**\n+ * Fetches stock price chart data for the selected tickers and date range.\n  * \n  */\n export function useStockPriceChartData(\n   selectedTickers: string[],\n"
+                },
+                {
+                    "date": 1717831079670,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,10 +30,10 @@\n   }));\n }\n \n /**\n- * Fetches stock price chart data for the selected tickers and date range.\n- * \n+ * Fetches stock price chart data for the selected tickers and date range\n+ * and transform the data into the format required by the chart library.\n  */\n export function useStockPriceChartData(\n   selectedTickers: string[],\n   dateRange: { start: string; end: string },\n"
+                }
+            ],
+            "date": 1717827422195,
+            "name": "Commit-0",
+            "content": "import React, { useState } from 'react';\nimport { render } from 'react-dom';\nimport HighchartsReact from 'highcharts-react-official';\nimport Highcharts from 'highcharts';\n\nconst LineChart = () => {\n  const [hoverData, setHoverData] = useState(null);\n  const [chartOptions, setChartOptions] = useState({\n    xAxis: {\n      categories: ['A', 'B', 'C'],\n    },\n    series: [{ data: [1, 2, 3] }],\n    plotOptions: {\n      series: {\n        point: {\n          events: {\n            mouseOver(e) {\n              setHoverData(e.target.category);\n            },\n          },\n        },\n      },\n    },\n  });\n\n  const updateSeries = () => {\n    setChartOptions({\n      series: [{ data: [Math.random() * 5, 2, 1] }],\n    });\n  };\n\n  return (\n    <div>\n      <HighchartsReact highcharts={Highcharts} options={chartOptions} />\n      <h3>Hovering over {hoverData}</h3>\n      <button onClick={updateSeries}>Update Series</button>\n    </div>\n  );\n};\n\nrender(<LineChart />, document.getElementById('root'));\n"
+        }
+    ]
+}

@@ -75,12 +75,13 @@ const StockPriceChart: React.FC<StockPriceChartProps> = ({
   const chartOptions = {
     title: { text: 'Stock Prices' },
     xAxis: { type: 'datetime' },
+    legend: { enabled: true },
     series: chartData,
   };
 
   if (isLoading)
     return (
-      <div className="flex items-center justify-center space-x-4">
+      <div className="flex h-[400px] items-center justify-center space-x-4">
         <Skeleton className="size-12 rounded-full" />
         <div className="space-y-2">
           <Skeleton className="h-4 w-[250px]" />
@@ -90,7 +91,7 @@ const StockPriceChart: React.FC<StockPriceChartProps> = ({
     );
   if (isError)
     return (
-      <div className="text-center text-muted-foreground">
+      <div className="h-[400px] text-center text-muted-foreground">
         Error loading data
       </div>
     );

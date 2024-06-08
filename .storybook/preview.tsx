@@ -1,12 +1,14 @@
 import React from 'react';
-import type { Preview } from '@storybook/react';
-import '../src/index.css';
+import { Preview } from '@storybook/react';
+import { withThemeByClassName } from '@storybook/addon-themes';
 import { initialize, mswLoader, mswDecorator } from 'msw-storybook-addon';
 import ThemeProvider from '../src/providers/ThemeProvider';
 import ReactQueryProvider from '../src/providers/ReactQueryProvider';
 import { testingQueryOptions } from '../src/testing/testingQueryConfig';
 import { QueryClient } from '@tanstack/react-query';
 import { handlers } from '../src/mocks/handlers';
+
+import '../src/index.css';
 
 initialize();
 
@@ -40,6 +42,14 @@ const preview: Preview = {
         </ThemeProvider>
       );
     },
+    withThemeByClassName<any>({
+      themes: {
+        light: '',
+        dark: 'dark',
+        system: 'system',
+      },
+      defaultTheme: 'light',
+    }),
   ],
 };
 

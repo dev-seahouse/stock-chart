@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 7,
+            "activePatchIndex": 21,
             "patches": [
                 {
                     "date": 1717752898450,
@@ -36,6 +36,62 @@
                 {
                     "date": 1717755249476,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n /// <reference types=\"vitest\" />\n import { defineConfig } from 'vite';\n-import path from \"path\"\n+import path from 'path';\n import react from '@vitejs/plugin-react-swc';\n \n // https://vitejs.dev/config/\n export default defineConfig({\n@@ -10,5 +10,10 @@\n     globals: true,\n     environment: 'happy-dom',\n     setupFiles: ['./src/testing/setup-tests.ts'],\n   },\n+  resolve: {\n+    alias: {\n+      '@': path.resolve(__dirname, './src'),\n+    },\n+  },\n });\n"
+                },
+                {
+                    "date": 1717823571086,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n /// <reference types=\"vitest\" />\n import { defineConfig } from 'vite';\n import path from 'path';\n import react from '@vitejs/plugin-react-swc';\n+import { splitVendorChunkPlugin } from 'vite';\n \n // https://vitejs.dev/config/\n export default defineConfig({\n   plugins: [react()],\n@@ -10,8 +11,12 @@\n     globals: true,\n     environment: 'happy-dom',\n     setupFiles: ['./src/testing/setup-tests.ts'],\n   },\n+  server: {\n+    host: 'localhost',\n+    port: 3000,\n+  },\n   resolve: {\n     alias: {\n       '@': path.resolve(__dirname, './src'),\n     },\n"
+                },
+                {
+                    "date": 1717823754794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n /// <reference types=\"vitest\" />\n import { defineConfig } from 'vite';\n import path from 'path';\n import react from '@vitejs/plugin-react-swc';\n-import { splitVendorChunkPlugin } from 'vite';\n \n // https://vitejs.dev/config/\n export default defineConfig({\n   plugins: [react()],\n"
+                },
+                {
+                    "date": 1717823786561,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,11 @@\n \n // https://vitejs.dev/config/\n export default defineConfig({\n   plugins: [react()],\n+  build: {\n+    rollupOptions: {},\n+  },\n   test: {\n     globals: true,\n     environment: 'happy-dom',\n     setupFiles: ['./src/testing/setup-tests.ts'],\n"
+                },
+                {
+                    "date": 1717823802380,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,12 @@\n // https://vitejs.dev/config/\n export default defineConfig({\n   plugins: [react()],\n   build: {\n-    rollupOptions: {},\n+    rollupOptions: {\n+      output: {\n+      }\n+    },\n   },\n   test: {\n     globals: true,\n     environment: 'happy-dom',\n"
+                },
+                {
+                    "date": 1717823828206,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,10 @@\n   plugins: [react()],\n   build: {\n     rollupOptions: {\n       output: {\n-      }\n+        manualChunks: (id, { getModuleInfo }) => {},\n+      },\n     },\n   },\n   test: {\n     globals: true,\n"
+                },
+                {
+                    "date": 1717823840028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   plugins: [react()],\n   build: {\n     rollupOptions: {\n       output: {\n-        manualChunks: (id, { getModuleInfo }) => {},\n+        manualChunks: (id, { getModuleInfo, getModuleIds }) => {},\n       },\n     },\n   },\n   test: {\n"
+                },
+                {
+                    "date": 1717823858782,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,13 @@\n   plugins: [react()],\n   build: {\n     rollupOptions: {\n       output: {\n-        manualChunks: (id, { getModuleInfo, getModuleIds }) => {},\n+        manualChunks: (id, { getModuleInfo, getModuleIds }) => {\n+          if (id.includes('node_modules')) {\n+            return 'vendor';\n+          }\n+        },\n       },\n     },\n   },\n   test: {\n"
+                },
+                {
+                    "date": 1717823871277,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   plugins: [react()],\n   build: {\n     rollupOptions: {\n       output: {\n-        manualChunks: (id, { getModuleInfo, getModuleIds }) => {\n+        manualChunks: (id) => {\n           if (id.includes('node_modules')) {\n             return 'vendor';\n           }\n         },\n"
+                },
+                {
+                    "date": 1717824240813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n /// <reference types=\"vitest\" />\n import { defineConfig } from 'vite';\n import path from 'path';\n import react from '@vitejs/plugin-react-swc';\n+import { visualizer } from 'rollup-plugin-visualizer';\n \n // https://vitejs.dev/config/\n export default defineConfig({\n   plugins: [react()],\n"
+                },
+                {
+                    "date": 1717824248653,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import { visualizer } from 'rollup-plugin-visualizer';\n \n // https://vitejs.dev/config/\n export default defineConfig({\n-  plugins: [react()],\n+  plugins: [react(), visualizer()],\n   build: {\n     rollupOptions: {\n       output: {\n         manualChunks: (id) => {\n"
+                },
+                {
+                    "date": 1717824375626,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,11 @@\n         manualChunks: (id) => {\n           if (id.includes('node_modules')) {\n             return 'vendor';\n           }\n+          if (id.includes('highcharts')) {\n+            return 'highcharts';\n+          }\n         },\n       },\n     },\n   },\n"
+                },
+                {
+                    "date": 1717824411216,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,14 +10,14 @@\n   build: {\n     rollupOptions: {\n       output: {\n         manualChunks: (id) => {\n+          if (id.includes('highcharts')) {\n+            return 'highcharts';\n+          }\n           if (id.includes('node_modules')) {\n             return 'vendor';\n           }\n-          if (id.includes('highcharts')) {\n-            return 'highcharts';\n-          }\n         },\n       },\n     },\n   },\n"
+                },
+                {
+                    "date": 1717824418101,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n   build: {\n     rollupOptions: {\n       output: {\n         manualChunks: (id) => {\n-          if (id.includes('highcharts')) {\n+          if (id.includes('highcharts.js')) {\n             return 'highcharts';\n           }\n           if (id.includes('node_modules')) {\n             return 'vendor';\n"
+                },
+                {
+                    "date": 1717824882244,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,11 @@\n         manualChunks: (id) => {\n           if (id.includes('highcharts.js')) {\n             return 'highcharts';\n           }\n+          if (id.includes('luxon')) {\n+            return 'luxon';\n+          }\n           if (id.includes('node_modules')) {\n             return 'vendor';\n           }\n         },\n"
                 }
             ],
             "date": 1717752898450,

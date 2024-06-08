@@ -3,11 +3,31 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1717818059183,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717820442708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   IsMulti extends boolean = false,\n   Group extends GroupBase<Option> = GroupBase<Option>,\n > = AsyncProps<Option, IsMulti, Group>;\n \n-const customStyles: StylesConfig<any, any, any> = {\n+const customStyles: StylesConfig<unknown, true> = {\n   control: (provided, state) => ({\n     ...provided,\n     borderColor: state.isFocused ? 'hsl(var(--ring))' : 'hsl(var(--border))',\n     borderRadius: '0.5rem',\n@@ -22,8 +22,11 @@\n     ...provided,\n     borderRadius: '0.5rem',\n     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',\n     backgroundColor: 'hsl(var(--popover))',\n+    '.dark &': {\n+      backgroundColor: 'hsl(var(--popover))',\n+    },\n   }),\n   option: (provided, state) => ({\n     ...provided,\n     backgroundColor: state.isSelected\n@@ -36,8 +39,22 @@\n       : 'hsl(var(--foreground))',\n     '&:hover': {\n       backgroundColor: 'hsl(var(--muted-light))',\n     },\n+    '.dark &': {\n+      backgroundColor: state.isSelected\n+        ? 'hsl(var(--accent))'\n+        : state.isFocused\n+          ? 'hsl(var(--muted))' /* Adjusted for better contrast in dark mode */\n+          : 'hsl(var(--background))',\n+      color: state.isSelected\n+        ? 'hsl(var(--accent-foreground))'\n+        : 'hsl(var(--foreground))',\n+      '&:hover': {\n+        backgroundColor:\n+          'hsl(var(--muted))' /* Adjusted for better contrast in dark mode */,\n+      },\n+    },\n   }),\n   singleValue: (provided) => ({\n     ...provided,\n     color: 'hsl(var(--foreground))',\n@@ -57,8 +74,16 @@\n       : 'hsl(var(--muted-foreground))',\n     '&:hover': {\n       color: 'hsl(var(--ring))',\n     },\n+    '.dark &': {\n+      color: state.isFocused\n+        ? 'hsl(var(--ring))'\n+        : 'hsl(var(--muted-foreground))',\n+      '&:hover': {\n+        color: 'hsl(var(--ring))',\n+      },\n+    },\n   }),\n };\n function AsyncSelect<\n   Option,\n"
+                },
+                {
+                    "date": 1717820521419,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   IsMulti extends boolean = false,\n   Group extends GroupBase<Option> = GroupBase<Option>,\n > = AsyncProps<Option, IsMulti, Group>;\n \n-const customStyles: StylesConfig<unknown, true> = {\n+const customStyles: StylesConfig<OptionType, false> = {\n   control: (provided, state) => ({\n     ...provided,\n     borderColor: state.isFocused ? 'hsl(var(--ring))' : 'hsl(var(--border))',\n     borderRadius: '0.5rem',\n@@ -22,11 +22,8 @@\n     ...provided,\n     borderRadius: '0.5rem',\n     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',\n     backgroundColor: 'hsl(var(--popover))',\n-    '.dark &': {\n-      backgroundColor: 'hsl(var(--popover))',\n-    },\n   }),\n   option: (provided, state) => ({\n     ...provided,\n     backgroundColor: state.isSelected\n@@ -43,16 +40,15 @@\n     '.dark &': {\n       backgroundColor: state.isSelected\n         ? 'hsl(var(--accent))'\n         : state.isFocused\n-          ? 'hsl(var(--muted))' /* Adjusted for better contrast in dark mode */\n+          ? 'hsl(var(--muted))'\n           : 'hsl(var(--background))',\n       color: state.isSelected\n         ? 'hsl(var(--accent-foreground))'\n         : 'hsl(var(--foreground))',\n       '&:hover': {\n-        backgroundColor:\n-          'hsl(var(--muted))' /* Adjusted for better contrast in dark mode */,\n+        backgroundColor: 'hsl(var(--muted))',\n       },\n     },\n   }),\n   singleValue: (provided) => ({\n"
+                },
+                {
+                    "date": 1717820557880,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   IsMulti extends boolean = false,\n   Group extends GroupBase<Option> = GroupBase<Option>,\n > = AsyncProps<Option, IsMulti, Group>;\n \n-const customStyles: StylesConfig<OptionType, false> = {\n+const customStyles: StylesConfig<any, false> = {\n   control: (provided, state) => ({\n     ...provided,\n     borderColor: state.isFocused ? 'hsl(var(--ring))' : 'hsl(var(--border))',\n     borderRadius: '0.5rem',\n"
+                },
+                {
+                    "date": 1717820563244,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   IsMulti extends boolean = false,\n   Group extends GroupBase<Option> = GroupBase<Option>,\n > = AsyncProps<Option, IsMulti, Group>;\n \n-const customStyles: StylesConfig<any, false> = {\n+const customStyles: StylesConfig<any, any> = {\n   control: (provided, state) => ({\n     ...provided,\n     borderColor: state.isFocused ? 'hsl(var(--ring))' : 'hsl(var(--border))',\n     borderRadius: '0.5rem',\n"
+                },
+                {
+                    "date": 1717820574397,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   IsMulti extends boolean = false,\n   Group extends GroupBase<Option> = GroupBase<Option>,\n > = AsyncProps<Option, IsMulti, Group>;\n \n-const customStyles: StylesConfig<any, any> = {\n+const customStyles: StylesConfig<any, any, any> = {\n   control: (provided, state) => ({\n     ...provided,\n     borderColor: state.isFocused ? 'hsl(var(--ring))' : 'hsl(var(--border))',\n     borderRadius: '0.5rem',\n"
                 }
             ],
             "date": 1717818059183,

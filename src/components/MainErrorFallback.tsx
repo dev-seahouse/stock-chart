@@ -8,7 +8,7 @@ export function MainErrorFallback() {
         className="flex h-screen w-screen flex-col items-center justify-center"
         role="alert"
       >
-        <h2 className="text-lg font-semibold">
+        <h2 className="text-lg font-semibold text-foreground">
           Ooops, something went wrong :({' '}
         </h2>
         <Button

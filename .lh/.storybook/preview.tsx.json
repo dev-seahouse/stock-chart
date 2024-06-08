@@ -1,0 +1,98 @@
+{
+    "sourceFile": ".storybook/preview.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 20,
+            "patches": [
+                {
+                    "date": 1717829677503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717829708014,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,4 @@\n-import React from 'react';\n import type { Preview } from '@storybook/react';\n import '../src/index.css';\n import { initialize, mswLoader, mswDecorator } from 'msw-storybook-addon';\n import ThemeProvider from '../src/providers/ThemeProvider';\n"
+                },
+                {
+                    "date": 1717829968287,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n-import type { Preview } from '@storybook/react';\n+import React from 'react';\n+import type { Preview, Renderer } from '@storybook/react';\n import '../src/index.css';\n import { initialize, mswLoader, mswDecorator } from 'msw-storybook-addon';\n import ThemeProvider from '../src/providers/ThemeProvider';\n import ReactQueryProvider from '../src/providers/ReactQueryProvider';\n"
+                },
+                {
+                    "date": 1717829975570,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,16 @@\n import React from 'react';\n import type { Preview, Renderer } from '@storybook/react';\n-import '../src/index.css';\n++import { withThemeByClassName } from '@storybook/addon-themes';\n import { initialize, mswLoader, mswDecorator } from 'msw-storybook-addon';\n import ThemeProvider from '../src/providers/ThemeProvider';\n import ReactQueryProvider from '../src/providers/ReactQueryProvider';\n import { testingQueryOptions } from '../src/testing/testingQueryConfig';\n import { QueryClient } from '@tanstack/react-query';\n import { handlers } from '../src/mocks/handlers';\n \n+import '../src/index.css';\n+\n initialize();\n \n const preview: Preview = {\n   tags: ['autodocs'],\n"
+                },
+                {
+                    "date": 1717830031916,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import React from 'react';\n-import type { Preview, Renderer } from '@storybook/react';\n+import { Preview, Renderer } from '@storybook/react';\n +import { withThemeByClassName } from '@storybook/addon-themes';\n import { initialize, mswLoader, mswDecorator } from 'msw-storybook-addon';\n import ThemeProvider from '../src/providers/ThemeProvider';\n import ReactQueryProvider from '../src/providers/ReactQueryProvider';\n@@ -41,8 +41,13 @@\n           </ReactQueryProvider>\n         </ThemeProvider>\n       );\n     },\n+    withThemeByClassName<Renderer>({\n+      theme:{\n+\n+      }\n+    })\n   ],\n };\n \n export default preview;\n"
+                },
+                {
+                    "date": 1717830041587,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,10 +42,10 @@\n         </ThemeProvider>\n       );\n     },\n     withThemeByClassName<Renderer>({\n-      theme:{\n-\n+      themes:{\n+        light:\"\"\n       }\n     })\n   ],\n };\n"
+                },
+                {
+                    "date": 1717830048826,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,10 @@\n       );\n     },\n     withThemeByClassName<Renderer>({\n       themes:{\n-        light:\"\"\n+        light:\"\",\n+        dark:\"dark\"\n       }\n     })\n   ],\n };\n"
+                },
+                {
+                    "date": 1717830065694,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,12 +42,8 @@\n         </ThemeProvider>\n       );\n     },\n     withThemeByClassName<Renderer>({\n-      themes:{\n-        light:\"\",\n-        dark:\"dark\"\n-      }\n     })\n   ],\n };\n \n"
+                },
+                {
+                    "date": 1717830081945,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,8 +42,12 @@\n         </ThemeProvider>\n       );\n     },\n     withThemeByClassName<Renderer>({\n+      themes: [\n+        { name: 'Light', className: 'theme-light' },\n+        { name: 'Dark', className: 'theme-dark' },\n+      ],\n     })\n   ],\n };\n \n"
+                },
+                {
+                    "date": 1717830100141,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,12 +42,9 @@\n         </ThemeProvider>\n       );\n     },\n     withThemeByClassName<Renderer>({\n-      themes: [\n-        { name: 'Light', className: 'theme-light' },\n-        { name: 'Dark', className: 'theme-dark' },\n-      ],\n+      themes: {}\n     })\n   ],\n };\n \n"
+                },
+                {
+                    "date": 1717830109856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,11 @@\n         </ThemeProvider>\n       );\n     },\n     withThemeByClassName<Renderer>({\n-      themes: {}\n+      themes: {\n+        defaultTheme:\"\"\n+      }\n     })\n   ],\n };\n \n"
+                },
+                {
+                    "date": 1717830118309,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,8 +43,9 @@\n       );\n     },\n     withThemeByClassName<Renderer>({\n       themes: {\n+        themes:{}\n         defaultTheme:\"\"\n       }\n     })\n   ],\n"
+                },
+                {
+                    "date": 1717830130793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n       );\n     },\n     withThemeByClassName<Renderer>({\n       themes: {\n-        themes:{}\n+        light:\"\",\n         defaultTheme:\"\"\n       }\n     })\n   ],\n"
+                },
+                {
+                    "date": 1717830136256,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,10 +44,10 @@\n     },\n     withThemeByClassName<Renderer>({\n       themes: {\n         light:\"\",\n+      }\n         defaultTheme:\"\"\n-      }\n     })\n   ],\n };\n \n"
+                },
+                {
+                    "date": 1717830146456,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,10 @@\n     },\n     withThemeByClassName<Renderer>({\n       themes: {\n         light:\"\",\n-      }\n+        dark:\"dark\"\n+      },\n         defaultTheme:\"\"\n     })\n   ],\n };\n"
+                },
+                {
+                    "date": 1717830154972,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,9 +46,9 @@\n       themes: {\n         light:\"\",\n         dark:\"dark\"\n       },\n-        defaultTheme:\"\"\n+      defaultTheme:\"light\"\n     })\n   ],\n };\n \n"
+                },
+                {
+                    "date": 1717830162828,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,10 @@\n     },\n     withThemeByClassName<Renderer>({\n       themes: {\n         light:\"\",\n-        dark:\"dark\"\n+        dark:\"dark\",\n+        system:\"system\"\n       },\n       defaultTheme:\"light\"\n     })\n   ],\n"
+                },
+                {
+                    "date": 1717830222392,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React from 'react';\n import { Preview, Renderer } from '@storybook/react';\n-+import { withThemeByClassName } from '@storybook/addon-themes';\n+import { withThemeByClassName } from '@storybook/addon-themes';\n import { initialize, mswLoader, mswDecorator } from 'msw-storybook-addon';\n import ThemeProvider from '../src/providers/ThemeProvider';\n import ReactQueryProvider from '../src/providers/ReactQueryProvider';\n import { testingQueryOptions } from '../src/testing/testingQueryConfig';\n@@ -43,14 +43,14 @@\n       );\n     },\n     withThemeByClassName<Renderer>({\n       themes: {\n-        light:\"\",\n-        dark:\"dark\",\n-        system:\"system\"\n+        light: '',\n+        dark: 'dark',\n+        system: 'system',\n       },\n-      defaultTheme:\"light\"\n-    })\n+      defaultTheme: 'light',\n+    }),\n   ],\n };\n \n export default preview;\n"
+                },
+                {
+                    "date": 1717830229235,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import React from 'react';\n-import { Preview, Renderer } from '@storybook/react';\n+import { Preview } from '@storybook/react';\n import { withThemeByClassName } from '@storybook/addon-themes';\n import { initialize, mswLoader, mswDecorator } from 'msw-storybook-addon';\n import ThemeProvider from '../src/providers/ThemeProvider';\n import ReactQueryProvider from '../src/providers/ReactQueryProvider';\n"
+                },
+                {
+                    "date": 1717830251842,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n           </ReactQueryProvider>\n         </ThemeProvider>\n       );\n     },\n-    withThemeByClassName<Renderer>({\n+    withThemeByClassName<Rend>({\n       themes: {\n         light: '',\n         dark: 'dark',\n         system: 'system',\n"
+                },
+                {
+                    "date": 1717830268256,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n           </ReactQueryProvider>\n         </ThemeProvider>\n       );\n     },\n-    withThemeByClassName<Rend>({\n+    withThemeByClassName<any>({\n       themes: {\n         light: '',\n         dark: 'dark',\n         system: 'system',\n"
+                }
+            ],
+            "date": 1717829677503,
+            "name": "Commit-0",
+            "content": "import React from 'react';\nimport type { Preview } from '@storybook/react';\nimport '../src/index.css';\nimport { initialize, mswLoader, mswDecorator } from 'msw-storybook-addon';\nimport ThemeProvider from '../src/providers/ThemeProvider';\nimport ReactQueryProvider from '../src/providers/ReactQueryProvider';\nimport { testingQueryOptions } from '../src/testing/testingQueryConfig';\nimport { QueryClient } from '@tanstack/react-query';\nimport { handlers } from '../src/mocks/handlers';\n\ninitialize();\n\nconst preview: Preview = {\n  tags: ['autodocs'],\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n    msw: {\n      handlers,\n    },\n  },\n  loaders: [mswLoader],\n  decorators: [\n    mswDecorator,\n    (Story) => {\n      return (\n        <ThemeProvider\n          defaultTheme=\"light\"\n          storageKey=\"stock-chart-theme-storybook\"\n        >\n          <ReactQueryProvider\n            overrideQueryClient={new QueryClient(testingQueryOptions)}\n          >\n            <Story />\n          </ReactQueryProvider>\n        </ThemeProvider>\n      );\n    },\n  ],\n};\n\nexport default preview;\n"
+        }
+    ]
+}

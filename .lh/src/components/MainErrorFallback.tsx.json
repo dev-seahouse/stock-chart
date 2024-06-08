@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/MainErrorFallback.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1717828390436,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1717828390435,
+            "name": "Commit-0",
+            "content": "import AppLayout from '@/layouts/AppLayout';\nimport { Button } from '@/lib/components/Button';\n\nexport function MainErrorFallback() {\n  return (\n    <AppLayout>\n      <div\n        className=\"flex h-screen w-screen flex-col items-center justify-center\"\n        role=\"alert\"\n      >\n        <h2 className=\"text-lg font-semibold text-foreground\">\n          Ooops, something went wrong :({' '}\n        </h2>\n        <Button\n          className=\"mt-4\"\n          onClick={() => window.location.assign(window.location.origin)}\n        >\n          Refresh\n        </Button>\n      </div>\n    </AppLayout>\n  );\n}\n\nexport default MainErrorFallback;\n"
+        }
+    ]
+}

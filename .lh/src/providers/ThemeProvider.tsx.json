@@ -3,11 +3,27 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1717758017263,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717829795335,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,9 +61,9 @@\n       localStorage.setItem(storageKey, theme);\n       setTheme(theme);\n     },\n     toggleTheme: () => {\n-      setTheme((currTheme) => (currTheme == 'dark' ? 'light' : 'dark'));\n+      setTheme((currTheme: string) => (currTheme == 'dark' ? 'light' : 'dark'));\n     },\n   };\n \n   return (\n"
+                },
+                {
+                    "date": 1717829810595,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,9 +61,9 @@\n       localStorage.setItem(storageKey, theme);\n       setTheme(theme);\n     },\n     toggleTheme: () => {\n-      setTheme((currTheme: string) => (currTheme == 'dark' ? 'light' : 'dark'));\n+      setTheme((currTheme: Theme) => (currTheme == 'dark' ? 'light' : 'dark'));\n     },\n   };\n \n   return (\n"
+                },
+                {
+                    "date": 1717829827115,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \n export type Theme = 'dark' | 'light' | 'system';\n \n interface ThemeProviderProps {\n-  children: React.ReactNode;\n+  children: ReactNode;\n   defaultTheme?: Theme;\n   storageKey?: string;\n }\n \n"
+                },
+                {
+                    "date": 1717829838507,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \n export type Theme = 'dark' | 'light' | 'system';\n \n interface ThemeProviderProps {\n-  children: ReactNode;\n+  children: React.ReactNode;\n   defaultTheme?: Theme;\n   storageKey?: string;\n }\n \n"
                 }
             ],
             "date": 1717758017263,

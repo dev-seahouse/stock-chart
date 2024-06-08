@@ -45,17 +45,34 @@ npm run test:ui
 - useQueries https://tanstack.com/query/v4/docs/framework/react/reference/useQueries is used to fetch stocks price data in parallel.
 - when user add a new stock e.g now we have Apple, and added Google, a new api call will be made to fetch Google data, but no api call will be made to fetch Apple data since Tanstack Query already have cached result for Apple, unless parameters changed (date, price type etc)
 
-
 ### UI/UX
+
 1. dark mode has been implemented
-2. efforts have been made to tweak color theme to have sufficient contrast
+2. efforts have been made to tweak color theme to have sufficient contrast and with the help of Storybook's a11y add-on
+   **Before**
+   ![alt text](screenshots/image7.png)
+   **After**
+   ![alt text](screenshots/image8.png)
+   **A11y colors**
+   ![alt text](screenshots/image10.png)
 
 ## Testing
 
-1. msw is setup to mock http request/response, stock-chart/src/mocks
-   ![alt text](image.png)
+1. msw is setup to mock http request/response for tests, e.g. stock-chart/src/mocks
 2. msw is linked to storybook to provide mocked response
+   ![alt text](screenshots/image6.png)
 3. all components are created with being testable in mind, for example stock-chart/src/providers/ReactQueryProvider.tsx is reusable in tests to allow overriding the app queryClient
+
+## Error handling
+
+1. errors are handled as much as possible at component level by rending simple error messages
+2. error boundary has been setup to catch application wide errors
+   ![alt text](screenshots/image9.png)
+
+## Build optimization
+
+1. stats.html is generated at build time to analyze bundle size (rollup-bundle-visulizer-plugin)
+2. large libraries are manually split while the rest are put into vendor chunk
 
 ## Folder structure
 

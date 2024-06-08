@@ -62,7 +62,7 @@ export function ThemeProvider({
       setTheme(theme);
     },
     toggleTheme: () => {
-      setTheme((currTheme) => (currTheme == 'dark' ? 'light' : 'dark'));
+      setTheme((currTheme: Theme) => (currTheme == 'dark' ? 'light' : 'dark'));
     },
   };
 

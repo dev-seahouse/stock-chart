@@ -32,7 +32,7 @@ function App() {
     [],
   );
   const [dateRange, setDateRange] = useState({
-    start: DateTime.now().minus({ month: 1 }).toJSDate(),
+    start: DateTime.now().minus({ month: 6 }).toJSDate(), // default view 6 months data
     end: DateTime.now().toJSDate(),
   });
   const [isFromPopoverOpen, setIsFromPopoverOpen] = useState(false);
