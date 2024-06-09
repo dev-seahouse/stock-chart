@@ -24,12 +24,15 @@ function DateRangePicker({
 }: DateRangePickerProps) {
   const [isFromPopoverOpen, setIsFromPopoverOpen] = useState(false);
   const [isToPopoverOpen, setIsToPopoverOpen] = useState(false);
+  const [fromMonth, setFromMonth] = useState(dateRange.start);
+  const [toMonth, setToMonth] = useState(dateRange.end);
 
   const handleFromDateChange = (newFromDate: Date | undefined) => {
     if (!newFromDate) return;
     const newEndDate =
       newFromDate > dateRange.end ? newFromDate : dateRange.end;
     onDateChange(newFromDate, newEndDate);
+    setFromMonth(newFromDate); // Update the month
     setIsFromPopoverOpen(false);
   };
 
@@ -38,30 +41,29 @@ function DateRangePicker({
     const newStartDate =
       newToDate < dateRange.start ? newToDate : dateRange.start;
     onDateChange(newStartDate, newToDate);
+    setToMonth(newToDate); // Update the month
     setIsToPopoverOpen(false);
   };
 
   return (
     <div
-      className={cn(
-        `
-          flex w-full items-center gap-2
+      className={cn(`
+        flex w-full items-center gap-2
 
-          md:w-auto
-        `,
-      )}
+        md:w-auto
+      `)}
     >
       <Popover open={isFromPopoverOpen} onOpenChange={setIsFromPopoverOpen}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
             className={`
-              flex w-full items-center gap-2 text-gray-800
+                  flex w-full items-center gap-2 text-gray-800
 
-              dark:text-gray-200
+                  dark:text-gray-200
 
-              md:w-auto
-            `}
+                  md:w-auto
+                `}
             onClick={() => setIsFromPopoverOpen(true)}
           >
             <CalendarDaysIcon
@@ -80,6 +82,8 @@ function DateRangePicker({
             mode="single"
             onSelect={handleFromDateChange}
             toDate={disableFuture ? DateTime.now().toJSDate() : undefined}
+            month={fromMonth} // Control the displayed month
+            onMonthChange={setFromMonth} // Handle month changes
           />
         </PopoverContent>
       </Popover>
@@ -97,12 +101,12 @@ function DateRangePicker({
           <Button
             variant="outline"
             className={`
-              flex w-full items-center gap-2 text-gray-800
+                  flex w-full items-center gap-2 text-gray-800
 
-              dark:text-gray-200
+                  dark:text-gray-200
 
-              md:w-auto
-            `}
+                  md:w-auto
+                `}
             onClick={() => setIsToPopoverOpen(true)}
           >
             <CalendarDaysIcon
@@ -121,6 +125,8 @@ function DateRangePicker({
             mode="single"
             onSelect={handleToDateChange}
             toDate={disableFuture ? DateTime.now().toJSDate() : undefined}
+            month={toMonth} // Control the displayed month
+            onMonthChange={setToMonth} // Handle month changes
           />
         </PopoverContent>
       </Popover>

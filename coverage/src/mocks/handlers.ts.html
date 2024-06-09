@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">32.43% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>37/37</span>
+                <span class='fraction'>12/37</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/6</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">32.43% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>37/37</span>
+                <span class='fraction'>12/37</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -105,36 +105,36 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">79x</span>
-<span class="cline-any cline-yes">79x</span>
-<span class="cline-any cline-yes">79x</span>
-<span class="cline-any cline-yes">79x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">77x</span>
-<span class="cline-any cline-yes">77x</span>
-<span class="cline-any cline-yes">77x</span>
-<span class="cline-any cline-yes">77x</span>
-<span class="cline-any cline-yes">77x</span>
-<span class="cline-any cline-yes">77x</span>
-<span class="cline-any cline-yes">231x</span>
-<span class="cline-any cline-yes">77x</span>
-<span class="cline-any cline-yes">77x</span>
-<span class="cline-any cline-yes">77x</span>
-<span class="cline-any cline-yes">77x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { http, HttpResponse } from 'msw';
@@ -142,31 +142,31 @@ import { appleStockAggregates } from '@/mocks/aggregates.mock.ts';
 &nbsp;
 export const handlers = [
   http.get('https://api.polygon.io/v3/reference/tickers', ({ request }) =&gt; {
-    const url = new URL(request.url);
-    const search = url.searchParams.get('search');
-&nbsp;
-    if (search === 'error') {
-      return HttpResponse.json(
-        {
-          status: 'ERROR',
-          request_id: '32f2331e61c4041ab6a9a8a286b1f8fa',
-          error:
-            "You've exceeded the maximum requests per minute, please wait or upgrade your subscription to continue. https://polygon.io/pricing",
-        },
-        { status: 429 },
-      );
-    }
-&nbsp;
-    const results = [
-      { ticker: 'AAPL', name: 'Apple Inc.' },
-      { ticker: 'GOOGL', name: 'Alphabet Inc.' },
-      { ticker: 'TSLA', name: 'Tesla Inc.' },
-    ].filter((stock) =&gt;
-      stock.name.toLowerCase().includes(search?.<span class="branch-0 cbranch-no" title="branch not covered" >toLowerCase() || ''),</span>
-    );
-&nbsp;
-    return HttpResponse.json({ results });
-  }),
+<span class="cstat-no" title="statement not covered" >    const url = new URL(request.url);</span>
+<span class="cstat-no" title="statement not covered" >    const search = url.searchParams.get('search');</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    if (search === 'error') {</span>
+<span class="cstat-no" title="statement not covered" >      return HttpResponse.json(</span>
+<span class="cstat-no" title="statement not covered" >        {</span>
+<span class="cstat-no" title="statement not covered" >          status: 'ERROR',</span>
+<span class="cstat-no" title="statement not covered" >          request_id: '32f2331e61c4041ab6a9a8a286b1f8fa',</span>
+<span class="cstat-no" title="statement not covered" >          error:</span>
+<span class="cstat-no" title="statement not covered" >            "You've exceeded the maximum requests per minute, please wait or upgrade your subscription to continue. https://polygon.io/pricing",</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >        { status: 429 },</span>
+<span class="cstat-no" title="statement not covered" >      );</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    const results = [</span>
+<span class="cstat-no" title="statement not covered" >      { ticker: 'AAPL', name: 'Apple Inc.' },</span>
+<span class="cstat-no" title="statement not covered" >      { ticker: 'GOOGL', name: 'Alphabet Inc.' },</span>
+<span class="cstat-no" title="statement not covered" >      { ticker: 'TSLA', name: 'Tesla Inc.' },</span>
+<span class="cstat-no" title="statement not covered" >    ].filter((stock) =&gt;</span>
+<span class="cstat-no" title="statement not covered" >      stock.name.toLowerCase().includes(search?.toLowerCase() || ''),</span>
+<span class="cstat-no" title="statement not covered" >    );</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    return HttpResponse.json({ results });</span>
+<span class="cstat-no" title="statement not covered" >  }),</span>
   http.get(
     'https://api.polygon.io/v2/aggs/ticker/:ticker/range/:multiplier/:timespan/:from/:to',
     () =&gt; {
@@ -181,7 +181,7 @@ export const handlers = [
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-06-09T17:50:02.315Z
+                at 2024-06-09T18:06:48.825Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

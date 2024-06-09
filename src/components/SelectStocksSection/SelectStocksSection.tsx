@@ -24,12 +24,11 @@ function SelectStocksSection({
 }: SelectStocksSectionProps) {
   function handleStocksChange(newOption: StocksSelectOption | null) {
     if (
-      !newOption?.value ||
-      selectedStocks?.some((o) => o.value === newOption.value)
+      newOption?.value &&
+      !selectedStocks?.some((o) => o.value === newOption.value)
     ) {
-      return;
+      setSelectedStocks((oldOptions) => [newOption, ...oldOptions]);
     }
-    setSelectedStocks((oldOptions) => [newOption, ...oldOptions]);
   }
 
   function handleDeselectStock(newOption: StocksSelectOption) {
@@ -37,6 +36,7 @@ function SelectStocksSection({
       old.filter((option) => option.value !== newOption.value),
     );
   }
+
   return (
     <section className={cn(className)}>
       <Heading as="h2">Select Stocks</Heading>
