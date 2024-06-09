@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/StockPriceChart.hooks.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1717835633686,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1717835633686,
+            "name": "Commit-0",
+            "content": "import { useQueries, UseQueryResult } from '@tanstack/react-query';\nimport AggregatesService from '@/api/services/Aggregates';\nimport type { AggregatesResult } from '@/api/services/Aggregates.types';\nimport { StockPriceType } from '@/components/StockPriceChart';\n\ninterface DateRange {\n  start: string;\n  end: string;\n}\n\nconst fetchStockData = async (\n  ticker: string,\n  dateRange: DateRange,\n  priceType: StockPriceType,\n) => {\n  const { start, end } = dateRange;\n  const params = {\n    multiplier: 1,\n    timespan: 'day' as const,\n    from: start,\n    to: end,\n  };\n  const response = await AggregatesService.getAggregates(ticker, params);\n  const priceKeyMap: Record<StockPriceType, keyof AggregatesResult> = {\n    open: 'o',\n    high: 'h',\n    low: 'l',\n    close: 'c',\n  };\n  const priceKey = priceKeyMap[priceType];\n  return response.data.results.map((point) => ({\n    x: point.t, // time\n    y: point[priceKey], // price\n    ticker,\n  }));\n};\n\nconst useStockPriceChartQuery = (\n  selectedTickers: string[],\n  dateRange: DateRange,\n  priceType: StockPriceType,\n): UseQueryResult<{ x: number; y: number; ticker: string }[], unknown>[] => {\n  return useQueries({\n    queries: selectedTickers.map((ticker) => ({\n      queryKey: ['aggregates', ticker, dateRange, priceType],\n      queryFn: () => fetchStockData(ticker, dateRange, priceType),\n      retry: false,\n      refetchOnMount: false,\n      refetchOnWindowFocus: false,\n      retryOnMount: false,\n      staleTime: 5 * 60 * 1000, // 5 minutes\n      gcTime: 10 * 60 * 1000, // 10 minutes\n    })),\n  });\n};\n\nexport default useStockPriceChartQuery;\n"
+        }
+    ]
+}

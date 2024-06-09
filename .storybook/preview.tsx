@@ -1,7 +1,6 @@
-import React from 'react';
 import { Preview } from '@storybook/react';
 import { withThemeByClassName } from '@storybook/addon-themes';
-import { initialize, mswLoader, mswDecorator } from 'msw-storybook-addon';
+import { initialize, mswLoader } from 'msw-storybook-addon';
 import ThemeProvider from '../src/providers/ThemeProvider';
 import ReactQueryProvider from '../src/providers/ReactQueryProvider';
 import { testingQueryOptions } from '../src/testing/testingQueryConfig';
@@ -15,6 +14,9 @@ initialize();
 const preview: Preview = {
   tags: ['autodocs'],
   parameters: {
+    docs: {
+      toc: true,
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -27,7 +29,6 @@ const preview: Preview = {
   },
   loaders: [mswLoader],
   decorators: [
-    mswDecorator,
     (Story) => {
       return (
         <ThemeProvider

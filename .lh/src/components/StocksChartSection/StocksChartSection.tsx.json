@@ -1,0 +1,62 @@
+{
+    "sourceFile": "src/components/StocksChartSection/StocksChartSection.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 11,
+            "patches": [
+                {
+                    "date": 1717862615743,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717862621615,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n     setPriceType(type);\n   }\n \n   return (\n-    <section className={cn(' className)}>\n+    <section className={cn(className)}>\n       <Heading as=\"h2\">Time Series Chart</Heading>\n       <div className=\"rounded-lg bg-background p-6 shadow-lg\">\n         {stocksSelectOptions.length ? (\n           <div className=\"grid gap-4\">\n"
+                },
+                {
+                    "date": 1717862630977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,8 +37,9 @@\n \n   return (\n     <section className={cn(className)}>\n       <Heading as=\"h2\">Time Series Chart</Heading>\n+\n       <div className=\"rounded-lg bg-background p-6 shadow-lg\">\n         {stocksSelectOptions.length ? (\n           <div className=\"grid gap-4\">\n             <div\n"
+                },
+                {
+                    "date": 1717862680006,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n       <Heading as=\"h2\">Time Series Chart</Heading>\n \n       <div className=\"rounded-lg bg-background p-6 shadow-lg\">\n         {stocksSelectOptions.length ? (\n-          <div className=\"grid gap-4\">\n+          <div className=\"flex gap-4\">\n             <div\n               className={`\n                 flex flex-col items-start justify-between\n \n"
+                },
+                {
+                    "date": 1717862744922,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,11 +38,10 @@\n   return (\n     <section className={cn(className)}>\n       <Heading as=\"h2\">Time Series Chart</Heading>\n \n-      <div className=\"rounded-lg bg-background p-6 shadow-lg\">\n+      < className=\"rounded-lg bg-background p-6 shadow-lg\">\n         {stocksSelectOptions.length ? (\n-          <div className=\"flex gap-4\">\n             <div\n               className={`\n                 flex flex-col items-start justify-between\n \n@@ -67,15 +66,14 @@\n                 start: DateTime.fromJSDate(dateRange.start).toISODate() ?? '',\n                 end: DateTime.fromJSDate(dateRange.end).toISODate() ?? '',\n               }}\n             />\n-          </div>\n         ) : (\n           <MaxSelectableStocksMessage\n             maxSelectableStocks={maxSelectableStocks}\n           />\n         )}\n-      </div>\n+      </>\n     </section>\n   );\n }\n \n"
+                },
+                {
+                    "date": 1717862751350,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,10 +38,11 @@\n   return (\n     <section className={cn(className)}>\n       <Heading as=\"h2\">Time Series Chart</Heading>\n \n-      < className=\"rounded-lg bg-background p-6 shadow-lg\">\n+      <div className=\"rounded-lg bg-background p-6 shadow-lg\">\n         {stocksSelectOptions.length ? (\n+          <div className=\"flex flex-col gap-4\">\n             <div\n               className={`\n                 flex flex-col items-start justify-between\n \n@@ -66,14 +67,15 @@\n                 start: DateTime.fromJSDate(dateRange.start).toISODate() ?? '',\n                 end: DateTime.fromJSDate(dateRange.end).toISODate() ?? '',\n               }}\n             />\n+          </div>\n         ) : (\n           <MaxSelectableStocksMessage\n             maxSelectableStocks={maxSelectableStocks}\n           />\n         )}\n-      </>\n+      </div>\n     </section>\n   );\n }\n \n"
+                },
+                {
+                    "date": 1717862756518,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,11 +38,11 @@\n   return (\n     <section className={cn(className)}>\n       <Heading as=\"h2\">Time Series Chart</Heading>\n \n-      <div className=\"rounded-lg bg-background p-6 shadow-lg\">\n+      < className=\"rounded-lg bg-background p-6 shadow-lg\">\n         {stocksSelectOptions.length ? (\n-          <div className=\"flex flex-col gap-4\">\n+         \n             <div\n               className={`\n                 flex flex-col items-start justify-between\n \n@@ -67,15 +67,14 @@\n                 start: DateTime.fromJSDate(dateRange.start).toISODate() ?? '',\n                 end: DateTime.fromJSDate(dateRange.end).toISODate() ?? '',\n               }}\n             />\n-          </div>\n         ) : (\n           <MaxSelectableStocksMessage\n             maxSelectableStocks={maxSelectableStocks}\n           />\n         )}\n-      </div>\n+      </>\n     </section>\n   );\n }\n \n"
+                },
+                {
+                    "date": 1717862771606,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n   return (\n     <section className={cn(className)}>\n       <Heading as=\"h2\">Time Series Chart</Heading>\n \n-      < className=\"rounded-lg bg-background p-6 shadow-lg\">\n+      <div className=\"rounded-lg bg-background p-6 shadow-lg\">\n         {stocksSelectOptions.length ? (\n          \n             <div\n               className={`\n@@ -67,14 +67,15 @@\n                 start: DateTime.fromJSDate(dateRange.start).toISODate() ?? '',\n                 end: DateTime.fromJSDate(dateRange.end).toISODate() ?? '',\n               }}\n             />\n+          \n         ) : (\n           <MaxSelectableStocksMessage\n             maxSelectableStocks={maxSelectableStocks}\n           />\n         )}\n-      </>\n+      </div>\n     </section>\n   );\n }\n \n"
+                },
+                {
+                    "date": 1717862778718,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n       <Heading as=\"h2\">Time Series Chart</Heading>\n \n       <div className=\"rounded-lg bg-background p-6 shadow-lg\">\n         {stocksSelectOptions.length ? (\n-         \n+          <div className=\"flex flex-col gap-4\">\n             <div\n               className={`\n                 flex flex-col items-start justify-between\n \n@@ -67,9 +67,9 @@\n                 start: DateTime.fromJSDate(dateRange.start).toISODate() ?? '',\n                 end: DateTime.fromJSDate(dateRange.end).toISODate() ?? '',\n               }}\n             />\n-          \n+          </div>\n         ) : (\n           <MaxSelectableStocksMessage\n             maxSelectableStocks={maxSelectableStocks}\n           />\n"
+                },
+                {
+                    "date": 1717862786048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,8 +57,9 @@\n                 priceType={priceType}\n                 onPriceTypeChange={handlePriceTypeChange}\n               />\n             </div>\n+\n             <StockPriceChart\n               priceType={priceType}\n               selectedTickers={stocksSelectOptions.map(\n                 (option) => option.value,\n"
+                },
+                {
+                    "date": 1717862931108,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,9 @@\n \n interface StocksChartSectionProps {\n   stocksSelectOptions: StocksSelectOption[];\n   maxSelectableStocks: number;\n+  defaultMonthsRange: number; \n   className?: string;\n }\n \n function StocksChartSection({\n"
+                },
+                {
+                    "date": 1717862942342,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,8 @@\n \n interface StocksChartSectionProps {\n   stocksSelectOptions: StocksSelectOption[];\n   maxSelectableStocks: number;\n-  defaultMonthsRange: number; \n   className?: string;\n }\n \n function StocksChartSection({\n"
+                }
+            ],
+            "date": 1717862615742,
+            "name": "Commit-0",
+            "content": "import type { StocksSelectOption } from '@/components/SelectStocksSection/StocksAsyncSelect/StocksAsyncSelect.types.ts';\nimport { useState } from 'react';\nimport { DateTime } from 'luxon';\nimport type { StockPriceType } from '@/components/StocksChartSection/PriceTypePicker/PriceTypePicker.types.ts';\nimport DateRangePicker from '@/components/StocksChartSection/DateRangePicker/DateRangePicker.tsx';\nimport Heading from '@/lib/components/Heading.tsx';\nimport PriceTypeSelector from '@/components/StocksChartSection/PriceTypePicker/PriceTypePicker.tsx';\nimport StockPriceChart from '@/components/StocksChartSection/StocksPriceChart/StocksPriceChart.tsx';\nimport MaxSelectableStocksMessage from '@/components/StocksChartSection/MaxSelectableStocksMessage/MaxSelectableStocksMessage.tsx';\nimport { cn } from '@/lib/utils.ts';\n\ninterface StocksChartSectionProps {\n  stocksSelectOptions: StocksSelectOption[];\n  maxSelectableStocks: number;\n  className?: string;\n}\n\nfunction StocksChartSection({\n  stocksSelectOptions,\n  maxSelectableStocks,\n  className,\n}: StocksChartSectionProps) {\n  const [dateRange, setDateRange] = useState({\n    start: DateTime.now().minus({ month: 6 }).toJSDate(), // default view 6 months data\n    end: DateTime.now().toJSDate(),\n  });\n\n  const [priceType, setPriceType] = useState<StockPriceType>('open');\n\n  function handleDateChange(start: Date, end: Date) {\n    setDateRange({ start, end });\n  }\n\n  function handlePriceTypeChange(type: StockPriceType) {\n    setPriceType(type);\n  }\n\n  return (\n    <section className={cn(' className)}>\n      <Heading as=\"h2\">Time Series Chart</Heading>\n      <div className=\"rounded-lg bg-background p-6 shadow-lg\">\n        {stocksSelectOptions.length ? (\n          <div className=\"grid gap-4\">\n            <div\n              className={`\n                flex flex-col items-start justify-between\n\n                md:flex-row md:items-center\n              `}\n            >\n              <DateRangePicker\n                dateRange={dateRange}\n                onDateChange={handleDateChange}\n              />\n              <PriceTypeSelector\n                priceType={priceType}\n                onPriceTypeChange={handlePriceTypeChange}\n              />\n            </div>\n            <StockPriceChart\n              priceType={priceType}\n              selectedTickers={stocksSelectOptions.map(\n                (option) => option.value,\n              )}\n              dateRange={{\n                start: DateTime.fromJSDate(dateRange.start).toISODate() ?? '',\n                end: DateTime.fromJSDate(dateRange.end).toISODate() ?? '',\n              }}\n            />\n          </div>\n        ) : (\n          <MaxSelectableStocksMessage\n            maxSelectableStocks={maxSelectableStocks}\n          />\n        )}\n      </div>\n    </section>\n  );\n}\n\nexport default StocksChartSection;\n"
+        }
+    ]
+}

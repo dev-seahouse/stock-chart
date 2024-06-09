@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/StocksPriceChart/StockPriceChart.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1717855118671,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1717855118671,
+            "name": "Commit-0",
+            "content": "import Highcharts from 'highcharts';\nimport HighchartsReact from 'highcharts-react-official';\nimport useStockPriceChartQuery from './StocksPriceChart.hooks';\nimport { capitalize } from '@/lib/utils';\nexport type StockPriceType = 'open' | 'high' | 'low' | 'close';\n\ninterface StockPriceChartProps {\n  selectedTickers: string[];\n  dateRange: { start: string; end: string };\n  priceType: StockPriceType;\n}\n\nfunction StockPriceChart({\n  selectedTickers,\n  dateRange,\n  priceType,\n}: StockPriceChartProps) {\n  const queries = useStockPriceChartQuery(\n    selectedTickers,\n    dateRange,\n    priceType,\n  );\n\n  const chartData = selectedTickers.map((ticker) => {\n    const query = queries.find((q) => q?.data?.[0]?.ticker === ticker);\n    return {\n      type: 'line' as const,\n      name: ticker,\n      data: query?.data?.map((point) => ({ x: point.x, y: point.y })) ?? [],\n    };\n  });\n\n  const chartOptions = {\n    chart: {\n      zooming: {\n        type: 'x',\n      },\n    },\n    title: { text: 'Stock Prices' },\n    subtitle: {\n      text: 'Click and drag in the plot area to zoom in',\n    },\n    xAxis: { type: 'datetime' },\n    yAxis: {\n      title: {\n        text: `${capitalize(priceType)} Price`,\n      },\n    },\n    legend: { enabled: true },\n    series: chartData,\n  } satisfies Highcharts.Options;\n\n  const isError = queries.some((query) => query.isError);\n\n  if (isError)\n    return (\n      <div className=\"h-[400px] text-center text-muted-foreground\">\n        Error loading data\n      </div>\n    );\n\n  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n}\n\nexport default StockPriceChart;\n"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "sourceFile": "src/components/PriceTypePicker/PriceTypePicker.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1717854736384,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717854781812,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { BarChartIcon } from 'lucide-react';\n import { Button } from '@/lib/components/Button.tsx';\n \n-import type { StockPriceType } from '../StockPriceChart';\n+import type { StockPriceType } from '../StockPriceChart/StockPriceChart';\n import {\n   DropdownMenu,\n   DropdownMenuContent,\n   DropdownMenuRadioGroup,\n"
+                },
+                {
+                    "date": 1717855652606,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n import { BarChartIcon } from 'lucide-react';\n import { Button } from '@/lib/components/Button.tsx';\n \n-import type { StockPriceType } from '../StockPriceChart/StockPriceChart';\n import {\n   DropdownMenu,\n   DropdownMenuContent,\n   DropdownMenuRadioGroup,\n"
+                },
+                {
+                    "date": 1717855659154,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n   DropdownMenuRadioGroup,\n   DropdownMenuRadioItem,\n   DropdownMenuTrigger,\n } from '@/lib/components/DropdownMenu';\n+import type { StockPriceType } from '@/types';\n \n interface PriceTypeSelectorProps {\n   priceType: StockPriceType;\n   onPriceTypeChange: (type: StockPriceType) => void;\n"
+                },
+                {
+                    "date": 1717856860282,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   DropdownMenuRadioGroup,\n   DropdownMenuRadioItem,\n   DropdownMenuTrigger,\n } from '@/lib/components/DropdownMenu';\n-import type { StockPriceType } from '@/types';\n+import type { StockPriceType } from './PriceTypePicker.types';\n \n interface PriceTypeSelectorProps {\n   priceType: StockPriceType;\n   onPriceTypeChange: (type: StockPriceType) => void;\n"
+                }
+            ],
+            "date": 1717854736384,
+            "name": "Commit-0",
+            "content": "import { BarChartIcon } from 'lucide-react';\nimport { Button } from '@/lib/components/Button.tsx';\n\nimport type { StockPriceType } from '../StockPriceChart';\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuRadioGroup,\n  DropdownMenuRadioItem,\n  DropdownMenuTrigger,\n} from '@/lib/components/DropdownMenu';\n\ninterface PriceTypeSelectorProps {\n  priceType: StockPriceType;\n  onPriceTypeChange: (type: StockPriceType) => void;\n}\n\nfunction PriceTypeSelector({\n  priceType,\n  onPriceTypeChange,\n}: PriceTypeSelectorProps) {\n  return (\n    <DropdownMenu>\n      <DropdownMenuTrigger asChild>\n        <Button\n          variant=\"outline\"\n          className={`\n            mt-4 flex w-full items-center gap-2 text-gray-800\n\n            dark:text-gray-200\n\n            md:mt-0 md:w-auto\n          `}\n        >\n          <BarChartIcon\n            className={`\n              size-4 text-gray-500\n\n              dark:text-gray-400\n            `}\n          />\n          {priceType.toUpperCase()}\n        </Button>\n      </DropdownMenuTrigger>\n      <DropdownMenuContent>\n        <DropdownMenuRadioGroup\n          value={priceType}\n          //   libray typescirpt bug? should be generic\n          onValueChange={onPriceTypeChange as () => void}\n        >\n          <DropdownMenuRadioItem\n            value=\"open\"\n            className={`\n              text-gray-800\n\n              dark:text-gray-200\n            `}\n          >\n            Open\n          </DropdownMenuRadioItem>\n          <DropdownMenuRadioItem\n            value=\"high\"\n            className={`\n              text-gray-800\n\n              dark:text-gray-200\n            `}\n          >\n            High\n          </DropdownMenuRadioItem>\n          <DropdownMenuRadioItem\n            value=\"low\"\n            className={`\n              text-gray-800\n\n              dark:text-gray-200\n            `}\n          >\n            Low\n          </DropdownMenuRadioItem>\n          <DropdownMenuRadioItem\n            value=\"close\"\n            className={`\n              text-gray-800\n\n              dark:text-gray-200\n            `}\n          >\n            Close\n          </DropdownMenuRadioItem>\n        </DropdownMenuRadioGroup>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  );\n}\n\nexport default PriceTypeSelector;\n"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/lib/components/Button.stories.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1717867297813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717867314293,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,8 +32,9 @@\n     variant: 'outline',\n   },\n };\n \n+// for delete etc\n export const Destructive: Story = {\n   args: {\n     ...Default.args,\n     variant: 'destructive',\n"
+                },
+                {
+                    "date": 1717867335389,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n } as Meta<typeof Button>;\n \n type Story = StoryObj<typeof Button>;\n \n+// default button\n export const Default: Story = {\n   args: {\n     children: 'Submit',\n   },\n@@ -40,8 +41,9 @@\n     variant: 'destructive',\n   },\n };\n \n+// for icons, \n export const Ghost: Story = {\n   args: {\n     variant: 'ghost',\n     children: <SmileIcon />,\n"
+                },
+                {
+                    "date": 1717867355770,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     variant: 'destructive',\n   },\n };\n \n-// for icons, \n+// for icons, cross button, anything that is clickable but is not button\n export const Ghost: Story = {\n   args: {\n     variant: 'ghost',\n     children: <SmileIcon />,\n"
+                }
+            ],
+            "date": 1717867297813,
+            "name": "Commit-0",
+            "content": "import { StoryObj, Meta } from '@storybook/react';\nimport { Button } from './Button';\nimport { SmileIcon } from 'lucide-react';\n\nexport default {\n  title: 'lib/components/Button',\n  component: Button,\n  argTypes: {\n    size: { control: 'radio', options: ['default', 'sm', 'lg', 'icon'] },\n    asChild: { control: 'boolean' },\n  },\n} as Meta<typeof Button>;\n\ntype Story = StoryObj<typeof Button>;\n\nexport const Default: Story = {\n  args: {\n    children: 'Submit',\n  },\n};\n\nexport const Secondary: Story = {\n  args: {\n    ...Default.args,\n    variant: 'secondary',\n  },\n};\n\nexport const Outline: Story = {\n  args: {\n    ...Default.args,\n    variant: 'outline',\n  },\n};\n\nexport const Destructive: Story = {\n  args: {\n    ...Default.args,\n    variant: 'destructive',\n  },\n};\n\nexport const Ghost: Story = {\n  args: {\n    variant: 'ghost',\n    children: <SmileIcon />,\n  },\n};\n"
+        }
+    ]
+}

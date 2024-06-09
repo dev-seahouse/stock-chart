@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/AppHeader/AppHeader.stories.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1717854691627,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1717854691627,
+            "name": "Commit-0",
+            "content": "import { StoryObj, Meta } from '@storybook/react';\n\nimport AppHeader from './AppHeader';\n\nexport default {\n  title: 'components/AppHeader',\n  component: AppHeader,\n  args: {\n    theme: undefined,\n    toggleTheme: undefined,\n  },\n} as Meta<typeof AppHeader>;\n\ntype Story = StoryObj<typeof AppHeader>;\n\nexport const Default: Story = {\n  args: {\n    theme: 'light',\n  },\n};\n"
+        }
+    ]
+}

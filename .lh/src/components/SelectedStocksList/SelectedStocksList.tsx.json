@@ -1,0 +1,130 @@
+{
+    "sourceFile": "src/components/SelectedStocksList/SelectedStocksList.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 28,
+            "patches": [
+                {
+                    "date": 1717854809573,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717855360319,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { X } from 'lucide-react';\n import { Button } from '@/lib/components/Button.tsx';\n-import { StocksSelectOption } from '@/components/StocksAsyncSelect/StocksAsyncSelect';\n+import { StocksSelectOption } from '../StocksAsyncSelect/StocksSelectOption';\n \n interface SelectedStocksListProps {\n   selectedStocks: StocksSelectOption[];\n   handleDeselectStock: (stock: StocksSelectOption) => void;\n"
+                },
+                {
+                    "date": 1717856072284,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,13 +38,9 @@\n             dark:text-gray-200\n           `}\n         >\n           {stock.label}\n-          <Button\n-            onClick={() => handleDeselectStock(stock)}\n-            variant=\"ghost\"\n-            size=\"icon\"\n-          >\n+          <Button onClick={() => handleDeselectStock(stock)} size=\"icon\">\n             <X\n               className={`\n                 size-4 text-gray-500\n \n"
+                },
+                {
+                    "date": 1717856086960,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,13 @@\n             dark:text-gray-200\n           `}\n         >\n           {stock.label}\n-          <Button onClick={() => handleDeselectStock(stock)} size=\"icon\">\n+          <Button\n+            onClick={() => handleDeselectStock(stock)}\n+            variant=\"\"\n+            size=\"icon\"\n+          >\n             <X\n               className={`\n                 size-4 text-gray-500\n \n"
+                },
+                {
+                    "date": 1717856099343,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n         >\n           {stock.label}\n           <Button\n             onClick={() => handleDeselectStock(stock)}\n-            variant=\"\"\n+            variant=\"outline\"\n             size=\"icon\"\n           >\n             <X\n               className={`\n"
+                },
+                {
+                    "date": 1717856118557,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n         >\n           {stock.label}\n           <Button\n             onClick={() => handleDeselectStock(stock)}\n-            variant=\"outline\"\n+            variant=\"ghost\"\n             size=\"icon\"\n           >\n             <X\n               className={`\n"
+                },
+                {
+                    "date": 1717856128672,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n             <X\n               className={`\n                 size-4 text-gray-500\n \n-                dark:text-gray-400\n+                dark:text-gray-100\n               `}\n             />\n           </Button>\n         </li>\n"
+                },
+                {
+                    "date": 1717856140035,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n             size=\"icon\"\n           >\n             <X\n               className={`\n-                size-4 text-gray-500\n+                size-4 text-gray-800\n \n                 dark:text-gray-100\n               `}\n             />\n"
+                },
+                {
+                    "date": 1717856148181,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n             size=\"icon\"\n           >\n             <X\n               className={`\n-                size-4 text-gray-800\n+                size-4 text-gray-700\n \n                 dark:text-gray-100\n               `}\n             />\n"
+                },
+                {
+                    "date": 1717856153487,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,13 +38,9 @@\n             dark:text-gray-200\n           `}\n         >\n           {stock.label}\n-          <Button\n-            onClick={() => handleDeselectStock(stock)}\n-            variant=\"ghost\"\n-            size=\"icon\"\n-          >\n+          <Button onClick={() => handleDeselectStock(stock)} variant=\"ghost\">\n             <X\n               className={`\n                 size-4 text-gray-700\n \n"
+                },
+                {
+                    "date": 1717856160005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,12 +38,16 @@\n             dark:text-gray-200\n           `}\n         >\n           {stock.label}\n-          <Button onClick={() => handleDeselectStock(stock)} variant=\"ghost\">\n+          <Button\n+            onClick={() => handleDeselectStock(stock)}\n+            variant=\"ghost\"\n+            size=\"icon\"\n+          >\n             <X\n               className={`\n-                size-4 text-gray-700\n+                size-5 text-gray-700\n \n                 dark:text-gray-100\n               `}\n             />\n"
+                },
+                {
+                    "date": 1717856231756,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,8 +47,10 @@\n             <X\n               className={`\n                 size-5 text-gray-700\n \n+                hover:bg-accent\n+\n                 dark:text-gray-100\n               `}\n             />\n           </Button>\n"
+                },
+                {
+                    "date": 1717856247881,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n             <X\n               className={`\n                 size-5 text-gray-700\n \n-                hover:bg-accent\n+                hover:bg-red-300\n \n                 dark:text-gray-100\n               `}\n             />\n"
+                },
+                {
+                    "date": 1717856268527,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,15 +42,14 @@\n           <Button\n             onClick={() => handleDeselectStock(stock)}\n             variant=\"ghost\"\n             size=\"icon\"\n+            className=\"hover:bg-accent\"\n           >\n             <X\n               className={`\n                 size-5 text-gray-700\n \n-                hover:bg-red-300\n-\n                 dark:text-gray-100\n               `}\n             />\n           </Button>\n"
+                },
+                {
+                    "date": 1717856278658,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n           <Button\n             onClick={() => handleDeselectStock(stock)}\n             variant=\"ghost\"\n             size=\"icon\"\n-            className=\"hover:bg-accent\"\n+            className=\"hover:bg-secondary\"\n           >\n             <X\n               className={`\n                 size-5 text-gray-700\n"
+                },
+                {
+                    "date": 1717856327623,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n           <Button\n             onClick={() => handleDeselectStock(stock)}\n             variant=\"ghost\"\n             size=\"icon\"\n-            className=\"hover:bg-secondary\"\n+            className=\"hover:bg-muted\"\n           >\n             <X\n               className={`\n                 size-5 text-gray-700\n"
+                },
+                {
+                    "date": 1717856340309,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,8 +48,10 @@\n             <X\n               className={`\n                 size-5 text-gray-700\n \n+                hover:bg-muted\n+\n                 dark:text-gray-100\n               `}\n             />\n           </Button>\n"
+                },
+                {
+                    "date": 1717856369826,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,9 +48,9 @@\n             <X\n               className={`\n                 size-5 text-gray-700\n \n-                hover:bg-muted\n+                hover:bg-gray-700\n \n                 dark:text-gray-100\n               `}\n             />\n"
+                },
+                {
+                    "date": 1717856381255,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,9 +48,9 @@\n             <X\n               className={`\n                 size-5 text-gray-700\n \n-                hover:bg-gray-700\n+                hover:bg-muted\n \n                 dark:text-gray-100\n               `}\n             />\n"
+                },
+                {
+                    "date": 1717856390128,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,16 +42,13 @@\n           <Button\n             onClick={() => handleDeselectStock(stock)}\n             variant=\"ghost\"\n             size=\"icon\"\n-            className=\"hover:bg-muted\"\n           >\n             <X\n               className={`\n                 size-5 text-gray-700\n \n-                hover:bg-muted\n-\n                 dark:text-gray-100\n               `}\n             />\n           </Button>\n"
+                },
+                {
+                    "date": 1717856419716,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,8 +42,9 @@\n           <Button\n             onClick={() => handleDeselectStock(stock)}\n             variant=\"ghost\"\n             size=\"icon\"\n+            className=\"hover:bg-red-600\"\n           >\n             <X\n               className={`\n                 size-5 text-gray-700\n"
+                },
+                {
+                    "date": 1717856428578,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n           <Button\n             onClick={() => handleDeselectStock(stock)}\n             variant=\"ghost\"\n             size=\"icon\"\n-            className=\"hover:bg-red-600\"\n+            className=\"hover:bg-accent\"\n           >\n             <X\n               className={`\n                 size-5 text-gray-700\n"
+                },
+                {
+                    "date": 1717856449969,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n           <Button\n             onClick={() => handleDeselectStock(stock)}\n             variant=\"ghost\"\n             size=\"icon\"\n-            className=\"hover:bg-accent\"\n+            className=\"hover:bg-red-500\"\n           >\n             <X\n               className={`\n                 size-5 text-gray-700\n"
+                },
+                {
+                    "date": 1717856467639,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n           <Button\n             onClick={() => handleDeselectStock(stock)}\n             variant=\"ghost\"\n             size=\"icon\"\n-            className=\"hover:bg-red-500\"\n+            className=\"hover:bg-background\"\n           >\n             <X\n               className={`\n                 size-5 text-gray-700\n"
+                },
+                {
+                    "date": 1717856485016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n           <Button\n             onClick={() => handleDeselectStock(stock)}\n             variant=\"ghost\"\n             size=\"icon\"\n-            className=\"hover:bg-background\"\n+            className=\"hover:bg-\"\n           >\n             <X\n               className={`\n                 size-5 text-gray-700\n"
+                },
+                {
+                    "date": 1717856517688,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n           <Button\n             onClick={() => handleDeselectStock(stock)}\n             variant=\"ghost\"\n             size=\"icon\"\n-            className=\"hover:bg-\"\n+            className=\"hover:bg-accent-foreground\"\n           >\n             <X\n               className={`\n                 size-5 text-gray-700\n"
+                },
+                {
+                    "date": 1717856523371,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n           <Button\n             onClick={() => handleDeselectStock(stock)}\n             variant=\"ghost\"\n             size=\"icon\"\n-            className=\"hover:bg-accent-foreground\"\n+            className=\"hover:bg-accent\"\n           >\n             <X\n               className={`\n                 size-5 text-gray-700\n"
+                },
+                {
+                    "date": 1717856536828,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,8 @@\n           <Button\n             onClick={() => handleDeselectStock(stock)}\n             variant=\"ghost\"\n             size=\"icon\"\n-            className=\"hover:bg-accent\"\n           >\n             <X\n               className={`\n                 size-5 text-gray-700\n"
+                },
+                {
+                    "date": 1717856956753,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,6 @@\n import { X } from 'lucide-react';\n import { Button } from '@/lib/components/Button.tsx';\n-import { StocksSelectOption } from '../StocksAsyncSelect/StocksSelectOption';\n \n interface SelectedStocksListProps {\n   selectedStocks: StocksSelectOption[];\n   handleDeselectStock: (stock: StocksSelectOption) => void;\n"
+                }
+            ],
+            "date": 1717854809573,
+            "name": "Commit-0",
+            "content": "import { X } from 'lucide-react';\nimport { Button } from '@/lib/components/Button.tsx';\nimport { StocksSelectOption } from '@/components/StocksAsyncSelect/StocksAsyncSelect';\n\ninterface SelectedStocksListProps {\n  selectedStocks: StocksSelectOption[];\n  handleDeselectStock: (stock: StocksSelectOption) => void;\n}\n\nfunction NoStocksSelected() {\n  return (\n    <div\n      className={`\n        mt-5 text-gray-500\n\n        dark:text-gray-400\n      `}\n    >\n      No stocks selected.\n    </div>\n  );\n}\n\nfunction SelectedStocksList({\n  selectedStocks,\n  handleDeselectStock,\n}: SelectedStocksListProps) {\n  if (!selectedStocks?.length) return <NoStocksSelected />;\n\n  return (\n    <ul className=\"space-y-2\">\n      {selectedStocks.map((stock) => (\n        <li\n          key={stock.value}\n          className={`\n            flex items-center justify-between text-gray-800\n\n            dark:text-gray-200\n          `}\n        >\n          {stock.label}\n          <Button\n            onClick={() => handleDeselectStock(stock)}\n            variant=\"ghost\"\n            size=\"icon\"\n          >\n            <X\n              className={`\n                size-4 text-gray-500\n\n                dark:text-gray-400\n              `}\n            />\n          </Button>\n        </li>\n      ))}\n    </ul>\n  );\n}\n\nexport default SelectedStocksList;\n"
+        }
+    ]
+}

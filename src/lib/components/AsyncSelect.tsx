@@ -1,5 +1,6 @@
 import type { GroupBase, StylesConfig } from 'react-select';
 import AsyncReactSelect, { type AsyncProps } from 'react-select/async';
+
 export type AsyncSelectProps<
   Option = unknown,
   IsMulti extends boolean = false,
@@ -10,17 +11,30 @@ const customStyles: StylesConfig<any, any, any> = {
   control: (provided, state) => ({
     ...provided,
     borderColor: state.isFocused ? 'hsl(var(--ring))' : 'hsl(var(--border))',
-    borderRadius: '0.5rem',
+    borderRadius: 'var(--radius)',
     boxShadow: state.isFocused ? '0 0 0 1px hsl(var(--ring))' : '',
     '&:hover': {
       borderColor: 'hsl(var(--ring))',
     },
-    backgroundColor: 'hsl(var(--background))',
-    color: 'hsl(var(--foreground))',
+    backgroundColor: state.isDisabled
+      ? 'hsl(var(--input))'
+      : 'hsl(var(--background))',
+    color: state.isDisabled
+      ? 'hsl(var(--muted-foreground))'
+      : 'hsl(var(--foreground))',
+    opacity: state.isDisabled ? 0.9 : 1,
+    '.dark &': {
+      backgroundColor: state.isDisabled
+        ? 'hsl(var(--muted))'
+        : 'hsl(var(--background))',
+      color: state.isDisabled
+        ? 'hsl(var(--muted-foreground))'
+        : 'hsl(var(--foreground))',
+    },
   }),
   menu: (provided) => ({
     ...provided,
-    borderRadius: '0.5rem',
+    borderRadius: 'var(--radius)',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
     backgroundColor: 'hsl(var(--popover))',
   }),
@@ -51,17 +65,38 @@ const customStyles: StylesConfig<any, any, any> = {
       },
     },
   }),
-  singleValue: (provided) => ({
+  singleValue: (provided, state) => ({
     ...provided,
-    color: 'hsl(var(--foreground))',
+    color: state.isDisabled
+      ? 'hsl(var(--muted-foreground))'
+      : 'hsl(var(--foreground))',
+    '.dark &': {
+      color: state.isDisabled
+        ? 'hsl(var(--muted-foreground))'
+        : 'hsl(var(--foreground))',
+    },
   }),
-  input: (provided) => ({
+  input: (provided, state) => ({
     ...provided,
-    color: 'hsl(var(--foreground))',
+    color: state.isDisabled
+      ? 'hsl(var(--muted-foreground))'
+      : 'hsl(var(--foreground))',
+    '.dark &': {
+      color: state.isDisabled
+        ? 'hsl(var(--muted-foreground))'
+        : 'hsl(var(--foreground))',
+    },
   }),
-  placeholder: (provided) => ({
+  placeholder: (provided, state) => ({
     ...provided,
-    color: 'hsl(var(--muted-foreground))',
+    color: state.isDisabled
+      ? 'hsl(var(--muted-foreground))'
+      : 'hsl(var(--muted-foreground))',
+    '.dark &': {
+      color: state.isDisabled
+        ? 'hsl(var(--muted-foreground))'
+        : 'hsl(var(--muted-foreground))',
+    },
   }),
   dropdownIndicator: (provided, state) => ({
     ...provided,
@@ -81,6 +116,7 @@ const customStyles: StylesConfig<any, any, any> = {
     },
   }),
 };
+
 function AsyncSelect<
   Option,
   IsMulti extends boolean,

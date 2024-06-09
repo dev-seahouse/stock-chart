@@ -1,4 +1,5 @@
 import { http, HttpResponse } from 'msw';
+import { appleStockAggregates } from '@/mocks/aggregates.mock.ts';
 
 export const handlers = [
   http.get('https://api.polygon.io/v3/reference/tickers', ({ request }) => {
@@ -17,11 +18,20 @@ export const handlers = [
       );
     }
 
-    const results =
-      search?.toLowerCase() === 'apple'
-        ? [{ ticker: 'AAPL', name: 'Apple Inc.' }]
-        : [];
+    const results = [
+      { ticker: 'AAPL', name: 'Apple Inc.' },
+      { ticker: 'GOOGL', name: 'Alphabet Inc.' },
+      { ticker: 'TSLA', name: 'Tesla Inc.' },
+    ].filter((stock) =>
+      stock.name.toLowerCase().includes(search?.toLowerCase() || ''),
+    );
 
     return HttpResponse.json({ results });
   }),
+  http.get(
+    'https://api.polygon.io/v2/aggs/ticker/:ticker/range/:multiplier/:timespan/:from/:to',
+    () => {
+      return HttpResponse.json(appleStockAggregates);
+    },
+  ),
 ];

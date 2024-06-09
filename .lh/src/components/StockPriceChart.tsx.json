@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 65,
+            "activePatchIndex": 78,
             "patches": [
                 {
                     "date": 1717776816552,
@@ -268,6 +268,58 @@
                 {
                     "date": 1717832108297,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n \n export type StockPriceType = 'open' | 'high' | 'low' | 'close';\n \n interface StockPriceChartProps {\n-  selectedTickers: string[]; \n+  selectedTickers: string[];\n   dateRange: { start: string; end: string };\n   priceType: StockPriceType;\n }\n \n"
+                },
+                {
+                    "date": 1717832142549,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,8 +45,14 @@\n   selectedTickers,\n   dateRange,\n   priceType,\n }) => {\n+  const [chartOptions, setChartOptions] = useState<Highcharts.Options>({\n+    title: { text: 'Stock Prices' },\n+    xAxis: { type: 'datetime' },\n+    series: [],\n+  });\n+\n   const queries = useQueries({\n     queries: selectedTickers.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n"
+                },
+                {
+                    "date": 1717832192716,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import React from 'react';\n+import React, { useState } from 'react';\n import Highcharts from 'highcharts';\n import HighchartsReact from 'highcharts-react-official';\n import { useQueries } from '@tanstack/react-query';\n import AggregatesService from '@/api/services/Aggregates';\n"
+                },
+                {
+                    "date": 1717832211817,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,8 +51,17 @@\n     xAxis: { type: 'datetime' },\n     series: [],\n   });\n \n+  const handleSuccess = (\n+    newSeries: { name: string; data: { x: number; y: number }[] }[],\n+  ) => {\n+    setChartOptions((prevOptions) => ({\n+      ...prevOptions,\n+      series: [...prevOptions.series, ...newSeries],\n+    }));\n+  };\n+\n   const queries = useQueries({\n     queries: selectedTickers.map((stock) => ({\n       queryKey: ['aggregates', stock, dateRange, priceType],\n       queryFn: () => fetchStockData(stock, dateRange, priceType),\n"
+                },
+                {
+                    "date": 1717832217703,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,8 @@\n   const handleSuccess = (\n     newSeries: { name: string; data: { x: number; y: number }[] }[],\n   ) => {\n     setChartOptions((prevOptions) => ({\n-      ...prevOptions,\n       series: [...prevOptions.series, ...newSeries],\n     }));\n   };\n \n"
+                },
+                {
+                    "date": 1717832240485,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,11 +54,9 @@\n \n   const handleSuccess = (\n     newSeries: { name: string; data: { x: number; y: number }[] }[],\n   ) => {\n-    setChartOptions((prevOptions) => ({\n-      series: [...prevOptions.series, ...newSeries],\n-    }));\n+    setChartOptions\n   };\n \n   const queries = useQueries({\n     queries: selectedTickers.map((stock) => ({\n"
+                },
+                {
+                    "date": 1717832246489,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n \n   const handleSuccess = (\n     newSeries: { name: string; data: { x: number; y: number }[] }[],\n   ) => {\n-    setChartOptions\n+    setChartOptions()\n   };\n \n   const queries = useQueries({\n     queries: selectedTickers.map((stock) => ({\n"
+                },
+                {
+                    "date": 1717832255401,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,11 @@\n \n   const handleSuccess = (\n     newSeries: { name: string; data: { x: number; y: number }[] }[],\n   ) => {\n-    setChartOptions()\n+    setChartOptions({\n+      series: newSeries,\n+    });\n   };\n \n   const queries = useQueries({\n     queries: selectedTickers.map((stock) => ({\n"
+                },
+                {
+                    "date": 1717832275720,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,9 @@\n     series: [],\n   });\n \n   const handleSuccess = (\n-    newSeries: { name: string; data: { x: number; y: number }[] }[],\n+    newSeries: { name: string; data: { x: number; y: number }[] },\n   ) => {\n     setChartOptions({\n       series: newSeries,\n     });\n"
+                },
+                {
+                    "date": 1717832286193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,11 +51,9 @@\n     xAxis: { type: 'datetime' },\n     series: [],\n   });\n \n-  const handleSuccess = (\n-    newSeries: { name: string; data: { x: number; y: number }[] },\n-  ) => {\n+  const handleSuccess = (newSeries: { x: number; y: number }[]) => {\n     setChartOptions({\n       series: newSeries,\n     });\n   };\n"
+                },
+                {
+                    "date": 1717832309968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,12 +51,12 @@\n     xAxis: { type: 'datetime' },\n     series: [],\n   });\n \n-  const handleSuccess = (newSeries: { x: number; y: number }[]) => {\n-    setChartOptions({\n-      series: newSeries,\n-    });\n+  const handleSuccess = (\n+    newSeries: { name: string; data: { x: number; y: number }[] }[],\n+  ) => {\n+\n   };\n \n   const queries = useQueries({\n     queries: selectedTickers.map((stock) => ({\n"
+                },
+                {
+                    "date": 1717832320345,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n \n   const handleSuccess = (\n     newSeries: { name: string; data: { x: number; y: number }[] }[],\n   ) => {\n-\n+    setChartOptions({});\n   };\n \n   const queries = useQueries({\n     queries: selectedTickers.map((stock) => ({\n"
+                },
+                {
+                    "date": 1717832332029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,11 @@\n \n   const handleSuccess = (\n     newSeries: { name: string; data: { x: number; y: number }[] }[],\n   ) => {\n-    setChartOptions({});\n+    setChartOptions({\n+      series: newSeries,\n+    });\n   };\n \n   const queries = useQueries({\n     queries: selectedTickers.map((stock) => ({\n"
+                },
+                {
+                    "date": 1717832369896,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,9 @@\n     series: [],\n   });\n \n   const handleSuccess = (\n-    newSeries: Highcharts.series,\n+    newSeries: Highcharts.serie,\n   ) => {\n     setChartOptions({\n       series: newSeries,\n     });\n"
                 }
             ],
             "date": 1717776816551,

@@ -1,0 +1,54 @@
+{
+    "sourceFile": "src/testing/createWrapper.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1717901067911,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717901438638,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,7 @@\n+\n+\n+\n export const createWrapper = () => {\n   const queryClient = new QueryClient();\n   return ({ children }: { children: React.ReactNode }) => (\n     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>\n"
+                },
+                {
+                    "date": 1717901473159,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,6 @@\n \n-\n-\n+/* for testing react hooks */\n export const createWrapper = () => {\n   const queryClient = new QueryClient();\n   return ({ children }: { children: React.ReactNode }) => (\n     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>\n"
+                },
+                {
+                    "date": 1717901488501,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,10 @@\n+import { QueryClient } from '@tanstack/react-query';\n+import type { ReactNode } from 'react';\n \n /* for testing react hooks */\n export const createWrapper = () => {\n   const queryClient = new QueryClient();\n-  return ({ children }: { children: React.ReactNode }) => (\n+  return ({ children }: { children: ReactNode }) => (\n     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>\n   );\n };\n"
+                },
+                {
+                    "date": 1717901500329,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { QueryClient } from '@tanstack/react-query';\n+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';\n import type { ReactNode } from 'react';\n \n /* for testing react hooks */\n export const createWrapper = () => {\n"
+                },
+                {
+                    "date": 1717901523623,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,13 @@\n import { QueryClient, QueryClientProvider } from '@tanstack/react-query';\n import type { ReactNode } from 'react';\n+import { testingQueryOptions } from './testingQueryConfig';\n \n /* for testing react hooks */\n export const createWrapper = () => {\n-  const queryClient = new QueryClient();\n+  const queryClient = new QueryClient({\n+    testingQueryOptions,\n+  });\n   return ({ children }: { children: ReactNode }) => (\n     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>\n   );\n };\n"
+                },
+                {
+                    "date": 1717901530802,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,11 +3,9 @@\n import { testingQueryOptions } from './testingQueryConfig';\n \n /* for testing react hooks */\n export const createWrapper = () => {\n-  const queryClient = new QueryClient({\n-    testingQueryOptions,\n-  });\n+  const queryClient = new QueryClient(testingQueryOptions);\n   return ({ children }: { children: ReactNode }) => (\n     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>\n   );\n };\n"
+                },
+                {
+                    "date": 1717901536907,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n \n /* for testing react hooks */\n export const createWrapper = () => {\n   const queryClient = new QueryClient(testingQueryOptions);\n+\n   return ({ children }: { children: ReactNode }) => (\n     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>\n   );\n };\n"
+                },
+                {
+                    "date": 1717901580945,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n /* for testing react hooks */\n export const createWrapper = () => {\n   const queryClient = new QueryClient(testingQueryOptions);\n \n+  // eslint-disable-next-line react/display-name\n   return ({ children }: { children: ReactNode }) => (\n     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>\n   );\n };\n"
+                },
+                {
+                    "date": 1717901599493,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,7 +7,10 @@\n   const queryClient = new QueryClient(testingQueryOptions);\n \n   // eslint-disable-next-line react/display-name\n   return ({ children }: { children: ReactNode }) => (\n+    <ThemeProvider defaultTheme=\"light\" storageKey=\"stock-chart-theme-test\">\n+\n     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>\n+    </ThemeProvider>\n   );\n };\n"
+                }
+            ],
+            "date": 1717901067911,
+            "name": "Commit-0",
+            "content": "export const createWrapper = () => {\n  const queryClient = new QueryClient();\n  return ({ children }: { children: React.ReactNode }) => (\n    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>\n  );\n};\n"
+        }
+    ]
+}

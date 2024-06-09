@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/components/StocksChartSection/StocksPriceChart/StocksPriceChart.test.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1717870011303,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717870039783,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,5 @@\n import { it } from \"vitest\";\n \n-it('renders')\n\\ No newline at end of file\n+it('renders without error', ()=> {\n+    renderWith\n+})\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1717870053020,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n+import renderWithProviders from \"@/testing/renderWithProviders\";\n import { it } from \"vitest\";\n \n it('renders without error', ()=> {\n-    renderWith\n+    renderWithProviders(<StocksPriceChart />)\n })\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1717870011303,
+            "name": "Commit-0",
+            "content": "import { it } from \"vitest\";\n\nit('renders')"
+        }
+    ]
+}

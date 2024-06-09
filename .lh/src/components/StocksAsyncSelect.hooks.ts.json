@@ -1,0 +1,38 @@
+{
+    "sourceFile": "src/components/StocksAsyncSelect.hooks.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1717836086627,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717836091967,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,4 +13,25 @@\n     gcTime: 10 * 60 * 1000, // 10 minutes\n   });\n };\n \n+const fetchTickers = async (\n+  search: string,\n+  signal?: AbortSignal,\n+): Promise<StocksSelectOption[]> => {\n+  const queryParams = {\n+    search,\n+    locale: 'us',\n+    limit: 20, // max 20 results\n+    market: 'stocks',\n+    type: 'CS',\n+  };\n+  try {\n+    const response = await TickersService.tickers(queryParams, signal);\n+    return response.data.results.map((ticker) => ({\n+      label: `${ticker.name} (${ticker.ticker})`,\n+      value: ticker.ticker,\n+    }));\n+  } catch (e) {\n+    throw new Error(e as string);\n+  }\n+};\n"
+                },
+                {
+                    "date": 1717836129688,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { useQuery } from \"@tanstack/react-query\";\n \n-export const useFetchTickers = (search: string) => {\n+const useFetchTickers = (search: string) => {\n   return useQuery({\n     queryKey: ['tickers', search],\n     queryFn: ({ signal }) => fetchTickers(search, signal),\n     enabled: !!search,\n@@ -34,4 +34,7 @@\n   } catch (e) {\n     throw new Error(e as string);\n   }\n };\n+\n+\n+export default useFetchTickers;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1717836152697,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n-import { useQuery } from \"@tanstack/react-query\";\n+import { useQuery } from '@tanstack/react-query';\n \n-const useFetchTickers = (search: string) => {\n+export const useFetchTickers = (search: string) => {\n   return useQuery({\n     queryKey: ['tickers', search],\n     queryFn: ({ signal }) => fetchTickers(search, signal),\n     enabled: !!search,\n@@ -13,9 +13,9 @@\n     gcTime: 10 * 60 * 1000, // 10 minutes\n   });\n };\n \n-const fetchTickers = async (\n+export const fetchTickers = async (\n   search: string,\n   signal?: AbortSignal,\n ): Promise<StocksSelectOption[]> => {\n   const queryParams = {\n@@ -35,6 +35,5 @@\n     throw new Error(e as string);\n   }\n };\n \n-\n-export default useFetchTickers;\n\\ No newline at end of file\n+export default useFetchTickers;\n"
+                },
+                {
+                    "date": 1717836183014,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import { useQuery } from '@tanstack/react-query';\n+import type { StocksSelectOption } from './StocksAsyncSelect';\n \n export const useFetchTickers = (search: string) => {\n   return useQuery({\n     queryKey: ['tickers', search],\n"
+                },
+                {
+                    "date": 1717836234008,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import { useQuery } from '@tanstack/react-query';\n+import TickersService from '@/api/services/Tickers';\n import type { StocksSelectOption } from './StocksAsyncSelect';\n \n export const useFetchTickers = (search: string) => {\n   return useQuery({\n"
+                }
+            ],
+            "date": 1717836086627,
+            "name": "Commit-0",
+            "content": "import { useQuery } from \"@tanstack/react-query\";\n\nexport const useFetchTickers = (search: string) => {\n  return useQuery({\n    queryKey: ['tickers', search],\n    queryFn: ({ signal }) => fetchTickers(search, signal),\n    enabled: !!search,\n    retry: false,\n    retryOnMount: false,\n    refetchOnWindowFocus: false,\n    refetchOnMount: false,\n    staleTime: 5 * 60 * 1000, // 5 minutes\n    gcTime: 10 * 60 * 1000, // 10 minutes\n  });\n};\n\n"
+        }
+    ]
+}

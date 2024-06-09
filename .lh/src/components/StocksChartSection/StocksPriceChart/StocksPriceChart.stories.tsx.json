@@ -1,0 +1,58 @@
+{
+    "sourceFile": "src/components/StocksChartSection/StocksPriceChart/StocksPriceChart.stories.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1717866246644,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717866275451,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n export default {\n   title: 'components/StocksPriceChart',\n   component: StockPriceChart,\n   args: {\n-    selectedTickers: undefined, //TODO: Implement prop\n+    selectedTickers: [k], //TODO: Implement prop\n     dateRange: undefined, //TODO: Implement prop\n     priceType: undefined, //TODO: Implement prop\n   },\n } as Meta<typeof StockPriceChart>;\n"
+                },
+                {
+                    "date": 1717866500765,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n export default {\n   title: 'components/StocksPriceChart',\n   component: StockPriceChart,\n   args: {\n-    selectedTickers: [k], //TODO: Implement prop\n+    selectedTickers: [], //TODO: Implement prop\n     dateRange: undefined, //TODO: Implement prop\n     priceType: undefined, //TODO: Implement prop\n   },\n } as Meta<typeof StockPriceChart>;\n"
+                },
+                {
+                    "date": 1717866574929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,14 @@\n \n export default {\n   title: 'components/StocksPriceChart',\n   component: StockPriceChart,\n+  argTypes: {\n+    priceType: {\n+      control: 'radio',\n+      options: ['high'],\n+    },\n+  },\n   args: {\n     selectedTickers: [], //TODO: Implement prop\n     dateRange: undefined, //TODO: Implement prop\n     priceType: undefined, //TODO: Implement prop\n"
+                },
+                {
+                    "date": 1717866584903,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   component: StockPriceChart,\n   argTypes: {\n     priceType: {\n       control: 'radio',\n-      options: ['high'],\n+      options: ['high', 'low', 'open', 'close'],\n     },\n   },\n   args: {\n     selectedTickers: [], //TODO: Implement prop\n"
+                },
+                {
+                    "date": 1717866594737,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n   argTypes: {\n     priceType: {\n       control: 'radio',\n       options: ['high', 'low', 'open', 'close'],\n+      defaultValue: 'open',\n     },\n   },\n   args: {\n     selectedTickers: [], //TODO: Implement prop\n"
+                },
+                {
+                    "date": 1717866612928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,11 @@\n       control: 'radio',\n       options: ['high', 'low', 'open', 'close'],\n       defaultValue: 'open',\n     },\n+    dateRange: {\n+      control: 'date',\n+    },\n   },\n   args: {\n     selectedTickers: [], //TODO: Implement prop\n     dateRange: undefined, //TODO: Implement prop\n"
+                },
+                {
+                    "date": 1717866671922,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,15 +10,15 @@\n       control: 'radio',\n       options: ['high', 'low', 'open', 'close'],\n       defaultValue: 'open',\n     },\n-    dateRange: {\n-      control: 'date',\n-    },\n   },\n   args: {\n     selectedTickers: [], //TODO: Implement prop\n-    dateRange: undefined, //TODO: Implement prop\n+    dateRange: {\n+      start: '2021-01-01',\n+      end: '2022-01-01',\n+    }, //TODO: Implement prop\n     priceType: undefined, //TODO: Implement prop\n   },\n } as Meta<typeof StockPriceChart>;\n \n"
+                },
+                {
+                    "date": 1717866687449,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,14 +12,14 @@\n       defaultValue: 'open',\n     },\n   },\n   args: {\n-    selectedTickers: [], //TODO: Implement prop\n+    selectedTickers: [],\n     dateRange: {\n       start: '2021-01-01',\n       end: '2022-01-01',\n-    }, //TODO: Implement prop\n-    priceType: undefined, //TODO: Implement prop\n+    },\n+    priceType: undefined,\n   },\n } as Meta<typeof StockPriceChart>;\n \n type Story = StoryObj<typeof StockPriceChart>;\n"
+                },
+                {
+                    "date": 1717902243939,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,18 +12,21 @@\n       defaultValue: 'open',\n     },\n   },\n   args: {\n-    selectedTickers: [],\n+    selectedTickers: ['apple'],\n     dateRange: {\n-      start: '2021-01-01',\n-      end: '2022-01-01',\n+      start: '2023-01-01',\n+      end: '2024-06-22',\n     },\n-    priceType: undefined,\n+    priceType: \"open\",\n   },\n } as Meta<typeof StockPriceChart>;\n \n type Story = StoryObj<typeof StockPriceChart>;\n \n+// type Apple in the dropdown to see search result\n export const Default: Story = {\n-  args: {},\n+  args: {\n+    priceType: 'open',\n+  },\n };\n"
+                },
+                {
+                    "date": 1717902249004,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,8 @@\n     dateRange: {\n       start: '2023-01-01',\n       end: '2024-06-22',\n     },\n-    priceType: \"open\",\n   },\n } as Meta<typeof StockPriceChart>;\n \n type Story = StoryObj<typeof StockPriceChart>;\n"
+                }
+            ],
+            "date": 1717866246644,
+            "name": "Commit-0",
+            "content": "import { StoryObj, Meta } from '@storybook/react';\n\nimport StockPriceChart from './StocksPriceChart';\n\nexport default {\n  title: 'components/StocksPriceChart',\n  component: StockPriceChart,\n  args: {\n    selectedTickers: undefined, //TODO: Implement prop\n    dateRange: undefined, //TODO: Implement prop\n    priceType: undefined, //TODO: Implement prop\n  },\n} as Meta<typeof StockPriceChart>;\n\ntype Story = StoryObj<typeof StockPriceChart>;\n\nexport const Default: Story = {\n  args: {},\n};\n"
+        }
+    ]
+}

@@ -36,9 +36,11 @@ export function renderWithProviders(
     ...result,
     rerender: (rerenderUi: React.ReactElement) =>
       rerender(
-        <ReactQueryProvider overrideQueryClient={client}>
-          {rerenderUi}
-        </ReactQueryProvider>,
+        <ThemeProvider defaultTheme="light" storageKey="stock-chart-theme-test">
+          <ReactQueryProvider overrideQueryClient={client}>
+            {rerenderUi}
+          </ReactQueryProvider>
+        </ThemeProvider>,
       ),
   };
 }

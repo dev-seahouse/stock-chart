@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1717755279914,
@@ -16,6 +16,14 @@
                 {
                     "date": 1717756358178,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,10 @@\n     \"resolveJsonModule\": true,\n     \"isolatedModules\": true,\n     \"noEmit\": true,\n     \"jsx\": \"react-jsx\",\n+    \"esModuleInterop\": true,\n+    \"allowSyntheticDefaultImports\": true,\n \n     /* Linting */\n     \"strict\": true,\n     \"noUnusedLocals\": true,\n"
+                },
+                {
+                    "date": 1717896798550,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,10 @@\n     /* ShadCn*/\n     \"baseUrl\": \".\",\n     \"paths\": {\n       \"@/*\": [\"./src/*\"]\n-    }\n+    },\n+    \"types\": [\"vite/client\", \"vitest/globals\"]\n   },\n   \"include\": [\"src\"],\n   \"references\": [{ \"path\": \"./tsconfig.node.json\" }]\n }\n"
+                },
+                {
+                    "date": 1717897022172,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n     \"baseUrl\": \".\",\n     \"paths\": {\n       \"@/*\": [\"./src/*\"]\n     },\n-    \"types\": [\"vite/client\", \"vitest/globals\"]\n+    \"types\": [\"vite/client\"]\n   },\n   \"include\": [\"src\"],\n   \"references\": [{ \"path\": \"./tsconfig.node.json\" }]\n }\n"
                 }
             ],
             "date": 1717755279913,

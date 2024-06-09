@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/testing/renderWithProviders.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1717900953929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717900960292,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,13 +35,13 @@\n   return {\n     ...result,\n     rerender: (rerenderUi: React.ReactElement) =>\n       rerender(\n-    <ThemeProvider defaultTheme=\"light\" storageKey=\"stock-chart-theme-test\"></ThemeProvider>\n-        <ReactQueryProvider overrideQueryClient={client}>\n-          {rerenderUi}\n-        </ReactQueryProvider>,\n-        \n+        <ThemeProvider defaultTheme=\"light\" storageKey=\"stock-chart-theme-test\">\n+          <ReactQueryProvider overrideQueryClient={client}>\n+            {rerenderUi}\n+          </ReactQueryProvider>\n+        </ThemeProvider>,\n       ),\n   };\n }\n \n"
+                }
+            ],
+            "date": 1717900953929,
+            "name": "Commit-0",
+            "content": "import ReactQueryProvider from '@/providers/ReactQueryProvider';\nimport { QueryClient } from '@tanstack/react-query';\nimport { render, type RenderOptions } from '@testing-library/react';\nimport type React from 'react';\n\nimport ThemeProvider from '@/providers/ThemeProvider';\nimport { testingQueryOptions } from './testingQueryConfig';\n\ninterface RenderWithProvidersOptions extends Omit<RenderOptions, 'warpper'> {\n  queryClient?: QueryClient;\n}\n\n/**\nWhy render twice? @see https://github.com/TanStack/query/blob/ead2e5dd5237f3d004b66316b5f36af718286d2d/src/react/tests/utils.tsx#L6-L17\n1. The `renderWithProviders` function is called with a UI component and some options.\n2. The UI component is rendered inside a `ReactQueryProvider` (which should be `QueryClientProvider` based on the context) \nand the result of the render (including various utility functions like `rerender`) is stored.\n3. A new object is returned that includes all the original render result utilities, but with a modified `rerender` function.\n4. This modified `rerender` function takes a new UI component, and re-renders it inside the `QueryClientProvider`. \nThis ensures that the component is always rendered with the necessary context, even when it is re-rendered with new props.\n */\nexport function renderWithProviders(\n  ui: React.ReactElement,\n  options?: RenderWithProvidersOptions,\n) {\n  // each test its own QueryClientProvider and create a new QueryClient for each test.\n  //  That way, tests are completely isolated from each other.\n  const client = options?.queryClient ?? new QueryClient(testingQueryOptions);\n  const { rerender, ...result } = render(\n    <ThemeProvider defaultTheme=\"light\" storageKey=\"stock-chart-theme-test\">\n      <ReactQueryProvider overrideQueryClient={client}>{ui}</ReactQueryProvider>\n    </ThemeProvider>,\n    options,\n  );\n  return {\n    ...result,\n    rerender: (rerenderUi: React.ReactElement) =>\n      rerender(\n    <ThemeProvider defaultTheme=\"light\" storageKey=\"stock-chart-theme-test\"></ThemeProvider>\n        <ReactQueryProvider overrideQueryClient={client}>\n          {rerenderUi}\n        </ReactQueryProvider>,\n        \n      ),\n  };\n}\n\nexport default renderWithProviders;\n"
+        }
+    ]
+}

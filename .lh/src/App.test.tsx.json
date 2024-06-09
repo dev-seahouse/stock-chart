@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 9,
+            "activePatchIndex": 10,
             "patches": [
                 {
                     "date": 1717753290593,
@@ -44,6 +44,10 @@
                 {
                     "date": 1717758571257,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,17 +4,11 @@\n import { screen } from '@testing-library/react';\n \n // smoke test\n it('should render without error', async () => {\n-  // eslint-disable-next-line @typescript-eslint/require-await\n-  // it is wrapped in act and async because otherwise\n-  // Warning: An update to ForwardRef inside a test was not wrapped in act(...).\n   renderWithProviders(<App />);\n });\n \n it('should have stock price chart text', async () => {\n-  // eslint-disable-next-line @typescript-eslint/require-await\n-  // it is wrapped in act and async because otherwise\n-  // Warning: An update to ForwardRef inside a test was not wrapped in act(...).\n   renderWithProviders(<App />);\n   expect(screen.getByText(/stock price chart/i)).toBeVisible();\n });\n"
+                },
+                {
+                    "date": 1717871476181,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,15 @@\n+import { expect, it } from 'vitest';\n+import App from './App';\n+import renderWithProviders from './testing/renderWithProviders';\n+import { screen } from '@testing-library/react';\n+\n+// smoke test\n+it('should render without error', () => {\n+  renderWithProviders(<App />);\n+});\n+\n+it('should render app name', () => {\n+  renderWithProviders(<App />);\n+  const appName = import.meta.env.VITE_APP_TITLE;\n+  expect(screen.getByText(appName)).toBeVisible();\n+});\n"
                 }
             ],
             "date": 1717753290593,

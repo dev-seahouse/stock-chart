@@ -1,0 +1,158 @@
+{
+    "sourceFile": "src/components/StocksChartSection/StocksPriceChart/StocksPriceChart.test.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 35,
+            "patches": [
+                {
+                    "date": 1717870069429,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717870076590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,6 @@\n import { it } from 'vitest';\n import StocksPriceChart from './StocksPriceChart';\n \n it('renders without error', () => {\n-  renderWithProviders(<StocksPriceChart />);\n+  renderWithProviders(<StocksPriceChart  />);\n });\n"
+                },
+                {
+                    "date": 1717870086626,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,6 @@\n import { it } from 'vitest';\n import StocksPriceChart from './StocksPriceChart';\n \n it('renders without error', () => {\n-  renderWithProviders(<StocksPriceChart  />);\n+  renderWithProviders(<StocksPriceChart selectedTickers={['apple']} />);\n });\n"
+                },
+                {
+                    "date": 1717870143702,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,12 @@\n import { it } from 'vitest';\n import StocksPriceChart from './StocksPriceChart';\n \n it('renders without error', () => {\n-  renderWithProviders(<StocksPriceChart selectedTickers={['apple']} />);\n+  renderWithProviders(\n+    <StocksPriceChart\n+      selectedTickers={['apple']}\n+      priceType=\"open\"\n+      dateRange={{ start: '2023-01-01', end: '2024-06-22' }}\n+    />,\n+  );\n });\n"
+                },
+                {
+                    "date": 1717870217017,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,4 +10,18 @@\n       dateRange={{ start: '2023-01-01', end: '2024-06-22' }}\n     />,\n   );\n });\n+\n+  it('renders the chart with data', async () => {\n+    renderWithClient(\n+      <StockPriceChart\n+        selectedTickers={['AAPL']}\n+        dateRange={{ start: '2023-01-01', end: '2024-01-01' }}\n+        priceType=\"open\"\n+      />,\n+    );\n+\n+    await waitFor(() =>\n+      expect(screen.getByText(/stock prices/i)).toBeInTheDocument(),\n+    );\n+  });\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1717870225758,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n   );\n });\n \n   it('renders the chart with data', async () => {\n-    renderWithClient(\n+    renderWithProviders(\n       <StockPriceChart\n         selectedTickers={['AAPL']}\n         dateRange={{ start: '2023-01-01', end: '2024-01-01' }}\n         priceType=\"open\"\n"
+                },
+                {
+                    "date": 1717870239529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,17 +11,15 @@\n     />,\n   );\n });\n \n-  it('renders the chart with data', async () => {\n-    renderWithProviders(\n-      <StockPriceChart\n-        selectedTickers={['AAPL']}\n-        dateRange={{ start: '2023-01-01', end: '2024-01-01' }}\n-        priceType=\"open\"\n-      />,\n-    );\n+it('renders the chart with data', async () => {\n+  renderWithProviders(\n+    <StocksPriceChart\n+      selectedTickers={['AAPL']}\n+      dateRange={{ start: '2023-01-01', end: '2024-01-01' }}\n\\ No newline at end of file\n+      priceType=\"open\"\n+    />,\n+  );\n \n-    await waitFor(() =>\n-      expect(screen.getByText(/stock prices/i)).toBeInTheDocument(),\n-    );\n-  });\n+  await screen.findByText(/stock prices/i);\n+});\n"
+                },
+                {
+                    "date": 1717870256071,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { it } from 'vitest';\n import StocksPriceChart from './StocksPriceChart';\n+import { screen } from '@testing-library/react';\n \n it('renders without error', () => {\n   renderWithProviders(\n     <StocksPriceChart\n@@ -21,5 +22,5 @@\n     />,\n   );\n \n   await screen.findByText(/stock prices/i);\n-});\n\\ No newline at end of file\n+});\n"
+                },
+                {
+                    "date": 1717870488148,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n \n it('renders without error', () => {\n   renderWithProviders(\n     <StocksPriceChart\n-      selectedTickers={['apple']}\n+      selectedTickers={['AAPL']}\n       priceType=\"open\"\n       dateRange={{ start: '2023-01-01', end: '2024-06-22' }}\n     />,\n   );\n"
+                },
+                {
+                    "date": 1717870494328,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,16 +11,4 @@\n       dateRange={{ start: '2023-01-01', end: '2024-06-22' }}\n     />,\n   );\n });\n-\n-it('renders the chart with data', async () => {\n-  renderWithProviders(\n-    <StocksPriceChart\n-      selectedTickers={['AAPL']}\n-      dateRange={{ start: '2023-01-01', end: '2024-01-01' }}\n-      priceType=\"open\"\n-    />,\n-  );\n-\n-  await screen.findByText(/stock prices/i);\n-});\n"
+                },
+                {
+                    "date": 1717870665193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { it } from 'vitest';\n import StocksPriceChart from './StocksPriceChart';\n-import { screen } from '@testing-library/react';\n \n it('renders without error', () => {\n   renderWithProviders(\n     <StocksPriceChart\n@@ -11,4 +10,16 @@\n       dateRange={{ start: '2023-01-01', end: '2024-06-22' }}\n     />,\n   );\n });\n+\n+it('renders the chart with data', async () => {\n+  renderWithProviders(\n+    <StocksPriceChart\n+      selectedTickers={['AAPL']}\n+      dateRange={{ start: '2023-01-01', end: '2024-01-01' }}\n+      priceType=\"open\"\n+    />,\n+  );\n+\n+  await screen.findByText(/highcharts mock/i);\n+});\n"
+                },
+                {
+                    "date": 1717870687308,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { it } from 'vitest';\n import StocksPriceChart from './StocksPriceChart';\n+import { screen } from '@testing-library/react';\n \n it('renders without error', () => {\n   renderWithProviders(\n     <StocksPriceChart\n"
+                },
+                {
+                    "date": 1717870836509,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n-import { it } from 'vitest';\n+import { it, vi } from 'vitest';\n import StocksPriceChart from './StocksPriceChart';\n import { screen } from '@testing-library/react';\n \n it('renders without error', () => {\n@@ -13,8 +13,13 @@\n   );\n });\n \n it('renders the chart with data', async () => {\n+  vi.mock('highcharts-react-official', () => {\n+    return {\n+      default: () => <div>Highcharts Mock</div>,\n+    };\n+  });\n   renderWithProviders(\n     <StocksPriceChart\n       selectedTickers={['AAPL']}\n       dateRange={{ start: '2023-01-01', end: '2024-01-01' }}\n"
+                },
+                {
+                    "date": 1717870905795,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     />,\n   );\n });\n \n-it('renders the chart with data', async () => {\n+it('renders with mocked ', async () => {\n   vi.mock('highcharts-react-official', () => {\n     return {\n       default: () => <div>Highcharts Mock</div>,\n     };\n"
+                },
+                {
+                    "date": 1717870910945,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     />,\n   );\n });\n \n-it('renders with mocked ', async () => {\n+it('renders with mocked Highcharts', async () => {\n   vi.mock('highcharts-react-official', () => {\n     return {\n       default: () => <div>Highcharts Mock</div>,\n     };\n"
+                },
+                {
+                    "date": 1717871452368,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,4 +28,21 @@\n   );\n \n   await screen.findByText(/highcharts mock/i);\n });\n+\n+  it('renders the chart with data', async () => {\n+    renderWithClient(\n+      <StockPriceChart\n+        selectedTickers={['AAPL']}\n+        dateRange={{ start: '2023-01-01', end: '2024-01-01' }}\n+        priceType=\"open\"\n+      />,\n+    );\n+\n+    await waitFor(() =>\n+      expect(screen.getByText(/Stock Prices/i)).toBeInTheDocument(),\n+    );\n+\n+    // Check if the chart contains data points\n+    expect(screen.getByText(/192.7089/i)).toBeInTheDocument();\n+  });\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1717871461462,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,20 +29,18 @@\n \n   await screen.findByText(/highcharts mock/i);\n });\n \n-  it('renders the chart with data', async () => {\n-    renderWithClient(\n-      <StockPriceChart\n-        selectedTickers={['AAPL']}\n-        dateRange={{ start: '2023-01-01', end: '2024-01-01' }}\n-        priceType=\"open\"\n-      />,\n-    );\n+it('renders the chart with data', async () => {\n+  renderWithProviders(\n+    <StocksPriceChart\n+      selectedTickers={['AAPL']}\n+      dateRange={{ start: '2023-01-01', end: '2024-01-01' }}\n+      priceType=\"open\"\n+    />,\n+  );\n\\ No newline at end of file\n \n-    await waitFor(() =>\n-      expect(screen.getByText(/Stock Prices/i)).toBeInTheDocument(),\n-    );\n+  await screen.findByText(/Stock Prices/i);\n \n-    // Check if the chart contains data points\n-    expect(screen.getByText(/192.7089/i)).toBeInTheDocument();\n-  });\n+  // Check if the chart contains data points\n+  expect(screen.getByText(/192.7089/i)).toBeInTheDocument();\n+});\n"
+                },
+                {
+                    "date": 1717871499975,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n-import { it, vi } from 'vitest';\n+import { expect, it, vi } from 'vitest';\n import StocksPriceChart from './StocksPriceChart';\n import { screen } from '@testing-library/react';\n \n it('renders without error', () => {\n@@ -42,5 +42,5 @@\n   await screen.findByText(/Stock Prices/i);\n \n   // Check if the chart contains data points\n   expect(screen.getByText(/192.7089/i)).toBeInTheDocument();\n-});\n\\ No newline at end of file\n+});\n"
+                },
+                {
+                    "date": 1717871538023,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,7 +40,6 @@\n   );\n \n   await screen.findByText(/Stock Prices/i);\n \n-  // Check if the chart contains data points\n   expect(screen.getByText(/192.7089/i)).toBeInTheDocument();\n });\n"
+                },
+                {
+                    "date": 1717871592048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,8 +27,9 @@\n     />,\n   );\n \n   await screen.findByText(/highcharts mock/i);\n+  vi.resetAllMocks();\n });\n \n it('renders the chart with data', async () => {\n   renderWithProviders(\n"
+                },
+                {
+                    "date": 1717871608409,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,8 @@\n     />,\n   );\n \n   await screen.findByText(/highcharts mock/i);\n-  vi.resetAllMocks();\n });\n \n it('renders the chart with data', async () => {\n   renderWithProviders(\n"
+                },
+                {
+                    "date": 1717896300188,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,18 +28,4 @@\n   );\n \n   await screen.findByText(/highcharts mock/i);\n });\n-\n-it('renders the chart with data', async () => {\n-  renderWithProviders(\n-    <StocksPriceChart\n-      selectedTickers={['AAPL']}\n-      dateRange={{ start: '2023-01-01', end: '2024-01-01' }}\n-      priceType=\"open\"\n-    />,\n-  );\n-\n-  await screen.findByText(/Stock Prices/i);\n-\n-  expect(screen.getByText(/192.7089/i)).toBeInTheDocument();\n-});\n"
+                },
+                {
+                    "date": 1717896312174,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n-import { expect, it, vi } from 'vitest';\n+import { it, vi } from 'vitest';\n import StocksPriceChart from './StocksPriceChart';\n import { screen } from '@testing-library/react';\n \n it('renders without error', () => {\n"
+                },
+                {
+                    "date": 1717896337696,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n     />,\n   );\n });\n \n+// need browser based testing e.g playwright to test\n it('renders with mocked Highcharts', async () => {\n   vi.mock('highcharts-react-official', () => {\n     return {\n       default: () => <div>Highcharts Mock</div>,\n"
+                },
+                {
+                    "date": 1717896348715,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     />,\n   );\n });\n \n-// need browser based testing e.g playwright to test\n+// need browser based testing e.g playwright to test actual\n it('renders with mocked Highcharts', async () => {\n   vi.mock('highcharts-react-official', () => {\n     return {\n       default: () => <div>Highcharts Mock</div>,\n"
+                },
+                {
+                    "date": 1717896383077,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,15 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { it, vi } from 'vitest';\n import StocksPriceChart from './StocksPriceChart';\n import { screen } from '@testing-library/react';\n+import { describe } from 'node:test';\n \n+\n+describe(\"StocksPriceChart\", ()=> {\n+\n+})\n+\n it('renders without error', () => {\n   renderWithProviders(\n     <StocksPriceChart\n       selectedTickers={['AAPL']}\n"
+                },
+                {
+                    "date": 1717896407720,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,38 +1,34 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n-import { it, vi } from 'vitest';\n+import { describe, it, vi } from 'vitest';\n import StocksPriceChart from './StocksPriceChart';\n import { screen } from '@testing-library/react';\n-import { describe } from 'node:test';\n \n+describe('StocksPriceChart', () => {\n+  it('renders without error', () => {\n+    renderWithProviders(\n+      <StocksPriceChart\n+        selectedTickers={['AAPL']}\n+        priceType=\"open\"\n+        dateRange={{ start: '2023-01-01', end: '2024-06-22' }}\n+      />,\n+    );\n+  });\n \n-describe(\"StocksPriceChart\", ()=> {\n+  // need browser based testing e.g playwright to test actual\n+  it('renders with mocked Highcharts', async () => {\n+    vi.mock('highcharts-react-official', () => {\n+      return {\n+        default: () => <div>Highcharts Mock</div>,\n+      };\n+    });\n+    renderWithProviders(\n+      <StocksPriceChart\n+        selectedTickers={['AAPL']}\n+        dateRange={{ start: '2023-01-01', end: '2024-01-01' }}\n+        priceType=\"open\"\n+      />,\n+    );\n \n-})\n-\n-it('renders without error', () => {\n-  renderWithProviders(\n-    <StocksPriceChart\n-      selectedTickers={['AAPL']}\n-      priceType=\"open\"\n-      dateRange={{ start: '2023-01-01', end: '2024-06-22' }}\n-    />,\n-  );\n-});\n-\n-// need browser based testing e.g playwright to test actual\n-it('renders with mocked Highcharts', async () => {\n-  vi.mock('highcharts-react-official', () => {\n-    return {\n-      default: () => <div>Highcharts Mock</div>,\n-    };\n+    await screen.findByText(/highcharts mock/i);\n   });\n-  renderWithProviders(\n-    <StocksPriceChart\n-      selectedTickers={['AAPL']}\n-      dateRange={{ start: '2023-01-01', end: '2024-01-01' }}\n-      priceType=\"open\"\n-    />,\n-  );\n-\n-  await screen.findByText(/highcharts mock/i);\n });\n"
+                },
+                {
+                    "date": 1717896435040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,11 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n-import { describe, it, vi } from 'vitest';\n+import { beforeAll, describe, it, vi } from 'vitest';\n import StocksPriceChart from './StocksPriceChart';\n import { screen } from '@testing-library/react';\n \n describe('StocksPriceChart', () => {\n+  beforeAll(() => {});\n   it('renders without error', () => {\n     renderWithProviders(\n       <StocksPriceChart\n         selectedTickers={['AAPL']}\n"
+                },
+                {
+                    "date": 1717896441085,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,15 @@\n import StocksPriceChart from './StocksPriceChart';\n import { screen } from '@testing-library/react';\n \n describe('StocksPriceChart', () => {\n-  beforeAll(() => {});\n+  beforeAll(() => {\n+    vi.mock('highcharts-react-official', () => {\n+      return {\n+        default: () => <div>Highcharts Mock</div>,\n+      };\n+    });\n+  });\n   it('renders without error', () => {\n     renderWithProviders(\n       <StocksPriceChart\n         selectedTickers={['AAPL']}\n@@ -16,13 +22,8 @@\n   });\n \n   // need browser based testing e.g playwright to test actual\n   it('renders with mocked Highcharts', async () => {\n-    vi.mock('highcharts-react-official', () => {\n-      return {\n-        default: () => <div>Highcharts Mock</div>,\n-      };\n-    });\n     renderWithProviders(\n       <StocksPriceChart\n         selectedTickers={['AAPL']}\n         dateRange={{ start: '2023-01-01', end: '2024-01-01' }}\n"
+                },
+                {
+                    "date": 1717896459898,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n-import { beforeAll, describe, it, vi } from 'vitest';\n+import { afterAll, beforeAll, describe, it, vi } from 'vitest';\n import StocksPriceChart from './StocksPriceChart';\n import { screen } from '@testing-library/react';\n \n describe('StocksPriceChart', () => {\n@@ -10,8 +10,9 @@\n         default: () => <div>Highcharts Mock</div>,\n       };\n     });\n   });\n+\n   it('renders without error', () => {\n     renderWithProviders(\n       <StocksPriceChart\n         selectedTickers={['AAPL']}\n"
+                },
+                {
+                    "date": 1717896483511,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,18 +1,23 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n-import { afterAll, beforeAll, describe, it, vi } from 'vitest';\n+import { afterAll, beforeAll, beforeEach, describe, it, vi } from 'vitest';\n import StocksPriceChart from './StocksPriceChart';\n import { screen } from '@testing-library/react';\n+import { afterEach } from 'node:test';\n \n describe('StocksPriceChart', () => {\n-  beforeAll(() => {\n+  beforeEach(() => {\n     vi.mock('highcharts-react-official', () => {\n       return {\n         default: () => <div>Highcharts Mock</div>,\n       };\n     });\n   });\n \n+  afterEach(() => {\n+    vi.resetAllMocks();\n+  });\n+\n   it('renders without error', () => {\n     renderWithProviders(\n       <StocksPriceChart\n         selectedTickers={['AAPL']}\n"
+                },
+                {
+                    "date": 1717896498615,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n-import { afterAll, beforeAll, beforeEach, describe, it, vi } from 'vitest';\n+import { beforeEach, describe, it, vi } from 'vitest';\n import StocksPriceChart from './StocksPriceChart';\n import { screen } from '@testing-library/react';\n import { afterEach } from 'node:test';\n \n"
+                },
+                {
+                    "date": 1717897117876,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,8 @@\n import StocksPriceChart from './StocksPriceChart';\n import { screen } from '@testing-library/react';\n import { afterEach } from 'node:test';\n \n-describe('StocksPriceChart', () => {\n   beforeEach(() => {\n     vi.mock('highcharts-react-official', () => {\n       return {\n         default: () => <div>Highcharts Mock</div>,\n"
+                },
+                {
+                    "date": 1717897128300,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,41 +1,40 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n-import { beforeEach, describe, it, vi } from 'vitest';\n+import { beforeEach, it, vi } from 'vitest';\n import StocksPriceChart from './StocksPriceChart';\n import { screen } from '@testing-library/react';\n import { afterEach } from 'node:test';\n \n-  beforeEach(() => {\n-    vi.mock('highcharts-react-official', () => {\n-      return {\n-        default: () => <div>Highcharts Mock</div>,\n-      };\n-    });\n+beforeEach(() => {\n+  vi.mock('highcharts-react-official', () => {\n+    return {\n+      default: () => <div>Highcharts Mock</div>,\n+    };\n   });\n+});\n \n-  afterEach(() => {\n-    vi.resetAllMocks();\n-  });\n+afterEach(() => {\n+  vi.resetAllMocks();\n+});\n \n-  it('renders without error', () => {\n-    renderWithProviders(\n-      <StocksPriceChart\n-        selectedTickers={['AAPL']}\n-        priceType=\"open\"\n-        dateRange={{ start: '2023-01-01', end: '2024-06-22' }}\n-      />,\n-    );\n-  });\n+it('renders without error', () => {\n+  renderWithProviders(\n+    <StocksPriceChart\n+      selectedTickers={['AAPL']}\n+      priceType=\"open\"\n+      dateRange={{ start: '2023-01-01', end: '2024-06-22' }}\n+    />,\n+  );\n+});\n \n-  // need browser based testing e.g playwright to test actual\n-  it('renders with mocked Highcharts', async () => {\n-    renderWithProviders(\n-      <StocksPriceChart\n-        selectedTickers={['AAPL']}\n-        dateRange={{ start: '2023-01-01', end: '2024-01-01' }}\n-        priceType=\"open\"\n-      />,\n-    );\n+// need browser based testing e.g playwright to test actual\n+it('renders with mocked Highcharts', async () => {\n+  renderWithProviders(\n+    <StocksPriceChart\n+      selectedTickers={['AAPL']}\n+      dateRange={{ start: '2023-01-01', end: '2024-01-01' }}\n+      priceType=\"open\"\n+    />,\n+  );\n \n-    await screen.findByText(/highcharts mock/i);\n-  });\n+  await screen.findByText(/highcharts mock/i);\n });\n"
+                },
+                {
+                    "date": 1717897156865,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n   });\n });\n \n afterEach(() => {\n-  vi.resetAllMocks();\n+  vi.clearAllMocks();\n });\n \n it('renders without error', () => {\n   renderWithProviders(\n"
+                },
+                {
+                    "date": 1717897190927,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { afterAll, beforeEach, it, vi } from 'vitest';\n import StocksPriceChart from './StocksPriceChart';\n import { screen } from '@testing-library/react';\n-import { afterEach } from 'node:test';\n \n beforeEach(() => {\n   vi.mock('highcharts-react-official', () => {\n     return {\n"
+                }
+            ],
+            "date": 1717870069429,
+            "name": "Commit-0",
+            "content": "import renderWithProviders from '@/testing/renderWithProviders';\nimport { it } from 'vitest';\nimport StocksPriceChart from './StocksPriceChart';\n\nit('renders without error', () => {\n  renderWithProviders(<StocksPriceChart />);\n});\n"
+        }
+    ]
+}

@@ -1,4 +1,4 @@
-import AppHeader from '@/components/AppHeader';
+import AppHeader from '@/components/AppHeader/AppHeader';
 import { useTheme } from '@/providers/ThemeProvider';
 import type { PropsWithChildren } from 'react';
 

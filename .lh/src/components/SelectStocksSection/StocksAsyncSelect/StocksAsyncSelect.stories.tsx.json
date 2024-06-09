@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/SelectStocksSection/StocksAsyncSelect/StocksAsyncSelect.stories.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1717867233975,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1717867233975,
+            "name": "Commit-0",
+            "content": "import { StoryObj, Meta } from '@storybook/react';\n\nimport StocksAsyncSelect from './StocksAsyncSelect.tsx';\n\nexport default {\n  title: 'components/StocksAsyncSelect',\n  component: StocksAsyncSelect,\n  args: {\n    onChange: (value) => console.log(value),\n  },\n} as Meta<typeof StocksAsyncSelect>;\n\ntype Story = StoryObj<typeof StocksAsyncSelect>;\n\n// Type in Apple to search result\nexport const Default: Story = {\n  args: {},\n};\n"
+        }
+    ]
+}

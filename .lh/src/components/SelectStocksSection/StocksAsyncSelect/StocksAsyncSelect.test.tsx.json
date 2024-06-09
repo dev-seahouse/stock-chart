@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/components/SelectStocksSection/StocksAsyncSelect/StocksAsyncSelect.test.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1717900287851,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717900310704,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import userEvent from '@testing-library/user-event';\n \n describe('StocksAsyncSelect', () => {\n   // smoke test\n-  it('should render without error', async () => {\n+  it('should render without error', () => {\n     renderWithProviders(<StocksAsyncSelect onChange={vi.fn} />);\n   });\n \n   it('fetches and displays options based on user input', async () => {\n"
+                }
+            ],
+            "date": 1717900287851,
+            "name": "Commit-0",
+            "content": "import renderWithProviders from '@/testing/renderWithProviders.tsx';\nimport { describe, expect, it, vi } from 'vitest';\nimport StocksAsyncSelect from './StocksAsyncSelect.tsx';\nimport { screen, waitFor } from '@testing-library/react';\nimport userEvent from '@testing-library/user-event';\n\ndescribe('StocksAsyncSelect', () => {\n  // smoke test\n  it('should render without error', async () => {\n    renderWithProviders(<StocksAsyncSelect onChange={vi.fn} />);\n  });\n\n  it('fetches and displays options based on user input', async () => {\n    renderWithProviders(<StocksAsyncSelect onChange={vi.fn} />);\n\n    const input = screen.getByRole('combobox');\n    await userEvent.type(input, 'Apple');\n\n    await waitFor(() => {\n      expect(screen.getByText('Apple Inc. (AAPL)')).toBeInTheDocument();\n    });\n  });\n\n  it('handles no result correctly', async () => {\n    renderWithProviders(<StocksAsyncSelect onChange={vi.fn} />);\n    const input = screen.getByRole('combobox');\n    await userEvent.type(input, 'asdasdasdasdasdasd');\n\n    await waitFor(() => {\n      expect(screen.queryByText(/Apple Inc./i)).not.toBeInTheDocument();\n    });\n  });\n\n  it('uses cached data', async () => {\n    renderWithProviders(<StocksAsyncSelect onChange={vi.fn()} />);\n\n    const input = screen.getByRole('combobox');\n    await userEvent.type(input, 'Apple');\n\n    await screen.findByText('Apple Inc. (AAPL)');\n\n    await userEvent.clear(input);\n    await userEvent.type(input, 'Apple');\n\n    await screen.findByText('Apple Inc. (AAPL)');\n  });\n\n  it('handles API errors correctly', async () => {\n    renderWithProviders(<StocksAsyncSelect onChange={vi.fn()} />);\n\n    const input = screen.getByRole('combobox');\n    await userEvent.type(input, 'error');\n\n    await waitFor(() => {\n      expect(\n        screen.getByText(/Please wait before searching again./i),\n      ).toBeInTheDocument();\n    });\n  });\n});\n"
+        }
+    ]
+}

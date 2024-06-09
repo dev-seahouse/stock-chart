@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import path from 'path';
 import react from '@vitejs/plugin-react-swc';
 import { visualizer } from 'rollup-plugin-visualizer';
+import { configDefaults } from 'vitest/config';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,7 +12,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          if (id.includes('highcharts.js')) {
+          if (id.includes('highcharts')) {
             return 'highcharts';
           }
           if (id.includes('luxon')) {
@@ -28,6 +29,19 @@ export default defineConfig({
     globals: true,
     environment: 'happy-dom',
     setupFiles: ['./src/testing/setup-tests.ts'],
+    coverage: {
+      provider: 'v8',
+      exclude: [
+        ...configDefaults.exclude,
+        'src/main.tsx',
+        '.eslintrc.cjs',
+        'postcss.config.js',
+        'tailwind.config.cjs',
+        '**/*.stories.{ts,tsx}',
+        'public/**',
+        '**/.{idea,git,cache,output,temp,storybook}/**',
+      ],
+    },
   },
   server: {
     host: 'localhost',

@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1717758088820,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717854696087,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import AppHeader from '@/components/AppHeader';\n+import AppHeader from '@/components/AppHeader/AppHeader';\n import { useTheme } from '@/providers/ThemeProvider';\n import type { PropsWithChildren } from 'react';\n \n /**\n"
                 }
             ],
             "date": 1717758088820,

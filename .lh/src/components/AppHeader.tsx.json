@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/components/AppHeader.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1717854442491,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717854453468,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,11 @@\n       className={`\n         flex items-center justify-between bg-gray-900 px-6 py-4 text-white\n       `}\n     >\n-      <h1 className=\"text-2xl font-bold\">{import.meta.env.VITE_APP_TITLE}</h1>\n+      <h1 className=\"text-2xl font-bold\">\n+        {import.meta.env.VITE_APP_TITLE ?? 'Stock Price Viewer'}\n+      </h1>\n       <Button onClick={toggleTheme} variant=\"ghost\">\n         {theme === 'dark' ? <Sun /> : <SunMoon />}\n         <span className=\"sr-only\">Toggle dark mode</span>\n       </Button>\n"
+                }
+            ],
+            "date": 1717854442491,
+            "name": "Commit-0",
+            "content": "import { Button } from '@/lib/components/Button';\nimport type { Theme } from '@/providers/ThemeProvider';\nimport { Sun, SunMoon } from 'lucide-react';\n\nfunction AppHeader({\n  theme,\n  toggleTheme,\n}: {\n  theme: Theme;\n  toggleTheme: () => void;\n}) {\n  return (\n    <header\n      className={`\n        flex items-center justify-between bg-gray-900 px-6 py-4 text-white\n      `}\n    >\n      <h1 className=\"text-2xl font-bold\">{import.meta.env.VITE_APP_TITLE}</h1>\n      <Button onClick={toggleTheme} variant=\"ghost\">\n        {theme === 'dark' ? <Sun /> : <SunMoon />}\n        <span className=\"sr-only\">Toggle dark mode</span>\n      </Button>\n    </header>\n  );\n}\n\nexport default AppHeader;\n"
+        }
+    ]
+}

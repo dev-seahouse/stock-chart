@@ -19,6 +19,9 @@ module.exports = {
   settings: {
     tailwindcss: {
       callees: ["cn", "classnames", "clsx", "ctl", "cva", "tv", "tw"],
+    },
+    react:{
+      version:"detect"
     }
   },
   ignorePatterns: ['dist', '.eslintrc.cjs', 'public/mockServiceWorker.js',],
@@ -32,6 +35,10 @@ module.exports = {
   plugins: ['react-refresh', "readable-tailwind"],
   rules: {
     'react/prop-types': 'off',
+    'react/jsx-curly-brace-presence': [
+      'error',
+      { props: 'never', children: 'never' },
+    ],
     "@typescript-eslint/require-await": "warn",
     "readable-tailwind/multiline": ["warn", { "printWidth": 80 }],
     "@typescript-eslint/no-explicit-any": ["warn"],

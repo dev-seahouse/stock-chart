@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/components/DateRangePicker.stories.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1717843655015,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717843688107,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n export default {\n   title: 'components/DateRangePicker',\n   component: DateRangePicker,\n   args: {\n-    dateRange: undefined, //TODO: Implement prop\n+    dateRange: {}, //TODO: Implement prop\n     onDateChange: undefined, //TODO: Implement prop\n   },\n } as Meta<typeof DateRangePicker>;\n \n"
+                },
+                {
+                    "date": 1717843706824,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n export default {\n   title: 'components/DateRangePicker',\n   component: DateRangePicker,\n   args: {\n-    dateRange: {}, //TODO: Implement prop\n+    dateRange: { start: new Date(), end: new Date() }, //TODO: Implement prop\n     onDateChange: undefined, //TODO: Implement prop\n   },\n } as Meta<typeof DateRangePicker>;\n \n"
+                },
+                {
+                    "date": 1717843736783,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,15 @@\n import { StoryObj, Meta } from '@storybook/react';\n \n import DateRangePicker from './DateRangePicker';\n+import { fn } from '@storybook/test';\n \n export default {\n   title: 'components/DateRangePicker',\n   component: DateRangePicker,\n   args: {\n     dateRange: { start: new Date(), end: new Date() }, //TODO: Implement prop\n-    onDateChange: undefined, //TODO: Implement prop\n+    onDateChange: fn, //TODO: Implement prop\n   },\n } as Meta<typeof DateRangePicker>;\n \n type Story = StoryObj<typeof DateRangePicker>;\n"
+                }
+            ],
+            "date": 1717843655015,
+            "name": "Commit-0",
+            "content": "import { StoryObj, Meta } from '@storybook/react';\n\nimport DateRangePicker from './DateRangePicker';\n\nexport default {\n  title: 'components/DateRangePicker',\n  component: DateRangePicker,\n  args: {\n    dateRange: undefined, //TODO: Implement prop\n    onDateChange: undefined, //TODO: Implement prop\n  },\n} as Meta<typeof DateRangePicker>;\n\ntype Story = StoryObj<typeof DateRangePicker>;\n\nexport const Default: Story = {\n  args: {},\n};\n"
+        }
+    ]
+}

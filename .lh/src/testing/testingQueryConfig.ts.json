@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/testing/testingQueryConfig.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1717902919378,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717902947330,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+/* eslint-disable @typescript-eslint/no-empty-function */\n import { queryConfig } from '@/providers/ReactQueryProvider';\n \n // test query config should mimic the production query config\n // tests are likely to timeout if you want to test an erroneous query\n"
+                },
+                {
+                    "date": 1717903003424,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,11 @@\n \n // test query config should mimic the production query config\n // tests are likely to timeout if you want to test an erroneous query\n // so retry off\n+\n+// @see https://tanstack.com/query/v4/docs/framework/react/guides/testing\n+// for explanation of the following config\n export const testingQueryOptions = {\n   logger: {\n     log: console.log,\n     warn: console.warn,\n"
+                }
+            ],
+            "date": 1717902919378,
+            "name": "Commit-0",
+            "content": "import { queryConfig } from '@/providers/ReactQueryProvider';\n\n// test query config should mimic the production query config\n// tests are likely to timeout if you want to test an erroneous query\n// so retry off\nexport const testingQueryOptions = {\n  logger: {\n    log: console.log,\n    warn: console.warn,\n    // ✅ no more errors on the console for tests\n    error: process.env.NODE_ENV === 'test' ? () => {} : console.error,\n  },\n  defaultOptions: {\n    ...queryConfig,\n    queries: {\n      ...queryConfig.queries,\n      retry: false,\n    },\n  },\n};\n"
+        }
+    ]
+}

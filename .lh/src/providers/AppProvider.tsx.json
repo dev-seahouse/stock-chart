@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1717758042093,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717854724881,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import type { PropsWithChildren } from 'react';\n import ThemeProvider from './ThemeProvider';\n import ReactQueryProvider from './ReactQueryProvider';\n import { ErrorBoundary } from 'react-error-boundary';\n-import MainErrorFallback from '@/components/MainErrorFallback';\n+import MainErrorFallback from '@/components/MainErrorFallBack/MainErrorFallback';\n \n function AppProvider({ children }: PropsWithChildren) {\n   return (\n     <ErrorBoundary FallbackComponent={MainErrorFallback}>\n"
                 }
             ],
             "date": 1717758042093,

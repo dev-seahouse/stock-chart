@@ -1,0 +1,38 @@
+{
+    "sourceFile": "src/components/StocksAsyncSelect/StocksAsyncSelect.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1717855360339,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717855369690,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,14 @@\n import { useQueryClient } from '@tanstack/react-query';\n import AsyncSelect from '@/lib/components/AsyncSelect';\n import type { ActionMeta, SingleValue } from 'react-select';\n import useFetchTickers, { fetchTickers } from './StocksAsyncSelect.hooks';\n-import { StocksSelectOption } from './StocksSelectOption';\n \n+export interface StocksSelectOption {\n+  label: string;\n+  value: string;\n+}\n+\n interface StocksAsyncSelectProps {\n   className?: string;\n   onChange: (\n     newValue: SingleValue<StocksSelectOption>,\n"
+                },
+                {
+                    "date": 1717855380919,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,14 +2,10 @@\n import { useQueryClient } from '@tanstack/react-query';\n import AsyncSelect from '@/lib/components/AsyncSelect';\n import type { ActionMeta, SingleValue } from 'react-select';\n import useFetchTickers, { fetchTickers } from './StocksAsyncSelect.hooks';\n+import { StocksSelectOption } from '@/types';\n \n-export interface StocksSelectOption {\n-  label: string;\n-  value: string;\n-}\n-\n interface StocksAsyncSelectProps {\n   className?: string;\n   onChange: (\n     newValue: SingleValue<StocksSelectOption>,\n"
+                },
+                {
+                    "date": 1717856754904,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import { useQueryClient } from '@tanstack/react-query';\n import AsyncSelect from '@/lib/components/AsyncSelect';\n import type { ActionMeta, SingleValue } from 'react-select';\n import useFetchTickers, { fetchTickers } from './StocksAsyncSelect.hooks';\n-import { StocksSelectOption } from '@/types';\n+import { StocksSelectOption } from '@/types/StocksSelectOption';\n \n interface StocksAsyncSelectProps {\n   className?: string;\n   onChange: (\n"
+                },
+                {
+                    "date": 1717856878307,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,8 @@\n import { useQueryClient } from '@tanstack/react-query';\n import AsyncSelect from '@/lib/components/AsyncSelect';\n import type { ActionMeta, SingleValue } from 'react-select';\n import useFetchTickers, { fetchTickers } from './StocksAsyncSelect.hooks';\n-import { StocksSelectOption } from '@/types/StocksSelectOption';\n \n interface StocksAsyncSelectProps {\n   className?: string;\n   onChange: (\n"
+                },
+                {
+                    "date": 1717856888811,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n import { useQueryClient } from '@tanstack/react-query';\n import AsyncSelect from '@/lib/components/AsyncSelect';\n import type { ActionMeta, SingleValue } from 'react-select';\n import useFetchTickers, { fetchTickers } from './StocksAsyncSelect.hooks';\n+import type { StocksSelectOption } from './StocksAsyncSelect.types';\n \n interface StocksAsyncSelectProps {\n   className?: string;\n   onChange: (\n"
+                }
+            ],
+            "date": 1717855360339,
+            "name": "Commit-0",
+            "content": "import React, { useState } from 'react';\nimport { useQueryClient } from '@tanstack/react-query';\nimport AsyncSelect from '@/lib/components/AsyncSelect';\nimport type { ActionMeta, SingleValue } from 'react-select';\nimport useFetchTickers, { fetchTickers } from './StocksAsyncSelect.hooks';\nimport { StocksSelectOption } from './StocksSelectOption';\n\ninterface StocksAsyncSelectProps {\n  className?: string;\n  onChange: (\n    newValue: SingleValue<StocksSelectOption>,\n    actionMeta: ActionMeta<StocksSelectOption>,\n  ) => void;\n  isDisabled?: boolean;\n}\n\nconst StocksAsyncSelect: React.FC<StocksAsyncSelectProps> = ({\n  onChange,\n  isDisabled,\n  className,\n}) => {\n  const [inputValue, setInputValue] = useState('');\n  const queryClient = useQueryClient();\n\n  const { data: cachedData, isError } = useFetchTickers(inputValue);\n\n  const loadOptions = async (inputValue: string) => {\n    if (!inputValue?.length) return [];\n\n    setInputValue(inputValue);\n\n    // prevent dupliate network rrequests\n    const queryKey = ['tickers', inputValue];\n    const cachedData = queryClient.getQueryData<StocksSelectOption[]>(queryKey);\n    if (cachedData) return cachedData;\n\n    return await queryClient.fetchQuery({\n      queryKey,\n      queryFn: ({ signal }) => fetchTickers(inputValue, signal),\n    });\n  };\n\n  const noOptionsMessage = () => {\n    if (isError) {\n      return 'Please wait before searching again.';\n    }\n    return 'No stocks found';\n  };\n\n  return (\n    <AsyncSelect\n      placeholder=\"Type to search stocks ...\"\n      defaultOptions={cachedData ?? []}\n      noOptionsMessage={noOptionsMessage}\n      onChange={onChange}\n      loadOptions={loadOptions}\n      isMulti={false}\n      isDisabled={isDisabled}\n      className={className}\n    />\n  );\n};\n\nexport default StocksAsyncSelect;\n"
+        }
+    ]
+}

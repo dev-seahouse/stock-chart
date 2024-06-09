@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/components/SelectedStocksList/SelectedStocksList.stories.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1717854757071,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717854809578,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { Meta } from '@storybook/react';\n import SelectedStocksList from './SelectedStocksList';\n-import { StocksSelectOption } from '../StocksAsyncSelect';\n+import { StocksSelectOption } from '../StocksAsyncSelect/StocksAsyncSelect';\n import { fn } from '@storybook/test';\n \n export default {\n   title: 'Components/SelectedStocksList',\n"
+                },
+                {
+                    "date": 1717855360353,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { Meta } from '@storybook/react';\n import SelectedStocksList from './SelectedStocksList';\n-import { StocksSelectOption } from '../StocksAsyncSelect/StocksAsyncSelect';\n+import { StocksSelectOption } from '../StocksAsyncSelect/StocksSelectOption';\n import { fn } from '@storybook/test';\n \n export default {\n   title: 'Components/SelectedStocksList',\n"
+                },
+                {
+                    "date": 1717857015862,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { Meta } from '@storybook/react';\n import SelectedStocksList from './SelectedStocksList';\n-import { StocksSelectOption } from '../StocksAsyncSelect/StocksSelectOption';\n import { fn } from '@storybook/test';\n+import type { StocksSelectOption } from '../StocksAsyncSelect/StocksAsyncSelect.types';\n \n export default {\n   title: 'Components/SelectedStocksList',\n   component: SelectedStocksList,\n"
+                }
+            ],
+            "date": 1717854757071,
+            "name": "Commit-0",
+            "content": "import { Meta } from '@storybook/react';\nimport SelectedStocksList from './SelectedStocksList';\nimport { StocksSelectOption } from '../StocksAsyncSelect';\nimport { fn } from '@storybook/test';\n\nexport default {\n  title: 'Components/SelectedStocksList',\n  component: SelectedStocksList,\n} as Meta<typeof SelectedStocksList>;\n\nconst selectedStocks: StocksSelectOption[] = [\n  { value: 'AAPL', label: 'Apple Inc.' },\n  { value: 'GOOGL', label: 'Alphabet Inc.' },\n  { value: 'MSFT', label: 'Microsoft Corporation' },\n];\n\nconst handleDeselectStock = fn;\n\nexport const WithSelectedStocks = () => (\n  <SelectedStocksList\n    selectedStocks={selectedStocks}\n    handleDeselectStock={handleDeselectStock}\n  />\n);\n\nexport const NoSelectedStocks = () => (\n  <SelectedStocksList\n    selectedStocks={[]}\n    handleDeselectStock={handleDeselectStock}\n  />\n);\n"
+        }
+    ]
+}

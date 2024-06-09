@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/SelectedStocksList/SelectedStocksList.test.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1717854757072,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1717854757072,
+            "name": "Commit-0",
+            "content": "// smoke test\nimport { it, vi } from 'vitest';\nimport renderWithProviders from '@/testing/renderWithProviders.tsx';\nimport SelectedStocksList from '@/components/SelectedStocksList/SelectedStocksList';\n\n// smoke test\nit('should render without error', () => {\n  renderWithProviders(\n    <SelectedStocksList selectedStocks={[]} handleDeselectStock={vi.fn} />,\n  );\n});\n"
+        }
+    ]
+}

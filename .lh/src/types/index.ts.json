@@ -3,11 +3,39 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 7,
             "patches": [
                 {
                     "date": 1717830804126,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717855225545,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,3 @@\n // shared types\n+\n+export type StockPriceType = 'open' | 'high' | 'low' | 'close';\n"
+                },
+                {
+                    "date": 1717855380703,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,7 @@\n // shared types\n \n export type StockPriceType = 'open' | 'high' | 'low' | 'close';\n+export interface StocksSelectOption {\n+  label: string;\n+  value: string;\n+}\n"
+                },
+                {
+                    "date": 1717856754903,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,3 @@\n // shared types\n \n export type StockPriceType = 'open' | 'high' | 'low' | 'close';\n-export interface StocksSelectOption {\n-  label: string;\n-  value: string;\n-}\n"
+                },
+                {
+                    "date": 1717856767978,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,7 @@\n // shared types\n \n-export type StockPriceType = 'open' | 'high' | 'low' | 'close';\n+export type StockPriceType = 'open' | 'high' | 'low' | 'close';export interface StocksSelectOption {\n+  label: string;\n+  value: string;\n+}\n+\n"
+                },
+                {
+                    "date": 1717856787788,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,3 @@\n // shared types\n \n-export type StockPriceType = 'open' | 'high' | 'low' | 'close';export interface StocksSelectOption {\n-  label: string;\n-  value: string;\n-}\n-\n+export type StockPriceType = 'open' | 'high' | 'low' | 'close';\n"
+                },
+                {
+                    "date": 1717856805599,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,1 @@\n-// shared types\n-\n export type StockPriceType = 'open' | 'high' | 'low' | 'close';\n"
+                },
+                {
+                    "date": 1717856860733,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-export type StockPriceType = 'open' | 'high' | 'low' | 'close';\n+\n"
                 }
             ],
             "date": 1717830804126,

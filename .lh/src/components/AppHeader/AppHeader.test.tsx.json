@@ -1,0 +1,290 @@
+{
+    "sourceFile": "src/components/AppHeader/AppHeader.test.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 68,
+            "patches": [
+                {
+                    "date": 1717896782682,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717896815638,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,1 @@\n+it('should');\n"
+                },
+                {
+                    "date": 1717896830826,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-it('should');\n+it('should render without error', () => {});\n"
+                },
+                {
+                    "date": 1717896885066,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,2 @@\n+import { it } from 'vitest';\n it('should render without error', () => {});\n"
+                },
+                {
+                    "date": 1717896907668,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,4 @@\n import { it } from 'vitest';\n-it('should render without error', () => {});\n+it('should render without error', () => {\n+  expect();\n+});\n"
+                },
+                {
+                    "date": 1717896919571,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,2 @@\n import { it } from 'vitest';\n-it('should render without error', () => {\n-  expect();\n-});\n+it('should render without error', () => {});\n"
+                },
+                {
+                    "date": 1717896948908,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,6 @@\n+import renderWithProviders from '@/testing/renderWithProviders';\n import { it } from 'vitest';\n-it('should render without error', () => {});\n+import AppHeader from './AppHeader';\n+it('should render without error', () => {\n+  renderWithProviders(<AppHeader />);\n+});\n"
+                },
+                {
+                    "date": 1717896990544,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { it } from 'vitest';\n import AppHeader from './AppHeader';\n it('should render without error', () => {\n-  renderWithProviders(<AppHeader />);\n+  const toggleTheme = vi.mock();\n+  renderWithProviders(<AppHeader theme=\"dark\" />);\n });\n"
+                },
+                {
+                    "date": 1717897032402,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n-import { it } from 'vitest';\n+import { it, vi } from 'vitest';\n import AppHeader from './AppHeader';\n it('should render without error', () => {\n   const toggleTheme = vi.mock();\n   renderWithProviders(<AppHeader theme=\"dark\" />);\n"
+                },
+                {
+                    "date": 1717897046754,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { it, vi } from 'vitest';\n import AppHeader from './AppHeader';\n it('should render without error', () => {\n-  const toggleTheme = vi.mock();\n-  renderWithProviders(<AppHeader theme=\"dark\" />);\n+  const toggleTheme = vi.fn();\n+  renderWithProviders(<AppHeader theme=\"dark\" toggleTheme={toggleTheme} />);\n });\n"
+                },
+                {
+                    "date": 1717897056827,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,4 +4,7 @@\n it('should render without error', () => {\n   const toggleTheme = vi.fn();\n   renderWithProviders(<AppHeader theme=\"dark\" toggleTheme={toggleTheme} />);\n });\n+\n+\n+\n"
+                },
+                {
+                    "date": 1717897064245,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { it, vi } from 'vitest';\n import AppHeader from './AppHeader';\n+\n it('should render without error', () => {\n   const toggleTheme = vi.fn();\n   renderWithProviders(<AppHeader theme=\"dark\" toggleTheme={toggleTheme} />);\n });\n"
+                },
+                {
+                    "date": 1717897100943,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,4 @@\n it('should render without error', () => {\n   const toggleTheme = vi.fn();\n   renderWithProviders(<AppHeader theme=\"dark\" toggleTheme={toggleTheme} />);\n });\n-\n-\n-\n"
+                },
+                {
+                    "date": 1717897729561,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,16 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { it, vi } from 'vitest';\n import AppHeader from './AppHeader';\n \n+const TestWrapper = () => {\n+  const [theme, setTheme] = useState<Theme>('light');\n+  const toggleTheme = () => {\n+    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));\n+  };\n+  return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n+};\n+\n it('should render without error', () => {\n   const toggleTheme = vi.fn();\n   renderWithProviders(<AppHeader theme=\"dark\" toggleTheme={toggleTheme} />);\n });\n"
+                },
+                {
+                    "date": 1717897745399,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,9 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { it, vi } from 'vitest';\n import AppHeader from './AppHeader';\n+import { useState } from 'react';\n+import type { Theme } from 'react-select';\n \n const TestWrapper = () => {\n   const [theme, setTheme] = useState<Theme>('light');\n   const toggleTheme = () => {\n"
+                },
+                {
+                    "date": 1717897780247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { it, vi } from 'vitest';\n import AppHeader from './AppHeader';\n import { useState } from 'react';\n-import type { Theme } from 'react-select';\n \n const TestWrapper = () => {\n   const [theme, setTheme] = useState<Theme>('light');\n   const toggleTheme = () => {\n"
+                },
+                {
+                    "date": 1717897788515,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import AppHeader from './AppHeader';\n import { useState } from 'react';\n \n const TestWrapper = () => {\n-  const [theme, setTheme] = useState<Theme>('light');\n+  const [theme, setTheme] = useState<string>('light');\n   const toggleTheme = () => {\n     setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));\n   };\n   return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n"
+                },
+                {
+                    "date": 1717897812593,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import AppHeader from './AppHeader';\n import { useState } from 'react';\n \n const TestWrapper = () => {\n-  const [theme, setTheme] = useState<string>('light');\n+  const [theme, setTheme] = useState('light');\n   const toggleTheme = () => {\n     setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));\n   };\n   return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n"
+                },
+                {
+                    "date": 1717897819903,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import AppHeader from './AppHeader';\n import { useState } from 'react';\n \n const TestWrapper = () => {\n-  const [theme, setTheme] = useState('light');\n+  const [theme, setTheme] = useState<Theme>('light');\n   const toggleTheme = () => {\n     setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));\n   };\n   return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n"
+                },
+                {
+                    "date": 1717897832601,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { it, vi } from 'vitest';\n import AppHeader from './AppHeader';\n import { useState } from 'react';\n+import type { Theme } from '@/providers/ThemeProvider';\n \n const TestWrapper = () => {\n   const [theme, setTheme] = useState<Theme>('light');\n   const toggleTheme = () => {\n"
+                },
+                {
+                    "date": 1717897850848,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,6 +13,6 @@\n };\n \n it('should render without error', () => {\n   const toggleTheme = vi.fn();\n-  renderWithProviders(<AppHeader theme=\"dark\" toggleTheme={toggleTheme} />);\n+  renderWithProviders(<TestWrapper />);\n });\n"
+                },
+                {
+                    "date": 1717897864111,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,7 +12,6 @@\n   return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n };\n \n it('should render without error', () => {\n-  const toggleTheme = vi.fn();\n   renderWithProviders(<TestWrapper />);\n });\n"
+                },
+                {
+                    "date": 1717897872509,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n-import { it, vi } from 'vitest';\n+import { it } from 'vitest';\n import AppHeader from './AppHeader';\n import { useState } from 'react';\n import type { Theme } from '@/providers/ThemeProvider';\n \n"
+                },
+                {
+                    "date": 1717897902320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n-import { it } from 'vitest';\n+import { it, vi } from 'vitest';\n import AppHeader from './AppHeader';\n import { useState } from 'react';\n import type { Theme } from '@/providers/ThemeProvider';\n \n@@ -12,6 +12,6 @@\n   return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n };\n \n it('should render without error', () => {\n-  renderWithProviders(<TestWrapper />);\n+  renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n });\n"
+                },
+                {
+                    "date": 1717897911510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,7 +11,8 @@\n   };\n   return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n };\n \n+// smoke test\n it('should render without error', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n });\n"
+                },
+                {
+                    "date": 1717897917559,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,4 +15,5 @@\n // smoke test\n it('should render without error', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n });\n+\n"
+                },
+                {
+                    "date": 1717897971055,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,12 +4,8 @@\n import { useState } from 'react';\n import type { Theme } from '@/providers/ThemeProvider';\n \n const TestWrapper = () => {\n-  const [theme, setTheme] = useState<Theme>('light');\n-  const toggleTheme = () => {\n-    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));\n-  };\n   return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n };\n \n // smoke test\n"
+                },
+                {
+                    "date": 1717898660194,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,12 +4,12 @@\n import { useState } from 'react';\n import type { Theme } from '@/providers/ThemeProvider';\n \n const TestWrapper = () => {\n+  const { theme, toggleTheme } = useTheme();\n   return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n };\n \n // smoke test\n it('should render without error', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n });\n-\n"
+                },
+                {
+                    "date": 1717898666292,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { it, vi } from 'vitest';\n import AppHeader from './AppHeader';\n import { useState } from 'react';\n-import type { Theme } from '@/providers/ThemeProvider';\n+import { useTheme, type Theme } from '@/providers/ThemeProvider';\n \n const TestWrapper = () => {\n   const { theme, toggleTheme } = useTheme();\n   return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n"
+                },
+                {
+                    "date": 1717898673098,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { it, vi } from 'vitest';\n import AppHeader from './AppHeader';\n-import { useState } from 'react';\n-import { useTheme, type Theme } from '@/providers/ThemeProvider';\n+import { useTheme } from '@/providers/ThemeProvider';\n \n const TestWrapper = () => {\n   const { theme, toggleTheme } = useTheme();\n   return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n"
+                },
+                {
+                    "date": 1717898701789,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,4 +11,7 @@\n // smoke test\n it('should render without error', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n });\n+\n+\n+\n"
+                },
+                {
+                    "date": 1717898779503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { it, vi } from 'vitest';\n import AppHeader from './AppHeader';\n import { useTheme } from '@/providers/ThemeProvider';\n+import test from 'node:test';\n \n const TestWrapper = () => {\n   const { theme, toggleTheme } = useTheme();\n   return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n@@ -12,6 +13,7 @@\n it('should render without error', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n });\n \n-\n-\n+test('toggle dark mode button should be visible', () => {\n+  renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n+});\n"
+                },
+                {
+                    "date": 1717898798478,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { it, vi } from 'vitest';\n import AppHeader from './AppHeader';\n import { useTheme } from '@/providers/ThemeProvider';\n-import test from 'node:test';\n \n const TestWrapper = () => {\n   const { theme, toggleTheme } = useTheme();\n   return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n"
+                },
+                {
+                    "date": 1717898805296,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n-import { it, vi } from 'vitest';\n+import { it, test, vi } from 'vitest';\n import AppHeader from './AppHeader';\n import { useTheme } from '@/providers/ThemeProvider';\n \n const TestWrapper = () => {\n"
+                },
+                {
+                    "date": 1717898875446,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n-import { it, test, vi } from 'vitest';\n+import { expect, it, test, vi } from 'vitest';\n import AppHeader from './AppHeader';\n import { useTheme } from '@/providers/ThemeProvider';\n \n const TestWrapper = () => {\n@@ -14,5 +14,6 @@\n });\n \n test('toggle dark mode button should be visible', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n+  expect(screen.get)\n });\n"
+                },
+                {
+                    "date": 1717898904747,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,11 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { expect, it, test, vi } from 'vitest';\n import AppHeader from './AppHeader';\n import { useTheme } from '@/providers/ThemeProvider';\n+import {scren} from '@testing-library/react';\n \n+\n const TestWrapper = () => {\n   const { theme, toggleTheme } = useTheme();\n   return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n };\n@@ -14,6 +16,6 @@\n });\n \n test('toggle dark mode button should be visible', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n-  expect(screen.get)\n+  expect(screen.)\n });\n"
+                },
+                {
+                    "date": 1717898925762,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,10 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { expect, it, test, vi } from 'vitest';\n import AppHeader from './AppHeader';\n import { useTheme } from '@/providers/ThemeProvider';\n-import {scren} from '@testing-library/react';\n+import { screen } from '@testing-library/react';\n \n-\n const TestWrapper = () => {\n   const { theme, toggleTheme } = useTheme();\n   return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n };\n@@ -16,6 +15,6 @@\n });\n \n test('toggle dark mode button should be visible', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n-  expect(screen.)\n+  expect(screen.getByRole('button', { name: /toggle dark mode/i }));\n });\n"
+                },
+                {
+                    "date": 1717898941511,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,6 +15,8 @@\n });\n \n test('toggle dark mode button should be visible', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n-  expect(screen.getByRole('button', { name: /toggle dark mode/i }));\n+  expect(\n+    screen.getByRole('button', { name: /toggle dark mode/i }),\n+  ).toBeVisible();\n });\n"
+                },
+                {
+                    "date": 1717899036700,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,10 +13,14 @@\n it('should render without error', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n });\n \n+test(\"\")\n+\n test('toggle dark mode button should be visible', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n   expect(\n     screen.getByRole('button', { name: /toggle dark mode/i }),\n   ).toBeVisible();\n });\n+\n+\n"
+                },
+                {
+                    "date": 1717899078194,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,12 @@\n it('should render without error', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n });\n \n-test(\"\")\n+test(\"app title should be correct\",()=> {\n+  renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n+  expect(screen.get)\n+})\n \n test('toggle dark mode button should be visible', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n   expect(\n"
+                },
+                {
+                    "date": 1717899104467,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,17 +13,17 @@\n it('should render without error', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n });\n \n-test(\"app title should be correct\",()=> {\n+test('app title should be correct', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n-  expect(screen.get)\n-})\n+  expect(screen.getAllByRole('heading', { level: 1 })).toHaveTextContent(\n+    import.meta.env.VITE_APP_TITLE,\n+  );\n+});\n \n test('toggle dark mode button should be visible', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n   expect(\n     screen.getByRole('button', { name: /toggle dark mode/i }),\n   ).toBeVisible();\n });\n-\n-\n"
+                },
+                {
+                    "date": 1717899169398,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,11 +15,9 @@\n });\n \n test('app title should be correct', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n-  expect(screen.getAllByRole('heading', { level: 1 })).toHaveTextContent(\n-    import.meta.env.VITE_APP_TITLE,\n-  );\n+  expect(screen.getAllByRole('heading', { level: 1 })).toHaveTextContent('');\n });\n \n test('toggle dark mode button should be visible', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n"
+                },
+                {
+                    "date": 1717899229951,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n });\n \n test('app title should be correct', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n-  expect(screen.getAllByRole('heading', { level: 1 })).toHaveTextContent('');\n+  expect(screen.getByRole('heading'));\n });\n \n test('toggle dark mode button should be visible', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n"
+                },
+                {
+                    "date": 1717899238844,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n });\n \n test('app title should be correct', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n-  expect(screen.getByRole('heading'));\n+  expect(screen.getByRole('heading')).toBeInTheDocument();\n });\n \n test('toggle dark mode button should be visible', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n"
+                },
+                {
+                    "date": 1717899250138,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n });\n \n test('app title should be correct', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n-  expect(screen.getByRole('heading')).toBeInTheDocument();\n+  expect(screen.getByRole('heading'), { level: 1 }).toBeInTheDocument();\n });\n \n test('toggle dark mode button should be visible', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n"
+                },
+                {
+                    "date": 1717899262951,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n });\n \n test('app title should be correct', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n-  expect(screen.getByRole('heading'), { level: 1 }).toBeInTheDocument();\n+  expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();\n });\n \n test('toggle dark mode button should be visible', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n"
+                },
+                {
+                    "date": 1717899279758,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n });\n \n test('app title should be correct', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n-  expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();\n+  expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('');\n });\n \n test('toggle dark mode button should be visible', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n"
+                },
+                {
+                    "date": 1717899296805,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,11 @@\n });\n \n test('app title should be correct', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n-  expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('');\n+  expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(\n+    'Stock Price Viewer',\n+  );\n });\n \n test('toggle dark mode button should be visible', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n"
+                },
+                {
+                    "date": 1717899312998,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n \n test('app title should be correct', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(\n-    'Stock Price Viewer',\n+    import.meta.env.VITE_APP_TITLE,\n   );\n });\n \n test('toggle dark mode button should be visible', () => {\n"
+                },
+                {
+                    "date": 1717899344866,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n it('should render without error', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n });\n \n-test('app title should be correct', () => {\n+it('should have correct app title in h1', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(\n     import.meta.env.VITE_APP_TITLE,\n   );\n"
+                },
+                {
+                    "date": 1717899353673,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n it('should render without error', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n });\n \n-it('should have correct app title in h1', () => {\n+it('should render correct app title in h1', () => {\n   renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(\n     import.meta.env.VITE_APP_TITLE,\n   );\n"
+                },
+                {
+                    "date": 1717899381538,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,4 +26,9 @@\n   expect(\n     screen.getByRole('button', { name: /toggle dark mode/i }),\n   ).toBeVisible();\n });\n+\n+\n+test('render sun icon when theme is dark', ()=>{\n+\n+})\n"
+                },
+                {
+                    "date": 1717899396422,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,8 +27,5 @@\n     screen.getByRole('button', { name: /toggle dark mode/i }),\n   ).toBeVisible();\n });\n \n-\n-test('render sun icon when theme is dark', ()=>{\n-\n-})\n+test('toggle theme should have sun icon when theme is dark', () => {});\n"
+                },
+                {
+                    "date": 1717899464111,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,5 +27,7 @@\n     screen.getByRole('button', { name: /toggle dark mode/i }),\n   ).toBeVisible();\n });\n \n-test('toggle theme should have sun icon when theme is dark', () => {});\n+test('toggle theme should have sun icon when theme is dark', () => {\n+    \n+});\n"
+                },
+                {
+                    "date": 1717899474567,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,6 +28,7 @@\n   ).toBeVisible();\n });\n \n test('toggle theme should have sun icon when theme is dark', () => {\n-    \n+    renderWithProviders(<TestWrapper />);\n+    expect(screen.getByLabelText(/sun icon/i)).toBeVisible();\n });\n"
+                },
+                {
+                    "date": 1717899493955,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,6 +29,6 @@\n });\n \n test('toggle theme should have sun icon when theme is dark', () => {\n     renderWithProviders(<TestWrapper />);\n-    expect(screen.getByLabelText(/sun icon/i)).toBeVisible();\n+    expect(screen.getByRole('button'))\n });\n"
+                },
+                {
+                    "date": 1717899528811,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import { useTheme } from '@/providers/ThemeProvider';\n import { screen } from '@testing-library/react';\n \n const TestWrapper = () => {\n-  const { theme, toggleTheme } = useTheme();\n+  const { theme, toggleTheme, setTheme } = useTheme();\n   return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n };\n \n // smoke test\n@@ -28,7 +28,7 @@\n   ).toBeVisible();\n });\n \n test('toggle theme should have sun icon when theme is dark', () => {\n-    renderWithProviders(<TestWrapper />);\n-    expect(screen.getByRole('button'))\n+  renderWithProviders(<TestWrapper />);\n+  expect(screen.getByRole('button'));\n });\n"
+                },
+                {
+                    "date": 1717899547265,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import { useTheme } from '@/providers/ThemeProvider';\n import { screen } from '@testing-library/react';\n \n const TestWrapper = () => {\n-  const { theme, toggleTheme, setTheme } = useTheme();\n+  const { theme, toggleTheme} = useTheme();\n   return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n };\n \n // smoke test\n"
+                },
+                {
+                    "date": 1717899610838,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,12 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n import { expect, it, test, vi } from 'vitest';\n import AppHeader from './AppHeader';\n-import { useTheme } from '@/providers/ThemeProvider';\n+import { useTheme, type Theme } from '@/providers/ThemeProvider';\n import { screen } from '@testing-library/react';\n \n-const TestWrapper = () => {\n-  const { theme, toggleTheme} = useTheme();\n+const TestWrapper = (theme: Theme) => {\n+  const { theme, toggleTheme } = useTheme();\n   return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n };\n \n // smoke test\n"
+                },
+                {
+                    "date": 1717899643284,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,11 +3,11 @@\n import AppHeader from './AppHeader';\n import { useTheme, type Theme } from '@/providers/ThemeProvider';\n import { screen } from '@testing-library/react';\n \n-const TestWrapper = (theme: Theme) => {\n+const TestWrapper = (overrideTheme: Theme) => {\n   const { theme, toggleTheme } = useTheme();\n-  return <AppHeader theme={theme} toggleTheme={toggleTheme} />;\n+  return <AppHeader theme={overrideTheme ?? theme} toggleTheme={toggleTheme} />;\n };\n \n // smoke test\n it('should render without error', () => {\n"
+                },
+                {
+                    "date": 1717899651479,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import AppHeader from './AppHeader';\n import { useTheme, type Theme } from '@/providers/ThemeProvider';\n import { screen } from '@testing-library/react';\n \n-const TestWrapper = (overrideTheme: Theme) => {\n+const TestWrapper = (overrideTheme?: Theme) => {\n   const { theme, toggleTheme } = useTheme();\n   return <AppHeader theme={overrideTheme ?? theme} toggleTheme={toggleTheme} />;\n };\n \n"
+                },
+                {
+                    "date": 1717899675223,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,7 +28,7 @@\n   ).toBeVisible();\n });\n \n test('toggle theme should have sun icon when theme is dark', () => {\n-  renderWithProviders(<TestWrapper />);\n+  renderWithProviders(<TestWrapper/>);\n   expect(screen.getByRole('button'));\n });\n"
+                },
+                {
+                    "date": 1717899685108,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,7 +28,7 @@\n   ).toBeVisible();\n });\n \n test('toggle theme should have sun icon when theme is dark', () => {\n-  renderWithProviders(<TestWrapper/>);\n+  renderWithProviders(<TestWrapper />);\n   expect(screen.getByRole('button'));\n });\n"
+                },
+                {
+                    "date": 1717899711930,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import AppHeader from './AppHeader';\n import { useTheme, type Theme } from '@/providers/ThemeProvider';\n import { screen } from '@testing-library/react';\n \n-const TestWrapper = (overrideTheme?: Theme) => {\n+const TestWrapper = ({ overrideTheme }: { overrideTheme: Theme }) => {\n   const { theme, toggleTheme } = useTheme();\n   return <AppHeader theme={overrideTheme ?? theme} toggleTheme={toggleTheme} />;\n };\n \n"
+                },
+                {
+                    "date": 1717899720279,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import AppHeader from './AppHeader';\n import { useTheme, type Theme } from '@/providers/ThemeProvider';\n import { screen } from '@testing-library/react';\n \n-const TestWrapper = ({ overrideTheme }: { overrideTheme: Theme }) => {\n+const TestWrapper = ({ overrideTheme }: { overrideTheme?: Theme }) => {\n   const { theme, toggleTheme } = useTheme();\n   return <AppHeader theme={overrideTheme ?? theme} toggleTheme={toggleTheme} />;\n };\n \n"
+                },
+                {
+                    "date": 1717899734843,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,7 +28,7 @@\n   ).toBeVisible();\n });\n \n test('toggle theme should have sun icon when theme is dark', () => {\n-  renderWithProviders(<TestWrapper />);\n+  renderWithProviders(<TestWrapper theme={'dark' as const} />);\n   expect(screen.getByRole('button'));\n });\n"
+                },
+                {
+                    "date": 1717899747584,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,7 +28,7 @@\n   ).toBeVisible();\n });\n \n test('toggle theme should have sun icon when theme is dark', () => {\n-  renderWithProviders(<TestWrapper theme={'dark' as const} />);\n+  renderWithProviders(<TestWrapper overrideTheme={'dark'} />);\n   expect(screen.getByRole('button'));\n });\n"
+                },
+                {
+                    "date": 1717900144123,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,33 +2,36 @@\n import { expect, it, test, vi } from 'vitest';\n import AppHeader from './AppHeader';\n import { useTheme, type Theme } from '@/providers/ThemeProvider';\n import { screen } from '@testing-library/react';\n+import { describe } from 'node:test';\n \n const TestWrapper = ({ overrideTheme }: { overrideTheme?: Theme }) => {\n   const { theme, toggleTheme } = useTheme();\n   return <AppHeader theme={overrideTheme ?? theme} toggleTheme={toggleTheme} />;\n };\n \n-// smoke test\n-it('should render without error', () => {\n-  renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n-});\n+describe('AppHeader.tsx', () => {\n+  // smoke test\n+  it('should render without error', () => {\n+    renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n+  });\n \n-it('should render correct app title in h1', () => {\n-  renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n-  expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(\n-    import.meta.env.VITE_APP_TITLE,\n-  );\n-});\n+  it('should render correct app title in h1', () => {\n+    renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(\n+      import.meta.env.VITE_APP_TITLE,\n+    );\n+  });\n \n-test('toggle dark mode button should be visible', () => {\n-  renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n-  expect(\n-    screen.getByRole('button', { name: /toggle dark mode/i }),\n-  ).toBeVisible();\n-});\n+  test('toggle dark mode button should be visible', () => {\n+    renderWithProviders(<AppHeader theme=\"light\" toggleTheme={vi.fn} />);\n+    expect(\n+      screen.getByRole('button', { name: /toggle dark mode/i }),\n+    ).toBeVisible();\n+  });\n \n-test('toggle theme should have sun icon when theme is dark', () => {\n-  renderWithProviders(<TestWrapper overrideTheme={'dark'} />);\n-  expect(screen.getByRole('button'));\n+  test('toggle theme should have sun icon when theme is dark', () => {\n+    renderWithProviders(<TestWrapper overrideTheme={'dark'} />);\n+    expect(screen.getByRole('button'));\n+  });\n });\n"
+                },
+                {
+                    "date": 1717900158384,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,9 @@\n import renderWithProviders from '@/testing/renderWithProviders';\n-import { expect, it, test, vi } from 'vitest';\n+import { expect, it, test, vi, describe } from 'vitest';\n import AppHeader from './AppHeader';\n import { useTheme, type Theme } from '@/providers/ThemeProvider';\n import { screen } from '@testing-library/react';\n-import { describe } from 'node:test';\n \n const TestWrapper = ({ overrideTheme }: { overrideTheme?: Theme }) => {\n   const { theme, toggleTheme } = useTheme();\n   return <AppHeader theme={overrideTheme ?? theme} toggleTheme={toggleTheme} />;\n"
+                }
+            ],
+            "date": 1717896782682,
+            "name": "Commit-0",
+            "content": ""
+        }
+    ]
+}

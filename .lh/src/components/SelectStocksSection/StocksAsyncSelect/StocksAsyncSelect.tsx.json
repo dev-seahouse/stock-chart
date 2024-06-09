@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/components/SelectStocksSection/StocksAsyncSelect/StocksAsyncSelect.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1717867120033,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717867139320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,11 @@\n   ) => void;\n   isDisabled?: boolean;\n }\n \n+/**\n+ * \n+ */\n function StocksAsyncSelect({\n   onChange,\n   isDisabled,\n   className,\n"
+                },
+                {
+                    "date": 1717867174852,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   isDisabled?: boolean;\n }\n \n /**\n- * \n+ * Async select component for searching stocks\n  */\n function StocksAsyncSelect({\n   onChange,\n   isDisabled,\n"
+                }
+            ],
+            "date": 1717867120032,
+            "name": "Commit-0",
+            "content": "import React, { useState } from 'react';\nimport { useQueryClient } from '@tanstack/react-query';\nimport AsyncSelect from '@/lib/components/AsyncSelect.tsx';\nimport type { ActionMeta, SingleValue } from 'react-select';\nimport useFetchTickers, { fetchTickers } from './StocksAsyncSelect.hooks.ts';\nimport type { StocksSelectOption } from './StocksAsyncSelect.types.ts';\n\ninterface StocksAsyncSelectProps {\n  className?: string;\n  onChange: (\n    newValue: SingleValue<StocksSelectOption>,\n    actionMeta: ActionMeta<StocksSelectOption>,\n  ) => void;\n  isDisabled?: boolean;\n}\n\nfunction StocksAsyncSelect({\n  onChange,\n  isDisabled,\n  className,\n}: StocksAsyncSelectProps) {\n  const [inputState, setInputState] = useState('');\n  const queryClient = useQueryClient();\n\n  const { data: cachedData, isError } = useFetchTickers(inputState);\n\n  const loadOptions = async (inputValue: string) => {\n    if (!inputValue?.length) return [];\n\n    setInputState(inputValue);\n\n    // prevent dupliate network rrequests\n    const queryKey = ['tickers', inputValue];\n    const cachedData = queryClient.getQueryData<StocksSelectOption[]>(queryKey);\n    if (cachedData) return cachedData;\n\n    return await queryClient.fetchQuery({\n      queryKey,\n      queryFn: ({ signal }) => fetchTickers(inputValue, signal),\n    });\n  };\n\n  const noOptionsMessage = () => {\n    if (isError) {\n      return 'Please wait before searching again.';\n    }\n    return 'No stocks found';\n  };\n\n  return (\n    <AsyncSelect\n      placeholder=\"Type to search stocks ...\"\n      defaultOptions={cachedData ?? []}\n      noOptionsMessage={noOptionsMessage}\n      onChange={onChange}\n      loadOptions={loadOptions}\n      isMulti={false}\n      isDisabled={isDisabled}\n      className={className}\n    />\n  );\n}\n\nexport default StocksAsyncSelect;\n"
+        }
+    ]
+}

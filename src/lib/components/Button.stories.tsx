@@ -19,6 +19,7 @@ export const Default: Story = {
   },
 };
 
+/** secondary button */
 export const Secondary: Story = {
   args: {
     ...Default.args,
@@ -33,13 +34,14 @@ export const Outline: Story = {
   },
 };
 
-export const destructive: Story = {
+export const Destructive: Story = {
   args: {
     ...Default.args,
     variant: 'destructive',
   },
 };
 
+/** for icons, cross button, anything that is clickable but is not button */
 export const Ghost: Story = {
   args: {
     variant: 'ghost',

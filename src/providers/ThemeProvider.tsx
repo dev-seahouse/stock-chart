@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 /**
  * See https://ui.shadcn.com/docs/dark-mode/vite

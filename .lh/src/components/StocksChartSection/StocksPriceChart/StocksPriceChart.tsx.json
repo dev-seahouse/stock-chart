@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/components/StocksChartSection/StocksPriceChart/StocksPriceChart.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1717871201783,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717871257400,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,8 +62,9 @@\n           h-[400px] items-center justify-center space-x-4\n         `}\n       >\n         <Skeleton className=\"size-12 rounded-full\" />\n+        <span className=\"sr-only\">Loading...</span>\n         <div className=\"space-y-2\">\n           <Skeleton className=\"h-4 w-[250px]\" />\n           <Skeleton className=\"h-4 w-[200px]\" />\n         </div>\n"
+                }
+            ],
+            "date": 1717871201783,
+            "name": "Commit-0",
+            "content": "import Highcharts from 'highcharts';\nimport HighchartsReact from 'highcharts-react-official';\nimport useStockPriceChartQuery from './StocksPriceChart.hooks.ts';\nimport { capitalize } from '@/lib/utils.ts';\nimport { StockPriceType } from '@/components/StocksChartSection/PriceTypePicker/PriceTypePicker.types.ts';\nimport { Skeleton } from '@/lib/components/Skeleton.tsx';\ninterface StockPriceChartProps {\n  selectedTickers: string[];\n  dateRange: { start: string; end: string };\n  priceType: StockPriceType;\n}\n\nfunction StockPriceChart({\n  selectedTickers,\n  dateRange,\n  priceType,\n}: StockPriceChartProps) {\n  const queries = useStockPriceChartQuery(\n    selectedTickers,\n    dateRange,\n    priceType,\n  );\n\n  const chartData = selectedTickers.map((ticker) => {\n    const query = queries.find((q) => q?.data?.[0]?.ticker === ticker);\n    return {\n      type: 'line' as const,\n      name: ticker,\n      data: query?.data?.map((point) => ({ x: point.x, y: point.y })) ?? [],\n    };\n  });\n\n  const chartOptions = {\n    chart: {\n      zooming: {\n        type: 'x',\n      },\n    },\n    title: { text: 'Stock Prices' },\n    subtitle: {\n      text: 'Click and drag in the plot area to zoom in',\n    },\n    xAxis: { type: 'datetime' },\n    yAxis: {\n      title: {\n        text: `${capitalize(priceType)} Price`,\n      },\n    },\n    legend: { enabled: true },\n    series: chartData,\n  } satisfies Highcharts.Options;\n\n  const isError = queries.some((query) => query.isError);\n  const isLoading = queries.some((query) => query.isLoading);\n\n  if (isLoading) {\n    return (\n      <div\n        className={`\n          flex\n\n          h-[400px] items-center justify-center space-x-4\n        `}\n      >\n        <Skeleton className=\"size-12 rounded-full\" />\n        <div className=\"space-y-2\">\n          <Skeleton className=\"h-4 w-[250px]\" />\n          <Skeleton className=\"h-4 w-[200px]\" />\n        </div>\n      </div>\n    );\n  }\n\n  if (isError)\n    return (\n      <div className=\"h-[400px] text-center text-muted-foreground\">\n        Error loading data\n      </div>\n    );\n\n  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;\n}\n\nexport default StockPriceChart;\n"
+        }
+    ]
+}

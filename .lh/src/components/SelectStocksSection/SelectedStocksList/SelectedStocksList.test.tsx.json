@@ -1,0 +1,34 @@
+{
+    "sourceFile": "src/components/SelectStocksSection/SelectedStocksList/SelectedStocksList.test.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1717899976719,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717900021629,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,4 @@\n-// smoke test\n import { it, vi } from 'vitest';\n import renderWithProviders from '@/testing/renderWithProviders.tsx';\n import SelectedStocksList from '@/components/SelectStocksSection/SelectedStocksList/SelectedStocksList.tsx';\n \n"
+                },
+                {
+                    "date": 1717900176375,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,13 @@\n import { it, vi } from 'vitest';\n import renderWithProviders from '@/testing/renderWithProviders.tsx';\n import SelectedStocksList from '@/components/SelectStocksSection/SelectedStocksList/SelectedStocksList.tsx';\n+import { describe } from 'node:test';\n \n-// smoke test\n-it('should render without error', () => {\n-  renderWithProviders(\n-    <SelectedStocksList selectedStocks={[]} handleDeselectStock={vi.fn} />,\n-  );\n+describe(() => {\n+  // smoke test\n+  it('should render without error', () => {\n+    renderWithProviders(\n+      <SelectedStocksList selectedStocks={[]} handleDeselectStock={vi.fn} />,\n+    );\n+  });\n });\n"
+                },
+                {
+                    "date": 1717900188896,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import renderWithProviders from '@/testing/renderWithProviders.tsx';\n import SelectedStocksList from '@/components/SelectStocksSection/SelectedStocksList/SelectedStocksList.tsx';\n import { describe } from 'node:test';\n \n-describe(() => {\n+describe('SelectedStocksList.tsx', () => {\n   // smoke test\n   it('should render without error', () => {\n     renderWithProviders(\n       <SelectedStocksList selectedStocks={[]} handleDeselectStock={vi.fn} />,\n"
+                },
+                {
+                    "date": 1717900199141,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n-import { it, vi } from 'vitest';\n+import { it, vi, describe } from 'vitest';\n import renderWithProviders from '@/testing/renderWithProviders.tsx';\n import SelectedStocksList from '@/components/SelectStocksSection/SelectedStocksList/SelectedStocksList.tsx';\n-import { describe } from 'node:test';\n \n describe('SelectedStocksList.tsx', () => {\n   // smoke test\n   it('should render without error', () => {\n"
+                }
+            ],
+            "date": 1717899976718,
+            "name": "Commit-0",
+            "content": "// smoke test\nimport { it, vi } from 'vitest';\nimport renderWithProviders from '@/testing/renderWithProviders.tsx';\nimport SelectedStocksList from '@/components/SelectStocksSection/SelectedStocksList/SelectedStocksList.tsx';\n\n// smoke test\nit('should render without error', () => {\n  renderWithProviders(\n    <SelectedStocksList selectedStocks={[]} handleDeselectStock={vi.fn} />,\n  );\n});\n"
+        }
+    ]
+}

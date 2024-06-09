@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/components/StocksAsyncSelect/StocksAsyncSelect.hooks.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1717854842620,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717855360309,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { useQuery } from '@tanstack/react-query';\n import TickersService from '@/api/services/Tickers';\n-import type { StocksSelectOption } from './StocksAsyncSelect';\n+import type { StocksSelectOption } from './StocksSelectOption';\n \n export const useFetchTickers = (search: string) => {\n   return useQuery({\n     queryKey: ['tickers', search],\n"
+                },
+                {
+                    "date": 1717857027846,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { useQuery } from '@tanstack/react-query';\n import TickersService from '@/api/services/Tickers';\n-import type { StocksSelectOption } from './StocksSelectOption';\n+import type { StocksSelectOption } from './StocksAsyncSelect.types';\n \n export const useFetchTickers = (search: string) => {\n   return useQuery({\n     queryKey: ['tickers', search],\n"
+                }
+            ],
+            "date": 1717854842620,
+            "name": "Commit-0",
+            "content": "import { useQuery } from '@tanstack/react-query';\nimport TickersService from '@/api/services/Tickers';\nimport type { StocksSelectOption } from './StocksAsyncSelect';\n\nexport const useFetchTickers = (search: string) => {\n  return useQuery({\n    queryKey: ['tickers', search],\n    queryFn: ({ signal }) => fetchTickers(search, signal),\n    enabled: !!search,\n    retry: false,\n    retryOnMount: false,\n    refetchOnWindowFocus: false,\n    refetchOnMount: false,\n    staleTime: 5 * 60 * 1000, // 5 minutes\n    gcTime: 10 * 60 * 1000, // 10 minutes\n  });\n};\n\nexport const fetchTickers = async (\n  search: string,\n  signal?: AbortSignal,\n): Promise<StocksSelectOption[]> => {\n  const queryParams = {\n    search,\n    locale: 'us',\n    limit: 20, // max 20 results\n    market: 'stocks',\n    type: 'CS',\n  };\n  try {\n    const response = await TickersService.tickers(queryParams, signal);\n    return response.data.results.map((ticker) => ({\n      label: `${ticker.name} (${ticker.ticker})`,\n      value: ticker.ticker,\n    }));\n  } catch (e) {\n    throw new Error(e as string);\n  }\n};\n\nexport default useFetchTickers;\n"
+        }
+    ]
+}
