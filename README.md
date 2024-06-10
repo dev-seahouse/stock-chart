@@ -1,3 +1,11 @@
+# Stock Viewer
+
+![alt text](screenshots/image-15.png)
+
+## Live demo
+
+https://stock-chart-omega.vercel.app/
+
 ## how to start
 
 ```

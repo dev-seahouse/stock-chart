@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 83,
+            "activePatchIndex": 88,
             "patches": [
                 {
                     "date": 1717814087608,
@@ -340,6 +340,26 @@
                 {
                     "date": 1717983793000,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -105,9 +105,9 @@\n 1. stats.html is generated at build time to analyze bundle size (rollup-bundle-visulizer-plugin)\n 2. large libraries are manually split so that each bundle have size small than 500kb, assuming that http2 is enabled this will speed up FCP.\n 3. why not vendor chunk ?\n \n-- this PR discussion when vite removes vendor chunk by default https://github.com/vitejs/vite/pull/6534\n+- this PR discussion when vite removes vendor chunk by default https://github.com/vitejs/vite/pull/6534 explains it\n - TLTR:\n \n > With ever more improved modern tree-shaking and code splitting algorithms, vendor modules may not \"change less often\". When you (un-)imported new methods from vendor modules, the chance of changing the output vendor chunk is actually much higher than they used to be when these algorithms didn't exist.\n > Also the vendor chunk implementation needs to be always inline with the bundler's code splitting algorithms, or you'll have a larger vendor chunk with unnecessary codes in it.\n"
+                },
+                {
+                    "date": 1717983959502,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,8 @@\n+\n+## Live demo\n+\n+\n ## how to start\n \n ```\n npm start\n"
+                },
+                {
+                    "date": 1717983985128,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,10 @@\n-\n+# Stock Viewer\n ## Live demo\n \n+https://stock-chart-omega.vercel.app/\n \n+\n ## how to start\n \n ```\n npm start\n"
+                },
+                {
+                    "date": 1717984046903,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n # Stock Viewer\n+![alt text](image.png)\n ## Live demo\n \n https://stock-chart-omega.vercel.app/\n \n"
+                },
+                {
+                    "date": 1717984089623,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n # Stock Viewer\n-![alt text](image.png)\n+![alt text](image-1.png)\n ## Live demo\n \n https://stock-chart-omega.vercel.app/\n \n"
+                },
+                {
+                    "date": 1717984162800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,12 @@\n # Stock Viewer\n-![alt text](image-1.png)\n+\n+![alt text](screenshots/image-15.png)\n+\n ## Live demo\n \n https://stock-chart-omega.vercel.app/\n \n-\n ## how to start\n \n ```\n npm start\n"
                 }
             ],
             "date": 1717814087608,
