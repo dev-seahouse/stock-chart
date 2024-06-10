@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 21,
+            "activePatchIndex": 64,
             "patches": [
                 {
                     "date": 1717752898450,
@@ -92,6 +92,178 @@
                 {
                     "date": 1717824882244,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,11 @@\n         manualChunks: (id) => {\n           if (id.includes('highcharts.js')) {\n             return 'highcharts';\n           }\n+          if (id.includes('luxon')) {\n+            return 'luxon';\n+          }\n           if (id.includes('node_modules')) {\n             return 'vendor';\n           }\n         },\n"
+                },
+                {
+                    "date": 1717979239323,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,22 +2,17 @@\n import { defineConfig } from 'vite';\n import path from 'path';\n import react from '@vitejs/plugin-react-swc';\n import { visualizer } from 'rollup-plugin-visualizer';\n+import { configDefaults } from 'vitest/config';\n \n // https://vitejs.dev/config/\n export default defineConfig({\n   plugins: [react(), visualizer()],\n   build: {\n     rollupOptions: {\n       output: {\n         manualChunks: (id) => {\n-          if (id.includes('highcharts.js')) {\n-            return 'highcharts';\n-          }\n-          if (id.includes('luxon')) {\n-            return 'luxon';\n-          }\n           if (id.includes('node_modules')) {\n             return 'vendor';\n           }\n         },\n@@ -27,8 +22,21 @@\n   test: {\n     globals: true,\n     environment: 'happy-dom',\n     setupFiles: ['./src/testing/setup-tests.ts'],\n+    coverage: {\n+      provider: 'v8',\n+      exclude: [\n+        ...configDefaults.exclude,\n+        'src/main.tsx',\n+        '.eslintrc.cjs',\n+        'postcss.config.js',\n+        'tailwind.config.cjs',\n+        '**/*.stories.{ts,tsx}',\n+        'public/**',\n+        '**/.{idea,git,cache,output,temp,storybook}/**',\n+      ],\n+    },\n   },\n   server: {\n     host: 'localhost',\n     port: 3000,\n"
+                },
+                {
+                    "date": 1717979319091,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,11 @@\n   build: {\n     rollupOptions: {\n       output: {\n         manualChunks: (id) => {\n+          if (id.includes('luxon')) {\n+            return 'luxon';\n+          }\n           if (id.includes('node_modules')) {\n             return 'vendor';\n           }\n         },\n"
+                },
+                {
+                    "date": 1717979417924,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,16 +10,9 @@\n   plugins: [react(), visualizer()],\n   build: {\n     rollupOptions: {\n       output: {\n-        manualChunks: (id) => {\n-          if (id.includes('luxon')) {\n-            return 'luxon';\n-          }\n-          if (id.includes('node_modules')) {\n-            return 'vendor';\n-          }\n-        },\n+        manualChunks: [],\n       },\n     },\n   },\n   test: {\n"
+                },
+                {
+                    "date": 1717979426184,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n   plugins: [react(), visualizer()],\n   build: {\n     rollupOptions: {\n       output: {\n-        manualChunks: [],\n+        manualChunks: ['luxon'],\n       },\n     },\n   },\n   test: {\n"
+                },
+                {
+                    "date": 1717979483692,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,19 @@\n   plugins: [react(), visualizer()],\n   build: {\n     rollupOptions: {\n       output: {\n-        manualChunks: ['luxon'],\n+        manualChunks: (id) => {\n+          if (id.includes('luxon')) {\n+            return 'luxon';\n+          }\n+          if (id.includes('Highcharts')) {\n+            return 'highcharts';\n+          }\n+          if (id.includes('node_modules')) {\n+            return 'vendor';\n+          }\n+        },\n       },\n     },\n   },\n   test: {\n"
+                },
+                {
+                    "date": 1717979558878,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         manualChunks: (id) => {\n           if (id.includes('luxon')) {\n             return 'luxon';\n           }\n-          if (id.includes('Highcharts')) {\n+          if (id.includes('highcharts.js')) {\n             return 'highcharts';\n           }\n           if (id.includes('node_modules')) {\n             return 'vendor';\n"
+                },
+                {
+                    "date": 1717979612936,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         manualChunks: (id) => {\n           if (id.includes('luxon')) {\n             return 'luxon';\n           }\n-          if (id.includes('highcharts.js')) {\n+          if (id.includes('highcharts')) {\n             return 'highcharts';\n           }\n           if (id.includes('node_modules')) {\n             return 'vendor';\n"
+                },
+                {
+                    "date": 1717979644531,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,10 +14,10 @@\n         manualChunks: (id) => {\n           if (id.includes('luxon')) {\n             return 'luxon';\n           }\n-          if (id.includes('highcharts')) {\n-            return 'highcharts';\n+          if (id.includes('highcharts.js')) {\n+            return 'highchartsjs';\n           }\n           if (id.includes('node_modules')) {\n             return 'vendor';\n           }\n"
+                },
+                {
+                    "date": 1717980380281,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,19 +10,23 @@\n   plugins: [react(), visualizer()],\n   build: {\n     rollupOptions: {\n       output: {\n-        manualChunks: (id) => {\n-          if (id.includes('luxon')) {\n-            return 'luxon';\n-          }\n-          if (id.includes('highcharts.js')) {\n-            return 'highchartsjs';\n-          }\n-          if (id.includes('node_modules')) {\n-            return 'vendor';\n-          }\n-        },\n+        manualChunks:{\n+          \"luxon\": [\"luxon\"],\n+          \"\"\n+        }\n+        // manualChunks: (id) => {\n+        //   if (id.includes('luxon')) {\n+        //     return 'luxon';\n+        //   }\n+        //   if (id.includes('highcharts.js')) {\n+        //     return 'highchartsjs';\n+        //   }\n+        //   if (id.includes('node_modules')) {\n+        //     return 'vendor';\n+        //   }\n+        // },\n       },\n     },\n   },\n   test: {\n"
+                },
+                {
+                    "date": 1717980411514,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     rollupOptions: {\n       output: {\n         manualChunks:{\n           \"luxon\": [\"luxon\"],\n-          \"\"\n+          \"highcharts.js\":['highcharts.js'],\n         }\n         // manualChunks: (id) => {\n         //   if (id.includes('luxon')) {\n         //     return 'luxon';\n"
+                },
+                {
+                    "date": 1717980445587,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,12 +10,11 @@\n   plugins: [react(), visualizer()],\n   build: {\n     rollupOptions: {\n       output: {\n-        manualChunks:{\n-          \"luxon\": [\"luxon\"],\n-          \"highcharts.js\":['highcharts.js'],\n-        }\n+        manualChunks: {\n+          luxon: ['luxon'],\n+        },\n         // manualChunks: (id) => {\n         //   if (id.includes('luxon')) {\n         //     return 'luxon';\n         //   }\n"
+                },
+                {
+                    "date": 1717980536799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,19 +13,8 @@\n       output: {\n         manualChunks: {\n           luxon: ['luxon'],\n         },\n-        // manualChunks: (id) => {\n-        //   if (id.includes('luxon')) {\n-        //     return 'luxon';\n-        //   }\n-        //   if (id.includes('highcharts.js')) {\n-        //     return 'highchartsjs';\n-        //   }\n-        //   if (id.includes('node_modules')) {\n-        //     return 'vendor';\n-        //   }\n-        // },\n       },\n     },\n   },\n   test: {\n"
+                },
+                {
+                    "date": 1717980593258,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,9 @@\n   build: {\n     rollupOptions: {\n       output: {\n         manualChunks: {\n+          '@radix-ui': ['@radix-ui'],\n           luxon: ['luxon'],\n         },\n       },\n     },\n"
+                },
+                {
+                    "date": 1717980661359,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,11 +10,18 @@\n   plugins: [react(), visualizer()],\n   build: {\n     rollupOptions: {\n       output: {\n-        manualChunks: {\n-          '@radix-ui': ['@radix-ui'],\n-          luxon: ['luxon'],\n+        manualChunks: (id) => {\n+          if (id.includes('luxon')) {\n+            return 'luxon';\n+          }\n+          if (id.includes('highcharts.js')) {\n+            return 'highchartsjs';\n+          }\n+          if (id.includes('node_modules')) {\n+            return 'vendor';\n+          }\n         },\n       },\n     },\n   },\n"
+                },
+                {
+                    "date": 1717980669677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,14 +14,8 @@\n         manualChunks: (id) => {\n           if (id.includes('luxon')) {\n             return 'luxon';\n           }\n-          if (id.includes('highcharts.js')) {\n-            return 'highchartsjs';\n-          }\n-          if (id.includes('node_modules')) {\n-            return 'vendor';\n-          }\n         },\n       },\n     },\n   },\n"
+                },
+                {
+                    "date": 1717980772757,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,11 @@\n         manualChunks: (id) => {\n           if (id.includes('luxon')) {\n             return 'luxon';\n           }\n+          if (id.includes('@radix-ui')) {\n+            return 'radix';\n+          }\n         },\n       },\n     },\n   },\n"
+                },
+                {
+                    "date": 1717981049684,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,11 @@\n           }\n           if (id.includes('@radix-ui')) {\n             return 'radix';\n           }\n+          if (id.includes('node_modules')) {\n+            return 'vendor';\n+          }\n         },\n       },\n     },\n   },\n"
+                },
+                {
+                    "date": 1717981178489,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,11 +17,8 @@\n           }\n           if (id.includes('@radix-ui')) {\n             return 'radix';\n           }\n-          if (id.includes('node_modules')) {\n-            return 'vendor';\n-          }\n         },\n       },\n     },\n   },\n"
+                },
+                {
+                    "date": 1717981419719,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,11 @@\n           }\n           if (id.includes('@radix-ui')) {\n             return 'radix';\n           }\n+          if (id.includes('node_modules')) {\n+            return 'vendor';\n+          }\n         },\n       },\n     },\n   },\n"
+                },
+                {
+                    "date": 1717981556761,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,11 @@\n           }\n           if (id.includes('@radix-ui')) {\n             return 'radix';\n           }\n+          if (id.includes('react') && !id.includes('react-dom')) {\n+            return 'react';\n+          }\n           if (id.includes('node_modules')) {\n             return 'vendor';\n           }\n         },\n"
+                },
+                {
+                    "date": 1717981641310,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,12 +17,15 @@\n           }\n           if (id.includes('@radix-ui')) {\n             return 'radix';\n           }\n-          if (id.includes('react') && !id.includes('react-dom')) {\n-            return 'react';\n+          if (id.includes('highcharts')) {\n+            return 'highcharts';\n           }\n           if (id.includes('node_modules')) {\n+            if (id.includes('react')) {\n+              return 'react';\n+            }\n             return 'vendor';\n           }\n         },\n       },\n"
+                },
+                {
+                    "date": 1717981766613,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,17 +17,8 @@\n           }\n           if (id.includes('@radix-ui')) {\n             return 'radix';\n           }\n-          if (id.includes('highcharts')) {\n-            return 'highcharts';\n-          }\n-          if (id.includes('node_modules')) {\n-            if (id.includes('react')) {\n-              return 'react';\n-            }\n-            return 'vendor';\n-          }\n         },\n       },\n     },\n   },\n"
+                },
+                {
+                    "date": 1717982051372,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,11 @@\n           }\n           if (id.includes('@radix-ui')) {\n             return 'radix';\n           }\n+          if (id.includes('node_modules')) {\n+            return 'vendor';\n+          }\n         },\n       },\n     },\n   },\n"
+                },
+                {
+                    "date": 1717982106316,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,12 +16,10 @@\n             return 'luxon';\n           }\n           if (id.includes('@radix-ui')) {\n             return 'radix';\n-          }\n-          if (id.includes('node_modules')) {\n-            return 'vendor';\n-          }\n+          },\n+          \n         },\n       },\n     },\n   },\n"
+                },
+                {
+                    "date": 1717982461243,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,24 +2,37 @@\n import { defineConfig } from 'vite';\n import path from 'path';\n import react from '@vitejs/plugin-react-swc';\n import { visualizer } from 'rollup-plugin-visualizer';\n+import { chunkSplitPlugin } from 'vite-plugin-chunk-split';\n import { configDefaults } from 'vitest/config';\n \n-// https://vitejs.dev/config/\n export default defineConfig({\n-  plugins: [react(), visualizer()],\n+  plugins: [\n+    react(),\n+    visualizer(),\n+    chunkSplitPlugin({\n+      strategy: 'default',\n+      customSplitting: {\n+        // Bundle react and react-dom into a single chunk\n+        'react-vendor': ['react', 'react-dom'],\n+        // You can add more custom splitting logic here\n+      },\n+    }),\n+  ],\n   build: {\n     rollupOptions: {\n       output: {\n-        manualChunks: (id) => {\n+        manualChunks(id) {\n           if (id.includes('luxon')) {\n             return 'luxon';\n           }\n           if (id.includes('@radix-ui')) {\n             return 'radix';\n-          },\n-          \n+          }\n+          if (id.includes('node_modules')) {\n+            return 'vendor';\n+          }\n         },\n       },\n     },\n   },\n"
+                },
+                {
+                    "date": 1717982536958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,20 +6,9 @@\n import { chunkSplitPlugin } from 'vite-plugin-chunk-split';\n import { configDefaults } from 'vitest/config';\n \n export default defineConfig({\n-  plugins: [\n-    react(),\n-    visualizer(),\n-    chunkSplitPlugin({\n-      strategy: 'default',\n-      customSplitting: {\n-        // Bundle react and react-dom into a single chunk\n-        'react-vendor': ['react', 'react-dom'],\n-        // You can add more custom splitting logic here\n-      },\n-    }),\n-  ],\n+  plugins: [react(), visualizer(), splitVendorChunkPlugin()],\n   build: {\n     rollupOptions: {\n       output: {\n         manualChunks(id) {\n"
+                },
+                {
+                    "date": 1717982544764,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,20 @@\n import { chunkSplitPlugin } from 'vite-plugin-chunk-split';\n import { configDefaults } from 'vitest/config';\n \n export default defineConfig({\n-  plugins: [react(), visualizer(), splitVendorChunkPlugin()],\n+  plugins: [\n+    react(),\n+    visualizer(),\n+    chunkSplitPlugin({\n+      strategy: 'default',\n+      customSplitting: {\n+        // Bundle react and react-dom into a single chunk\n+        'react-vendor': ['react', 'react-dom'],\n+        // You can add more custom splitting logic here\n+      },\n+    }),\n+  ],\n   build: {\n     rollupOptions: {\n       output: {\n         manualChunks(id) {\n"
+                },
+                {
+                    "date": 1717982599504,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,25 +18,8 @@\n         // You can add more custom splitting logic here\n       },\n     }),\n   ],\n-  build: {\n-    rollupOptions: {\n-      output: {\n-        manualChunks(id) {\n-          if (id.includes('luxon')) {\n-            return 'luxon';\n-          }\n-          if (id.includes('@radix-ui')) {\n-            return 'radix';\n-          }\n-          if (id.includes('node_modules')) {\n-            return 'vendor';\n-          }\n-        },\n-      },\n-    },\n-  },\n   test: {\n     globals: true,\n     environment: 'happy-dom',\n     setupFiles: ['./src/testing/setup-tests.ts'],\n"
+                },
+                {
+                    "date": 1717982642684,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,14 +10,9 @@\n   plugins: [\n     react(),\n     visualizer(),\n     chunkSplitPlugin({\n-      strategy: 'default',\n-      customSplitting: {\n-        // Bundle react and react-dom into a single chunk\n-        'react-vendor': ['react', 'react-dom'],\n-        // You can add more custom splitting logic here\n-      },\n+      strategy: 'single-vendor',\n     }),\n   ],\n   test: {\n     globals: true,\n"
+                },
+                {
+                    "date": 1717982736478,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,11 @@\n     react(),\n     visualizer(),\n     chunkSplitPlugin({\n       strategy: 'single-vendor',\n+      customChunk: (args) => {\n+        const { id } = args;\n+      },\n     }),\n   ],\n   test: {\n     globals: true,\n"
+                },
+                {
+                    "date": 1717982760858,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,9 @@\n     chunkSplitPlugin({\n       strategy: 'single-vendor',\n       customChunk: (args) => {\n         const { id } = args;\n+        if (id.includes(\"@r\"))\n       },\n     }),\n   ],\n   test: {\n"
+                },
+                {
+                    "date": 1717982797565,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,13 +10,9 @@\n   plugins: [\n     react(),\n     visualizer(),\n     chunkSplitPlugin({\n-      strategy: 'single-vendor',\n-      customChunk: (args) => {\n-        const { id } = args;\n-        if (id.includes(\"@r\"))\n-      },\n+      strategy: 'unbundle',\n     }),\n   ],\n   test: {\n     globals: true,\n"
+                },
+                {
+                    "date": 1717982835133,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n   plugins: [\n     react(),\n     visualizer(),\n     chunkSplitPlugin({\n-      strategy: 'unbundle',\n+      strategy: 'all-in-one',\n     }),\n   ],\n   test: {\n     globals: true,\n"
+                },
+                {
+                    "date": 1717982863502,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n   plugins: [\n     react(),\n     visualizer(),\n     chunkSplitPlugin({\n-      strategy: 'all-in-one',\n+      strategy: 'single-vendor',\n     }),\n   ],\n   test: {\n     globals: true,\n"
+                },
+                {
+                    "date": 1717982961981,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,14 @@\n     react(),\n     visualizer(),\n     chunkSplitPlugin({\n       strategy: 'single-vendor',\n+      customChunk: (args) => {\n+        // files into pages directory is export in single files\n+        let { file, id, moduleId, root } = args;\n+        if (id.includes(\"@radius\"))\n+        return null;\n+      },\n     }),\n   ],\n   test: {\n     globals: true,\n"
+                },
+                {
+                    "date": 1717982975525,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n       strategy: 'single-vendor',\n       customChunk: (args) => {\n         // files into pages directory is export in single files\n         let { file, id, moduleId, root } = args;\n-        if (id.includes(\"@radius\"))\n+        if (id.includes(\"@radix-ui\"))\n         return null;\n       },\n     }),\n   ],\n"
+                },
+                {
+                    "date": 1717983004967,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,14 +11,11 @@\n     react(),\n     visualizer(),\n     chunkSplitPlugin({\n       strategy: 'single-vendor',\n-      customChunk: (args) => {\n-        // files into pages directory is export in single files\n-        let { file, id, moduleId, root } = args;\n-        if (id.includes(\"@radix-ui\"))\n-        return null;\n-      },\n+      customSplitting: {\n+        \"\"\n+      }\n     }),\n   ],\n   test: {\n     globals: true,\n"
+                },
+                {
+                    "date": 1717983020930,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,10 @@\n     visualizer(),\n     chunkSplitPlugin({\n       strategy: 'single-vendor',\n       customSplitting: {\n-        \"\"\n-      }\n+        radix: ['@radix-ui'],\n+      },\n     }),\n   ],\n   test: {\n     globals: true,\n"
+                },
+                {
+                    "date": 1717983093077,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     visualizer(),\n     chunkSplitPlugin({\n       strategy: 'single-vendor',\n       customSplitting: {\n-        radix: ['@radix-ui'],\n+        radix: [//],\n       },\n     }),\n   ],\n   test: {\n"
+                },
+                {
+                    "date": 1717983100212,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     visualizer(),\n     chunkSplitPlugin({\n       strategy: 'single-vendor',\n       customSplitting: {\n-        radix: [//],\n+        radix: [/@radix-ui/],\n       },\n     }),\n   ],\n   test: {\n"
+                },
+                {
+                    "date": 1717983360835,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,22 +2,29 @@\n import { defineConfig } from 'vite';\n import path from 'path';\n import react from '@vitejs/plugin-react-swc';\n import { visualizer } from 'rollup-plugin-visualizer';\n-import { chunkSplitPlugin } from 'vite-plugin-chunk-split';\n import { configDefaults } from 'vitest/config';\n \n+// https://vitejs.dev/config/\n export default defineConfig({\n-  plugins: [\n-    react(),\n-    visualizer(),\n-    chunkSplitPlugin({\n-      strategy: 'single-vendor',\n-      customSplitting: {\n-        radix: [/@radix-ui/],\n+  plugins: [react(), visualizer()],\n+  build: {\n+    rollupOptions: {\n+      output: {\n+        manualChunks: (id) => {\n+          if (id.includes('luxon')) {\n+            return 'luxon';\n+          }\n+          if (id.includes('H'))\n+          if (id.includes('node_modules')) {\n+            return 'vendor';\n+          }\n+\n+        },\n       },\n-    }),\n-  ],\n+    },\n+  },\n   test: {\n     globals: true,\n     environment: 'happy-dom',\n     setupFiles: ['./src/testing/setup-tests.ts'],\n"
+                },
+                {
+                    "date": 1717983399928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,16 +11,17 @@\n   build: {\n     rollupOptions: {\n       output: {\n         manualChunks: (id) => {\n-          if (id.includes('luxon')) {\n-            return 'luxon';\n-          }\n-          if (id.includes('H'))\n           if (id.includes('node_modules')) {\n+            if (id.includes('luxon')) {\n+              return 'luxon';\n+            }\n+            if (id.includes('@radix-ui')) {\n+              return 'radix';\n+            }\n             return 'vendor';\n           }\n-\n         },\n       },\n     },\n   },\n"
+                },
+                {
+                    "date": 1717983472971,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,17 +11,14 @@\n   build: {\n     rollupOptions: {\n       output: {\n         manualChunks: (id) => {\n-          if (id.includes('node_modules')) {\n-            if (id.includes('luxon')) {\n-              return 'luxon';\n-            }\n-            if (id.includes('@radix-ui')) {\n-              return 'radix';\n-            }\n-            return 'vendor';\n+          if (id.includes('luxon')) {\n+            return 'luxon';\n           }\n+          if (id.includes('@radix-ui')) {\n+            return 'radix';\n+          }\n         },\n       },\n     },\n   },\n"
                 }
             ],
             "date": 1717752898450,

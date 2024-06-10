@@ -12,14 +12,11 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          if (id.includes('highcharts')) {
-            return 'highcharts';
-          }
           if (id.includes('luxon')) {
             return 'luxon';
           }
-          if (id.includes('node_modules')) {
-            return 'vendor';
+          if (id.includes('@radix-ui')) {
+            return 'radix';
           }
         },
       },

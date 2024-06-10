@@ -23,6 +23,7 @@ npm run test:ui
 ```
 
 ## Folder structure
+
 ```
 stock-chart/
 ├── .storybook/
@@ -40,8 +41,8 @@ stock-chart/
 │ ├── index.tsx
 ├── components.json # used by ShadCn
 ```
-PS: if app grows we can add a 'features' folder, right now 'features' are organized within xxxSection folder naming convention to keep it simple and easy to browse through components
 
+PS: if app grows we can add a 'features' folder, right now 'features' are organized within xxxSection folder naming convention to keep it simple and easy to browse through components
 
 ## Component features and behaviour
 
@@ -58,11 +59,11 @@ PS: if app grows we can add a 'features' folder, right now 'features' are organi
 ### Stock Range Date Picker
 
 1. if user choose a from date greater than end date, end date will be changed to from date.
- ![alt text](screenshots/image1.png)
- ![alt text](screenshots/image5.png)  
+   ![alt text](screenshots/image1.png)
+   ![alt text](screenshots/image5.png)
 2. similarly, if end date is earlier than start date, start date will be set to end date.
 3. future dates are disabled  
- ![img.png](screenshots/img11.png)
+   ![img.png](screenshots/img11.png)
 
 ### Stock price chart
 
@@ -90,27 +91,38 @@ PS: if app grows we can add a 'features' folder, right now 'features' are organi
 3. all components are created with being testable in mind, for example stock-chart/src/providers/ReactQueryProvider.tsx is reusable in tests to allow overriding the app queryClient
 
 ## Code Coverage
+
 ![img.png](screenshots/img13.png)
 
 ## Error handling
+
 1. errors are handled as much as possible at component level by rending simple error messages
 2. error boundary has been setup to catch application wide errors
    ![alt text](screenshots/image9.png)
 
 ## Build optimization
+
 1. stats.html is generated at build time to analyze bundle size (rollup-bundle-visulizer-plugin)
-2. large libraries are manually split while the rest are put into vendor chunk
+2. large libraries are manually split so that each bundle have size small than 500kb, assuming that http2 is enabled this will speed up FCP.
+3. why not vendor chunk ?
+
+- this PR discussion when vite removes vendor chunk by default https://github.com/vitejs/vite/pull/6534 explains it
+- TLTR:
+
+> With ever more improved modern tree-shaking and code splitting algorithms, vendor modules may not "change less often". When you (un-)imported new methods from vendor modules, the chance of changing the output vendor chunk is actually much higher than they used to be when these algorithms didn't exist.
+> Also the vendor chunk implementation needs to be always inline with the bundler's code splitting algorithms, or you'll have a larger vendor chunk with unnecessary codes in it.
 
 ## FCP optimization
-1. Since Highchart library is relatively large, it is lazily loaded until it is needed. This is done primarily for demo purpose since there is no actual slow loading issue and code splitting is commonly done at route level.
-2. ![img.png](screenshots/img12.png)  
-3. ![img_1.png](screenshots/img_1.png)  
+
+1. Since Highchart library is relatively large, it is lazily loaded until it is needed. This is done primarily to demonstrate since there is no actual slow loading issue and code splitting is commonly done at route level.
+2. ![img.png](screenshots/img12.png)
+3. ![img_1.png](screenshots/img_1.png)
 
 ## Accessibility
+
 1. keyboard navigations (yes)
 2. colors (yes)
-3. screen-reader friendly (partial) 
-
+3. screen-reader friendly (partial)
 
 ## Misc notes
 
