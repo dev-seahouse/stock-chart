@@ -53,11 +53,9 @@ function DateRangePicker({
           <Button
             variant="outline"
             className={`
-              flex w-full items-center gap-2 text-gray-800
+              flex items-center gap-2 text-gray-800
 
               dark:text-gray-200
-
-              md:w-auto
             `}
             onClick={() => setIsFromPopoverOpen(true)}
           >
