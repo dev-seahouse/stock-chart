@@ -49,6 +49,7 @@ function SelectStocksSection({
       <Heading className="mb-2" as="h2">
         Selected Stocks
       </Heading>
+
       <SelectedStocksList
         selectedStocks={selectedStocks}
         handleDeselectStock={handleDeselectStock}

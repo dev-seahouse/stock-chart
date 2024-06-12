@@ -17,7 +17,7 @@ const fetchStockData = async (
   dateRange: DateRange,
   priceType: StockPriceType,
   multiplier = 1,
-  timespan: AggregatesParams['timespan'] = 'day',
+  timespan: AggregatesParams['timespan'] = 'hour',
 ) => {
   try {
     const { start, end } = dateRange;
@@ -45,7 +45,6 @@ const fetchStockData = async (
   }
 };
 
-//
 const useStockPriceChartQuery = (
   selectedTickers: string[],
   dateRange: DateRange,
@@ -53,6 +52,12 @@ const useStockPriceChartQuery = (
   multiplier?: number,
   timespan?: AggregatesParams['timespan'],
 ): UseQueryResult<{ x: number; y: number; ticker: string }[], unknown>[] => {
+  const { multiplier: defaultMultipler, timespan: defaultTimespan } =
+    getBarSize(dateRange);
+
+  const ownMultiplier = multiplier ?? defaultMultipler;
+  const ownTimespan = timespan ?? defaultTimespan;
+
   return useQueries({
     queries: selectedTickers.map((ticker) => ({
       queryKey: [
@@ -60,11 +65,17 @@ const useStockPriceChartQuery = (
         ticker,
         dateRange,
         priceType,
-        multiplier,
-        timespan,
+        ownMultiplier,
+        ownTimespan,
       ],
       queryFn: () =>
-        fetchStockData(ticker, dateRange, priceType, multiplier, timespan),
+        fetchStockData(
+          ticker,
+          dateRange,
+          priceType,
+          ownMultiplier,
+          ownTimespan,
+        ),
       refetchOnMount: false,
       refetchOnWindowFocus: false,
       retryOnMount: false,
@@ -74,5 +85,24 @@ const useStockPriceChartQuery = (
     })),
   });
 };
+
+// if date range is too short we want shorter interval bars
+function getBarSize(dateRange: DateRange): {
+  multiplier: number;
+  timespan: AggregatesParams['timespan'];
+} {
+  const startDate = new Date(dateRange.start);
+  const endDate = new Date(dateRange.end);
+  const diffInHours =
+    (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60);
+
+  if (diffInHours <= 1) {
+    return { multiplier: 1, timespan: 'minute' };
+  } else if (diffInHours <= 24) {
+    return { multiplier: 1, timespan: 'hour' };
+  } else {
+    return { multiplier: 1, timespan: 'day' };
+  }
+}
 
 export default useStockPriceChartQuery;
