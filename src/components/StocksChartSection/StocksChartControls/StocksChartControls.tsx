@@ -29,13 +29,13 @@ function StocksChartControls(props: {
         `}
       />
 
-      <DropdownMenu>
+      {/* <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" className="pb-4">
             test
           </Button>
         </DropdownMenuTrigger>
-      </DropdownMenu>
+      </DropdownMenu> */}
 
       <PriceTypePicker
         priceType={props.priceType}
