@@ -1,9 +1,6 @@
 import type { StockPriceType } from '@/components/StocksChartSection/PriceTypePicker/PriceTypePicker.types.ts';
 import DateRangePicker from '@/components/StocksChartSection/DateRangePicker/DateRangePicker.tsx';
 import PriceTypePicker from '@/components/StocksChartSection/PriceTypePicker/PriceTypePicker.tsx';
-import { DropdownMenu } from '@/lib/components/DropdownMenu';
-import { Button } from '@/lib/components/Button';
-import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
 
 function StocksChartControls(props: {
   dateRange: { start: Date; end: Date };
