@@ -9,28 +9,34 @@ import {
   DropdownMenuTrigger,
 } from '@/lib/components/DropdownMenu.tsx';
 import type { StockPriceType } from './PriceTypePicker.types.ts';
+import { cn } from '@/lib/utils.ts';
 
 interface PriceTypePickerProps {
   priceType: StockPriceType;
   onPriceTypeChange: (type: StockPriceType) => void;
+  className?: string;
 }
+
+const priceTypes = ['Open', 'High', 'Low', 'Close'];
 
 function PriceTypePicker({
   priceType,
   onPriceTypeChange,
+  className,
 }: PriceTypePickerProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className={`
-            mt-4 flex w-full items-center gap-2 text-gray-800
+          className={cn(
+            `
+              flex items-center gap-2 text-gray-800
 
-            dark:text-gray-200
-
-            md:mt-0 md:w-auto
-          `}
+              dark:text-gray-200
+            `,
+            className,
+          )}
         >
           <BarChartIcon
             className={`
@@ -48,46 +54,19 @@ function PriceTypePicker({
           //   libray typescirpt bug? should be generic
           onValueChange={onPriceTypeChange as () => void}
         >
-          <DropdownMenuRadioItem
-            value="open"
-            className={`
-              text-gray-800
+          {priceTypes.map((type) => (
+            <DropdownMenuRadioItem
+              value={type.toLowerCase()}
+              key={type}
+              className={`
+                text-gray-800
 
-              dark:text-gray-200
-            `}
-          >
-            Open
-          </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem
-            value="high"
-            className={`
-              text-gray-800
-
-              dark:text-gray-200
-            `}
-          >
-            High
-          </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem
-            value="low"
-            className={`
-              text-gray-800
-
-              dark:text-gray-200
-            `}
-          >
-            Low
-          </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem
-            value="close"
-            className={`
-              text-gray-800
-
-              dark:text-gray-200
-            `}
-          >
-            Close
-          </DropdownMenuRadioItem>
+                dark:text-gray-200
+              `}
+            >
+              {type}
+            </DropdownMenuRadioItem>
+          ))}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

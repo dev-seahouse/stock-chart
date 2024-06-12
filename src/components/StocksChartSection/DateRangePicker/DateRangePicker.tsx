@@ -21,6 +21,7 @@ function DateRangePicker({
   dateRange,
   onDateChange,
   disableFuture = true,
+  className,
 }: DateRangePickerProps) {
   const [isFromPopoverOpen, setIsFromPopoverOpen] = useState(false);
   const [isToPopoverOpen, setIsToPopoverOpen] = useState(false);
@@ -46,24 +47,18 @@ function DateRangePicker({
   };
 
   return (
-    <div
-      className={cn(`
-        flex w-full items-center gap-2
-
-        md:w-auto
-      `)}
-    >
+    <div className={cn(`flex items-center gap-2`, className)}>
       <Popover open={isFromPopoverOpen} onOpenChange={setIsFromPopoverOpen}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
             className={`
-                  flex w-full items-center gap-2 text-gray-800
+              flex w-full items-center gap-2 text-gray-800
 
-                  dark:text-gray-200
+              dark:text-gray-200
 
-                  md:w-auto
-                `}
+              md:w-auto
+            `}
             onClick={() => setIsFromPopoverOpen(true)}
           >
             <CalendarDaysIcon
@@ -101,12 +96,12 @@ function DateRangePicker({
           <Button
             variant="outline"
             className={`
-                  flex w-full items-center gap-2 text-gray-800
+              flex w-full items-center gap-2 text-gray-800
 
-                  dark:text-gray-200
+              dark:text-gray-200
 
-                  md:w-auto
-                `}
+              md:w-auto
+            `}
             onClick={() => setIsToPopoverOpen(true)}
           >
             <CalendarDaysIcon
