@@ -1,6 +1,9 @@
 import { useQueries, UseQueryResult } from '@tanstack/react-query';
 import AggregatesService from '@/api/services/Aggregates.ts';
-import type { AggregatesResult } from '@/api/services/Aggregates.types.ts';
+import type {
+  AggregatesParams,
+  AggregatesResult,
+} from '@/api/services/Aggregates.types.ts';
 import type { StockPriceType } from '@/components/StocksChartSection/PriceTypePicker/PriceTypePicker.types.ts';
 
 interface DateRange {
@@ -8,16 +11,19 @@ interface DateRange {
   end: string;
 }
 
+// if there is a lot of params i will make it an object instead
 const fetchStockData = async (
   ticker: string,
   dateRange: DateRange,
   priceType: StockPriceType,
+  multiplier = 1,
+  timespan: AggregatesParams['timespan'] = 'day',
 ) => {
   try {
     const { start, end } = dateRange;
     const params = {
-      multiplier: 1,
-      timespan: 'day' as const,
+      multiplier: multiplier,
+      timespan: timespan,
       from: start,
       to: end,
     };
@@ -44,11 +50,21 @@ const useStockPriceChartQuery = (
   selectedTickers: string[],
   dateRange: DateRange,
   priceType: StockPriceType,
+  multiplier?: number,
+  timespan?: AggregatesParams['timespan'],
 ): UseQueryResult<{ x: number; y: number; ticker: string }[], unknown>[] => {
   return useQueries({
     queries: selectedTickers.map((ticker) => ({
-      queryKey: ['aggregates', ticker, dateRange, priceType],
-      queryFn: () => fetchStockData(ticker, dateRange, priceType),
+      queryKey: [
+        'aggregates',
+        ticker,
+        dateRange,
+        priceType,
+        multiplier,
+        timespan,
+      ],
+      queryFn: () =>
+        fetchStockData(ticker, dateRange, priceType, multiplier, timespan),
       refetchOnMount: false,
       refetchOnWindowFocus: false,
       retryOnMount: false,

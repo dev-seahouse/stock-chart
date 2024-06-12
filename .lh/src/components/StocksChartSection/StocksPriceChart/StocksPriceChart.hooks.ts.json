@@ -3,11 +3,71 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 15,
             "patches": [
                 {
                     "date": 1717903114963,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718170749872,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,32 +11,38 @@\n const fetchStockData = async (\n   ticker: string,\n   dateRange: DateRange,\n   priceType: StockPriceType,\n+  multiplier:number,\n+  timespan:,\n ) => {\n-  const { start, end } = dateRange;\n-  const params = {\n-    multiplier: 1,\n-    timespan: 'day' as const,\n-    from: start,\n-    to: end,\n-  };\n-  const response = await AggregatesService.getAggregates(ticker, params);\n-  const priceKeyMap: Record<StockPriceType, keyof AggregatesResult> = {\n-    open: 'o',\n-    high: 'h',\n-    low: 'l',\n-    close: 'c',\n-  };\n-  const priceKey = priceKeyMap[priceType];\n-  return response.data.results.map((point) => ({\n-    x: point.t, // time\n-    y: point[priceKey], // price\n-    ticker,\n-  }));\n+  try {\n+    const { start, end } = dateRange;\n+    const params = {\n+      multiplier: 1,\n+      timespan: 'day' as const,\n+      from: start,\n+      to: end,\n+    };\n+    const response = await AggregatesService.getAggregates(ticker, params);\n+    const priceKeyMap: Record<StockPriceType, keyof AggregatesResult> = {\n+      open: 'o',\n+      high: 'h',\n+      low: 'l',\n+      close: 'c',\n+    };\n+    const priceKey = priceKeyMap[priceType];\n+    return response.data.results.map((point) => ({\n+      x: point.t, // time\n+      y: point[priceKey], // price\n+      ticker,\n+    }));\n+  } catch (e) {\n+    return Promise.reject(e);\n+  }\n };\n \n-// \n+//\n const useStockPriceChartQuery = (\n   selectedTickers: string[],\n   dateRange: DateRange,\n   priceType: StockPriceType,\n@@ -44,12 +50,12 @@\n   return useQueries({\n     queries: selectedTickers.map((ticker) => ({\n       queryKey: ['aggregates', ticker, dateRange, priceType],\n       queryFn: () => fetchStockData(ticker, dateRange, priceType),\n-      retry: false,\n       refetchOnMount: false,\n       refetchOnWindowFocus: false,\n       retryOnMount: false,\n+      retry: false,\n       staleTime: 5 * 60 * 1000, // 5 minutes\n       gcTime: 10 * 60 * 1000, // 10 minutes\n     })),\n   });\n"
+                },
+                {
+                    "date": 1718170795326,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n   ticker: string,\n   dateRange: DateRange,\n   priceType: StockPriceType,\n   multiplier:number,\n-  timespan:,\n+  timespan:,A\n ) => {\n   try {\n     const { start, end } = dateRange;\n     const params = {\n"
+                },
+                {
+                    "date": 1718170829312,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { useQueries, UseQueryResult } from '@tanstack/react-query';\n import AggregatesService from '@/api/services/Aggregates.ts';\n-import type { AggregatesResult } from '@/api/services/Aggregates.types.ts';\n+import type { AggregatesParams, AggregatesResult } from '@/api/services/Aggregates.types.ts';\n import type { StockPriceType } from '@/components/StocksChartSection/PriceTypePicker/PriceTypePicker.types.ts';\n \n interface DateRange {\n   start: string;\n@@ -12,9 +12,9 @@\n   ticker: string,\n   dateRange: DateRange,\n   priceType: StockPriceType,\n   multiplier:number,\n-  timespan:,A\n+  timespan:AggregatesParams['timespan']\n ) => {\n   try {\n     const { start, end } = dateRange;\n     const params = {\n"
+                },
+                {
+                    "date": 1718170851654,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,10 @@\n import { useQueries, UseQueryResult } from '@tanstack/react-query';\n import AggregatesService from '@/api/services/Aggregates.ts';\n-import type { AggregatesParams, AggregatesResult } from '@/api/services/Aggregates.types.ts';\n+import type {\n+  AggregatesParams,\n+  AggregatesResult,\n+} from '@/api/services/Aggregates.types.ts';\n import type { StockPriceType } from '@/components/StocksChartSection/PriceTypePicker/PriceTypePicker.types.ts';\n \n interface DateRange {\n   start: string;\n@@ -11,10 +14,10 @@\n const fetchStockData = async (\n   ticker: string,\n   dateRange: DateRange,\n   priceType: StockPriceType,\n-  multiplier:number,\n-  timespan:AggregatesParams['timespan']\n+  multiplier: number = 1,\n+  timespan: AggregatesParams['timespan'],\n ) => {\n   try {\n     const { start, end } = dateRange;\n     const params = {\n"
+                },
+                {
+                    "date": 1718170860435,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,10 +14,10 @@\n const fetchStockData = async (\n   ticker: string,\n   dateRange: DateRange,\n   priceType: StockPriceType,\n-  multiplier: number = 1,\n-  timespan: AggregatesParams['timespan'],\n+  multiplier = 1,\n+  timespan: AggregatesParams['timespan'] ='day',\n ) => {\n   try {\n     const { start, end } = dateRange;\n     const params = {\n"
+                },
+                {
+                    "date": 1718170871632,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,10 +20,10 @@\n ) => {\n   try {\n     const { start, end } = dateRange;\n     const params = {\n-      multiplier: 1,\n-      timespan: 'day' as const,\n+      multiplier: multiplier,\n+      timespan: timespan,\n       from: start,\n       to: end,\n     };\n     const response = await AggregatesService.getAggregates(ticker, params);\n"
+                },
+                {
+                    "date": 1718170897085,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n   start: string;\n   end: string;\n }\n \n+// if there is a lot of params i will make it an object\n const fetchStockData = async (\n   ticker: string,\n   dateRange: DateRange,\n   priceType: StockPriceType,\n"
+                },
+                {
+                    "date": 1718170917711,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n   start: string;\n   end: string;\n }\n \n-// if there is a lot of params i will make it an object\n+// if there is a lot of params i will make it an object instead\n const fetchStockData = async (\n   ticker: string,\n   dateRange: DateRange,\n   priceType: StockPriceType,\n"
+                },
+                {
+                    "date": 1718170947326,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n   ticker: string,\n   dateRange: DateRange,\n   priceType: StockPriceType,\n   multiplier = 1,\n-  timespan: AggregatesParams['timespan'] ='day',\n+  timespan: AggregatesParams['timespan'] = 'day',\n ) => {\n   try {\n     const { start, end } = dateRange;\n     const params = {\n@@ -49,8 +49,9 @@\n const useStockPriceChartQuery = (\n   selectedTickers: string[],\n   dateRange: DateRange,\n   priceType: StockPriceType,\n+  multiplier?: \n ): UseQueryResult<{ x: number; y: number; ticker: string }[], unknown>[] => {\n   return useQueries({\n     queries: selectedTickers.map((ticker) => ({\n       queryKey: ['aggregates', ticker, dateRange, priceType],\n"
+                },
+                {
+                    "date": 1718170955508,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,9 +49,10 @@\n const useStockPriceChartQuery = (\n   selectedTickers: string[],\n   dateRange: DateRange,\n   priceType: StockPriceType,\n-  multiplier?: \n+  multiplier?: number,\n+  \n ): UseQueryResult<{ x: number; y: number; ticker: string }[], unknown>[] => {\n   return useQueries({\n     queries: selectedTickers.map((ticker) => ({\n       queryKey: ['aggregates', ticker, dateRange, priceType],\n"
+                },
+                {
+                    "date": 1718170964621,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,9 +50,9 @@\n   selectedTickers: string[],\n   dateRange: DateRange,\n   priceType: StockPriceType,\n   multiplier?: number,\n-  \n+  timespan?: \n ): UseQueryResult<{ x: number; y: number; ticker: string }[], unknown>[] => {\n   return useQueries({\n     queries: selectedTickers.map((ticker) => ({\n       queryKey: ['aggregates', ticker, dateRange, priceType],\n"
+                },
+                {
+                    "date": 1718170974095,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,9 +50,9 @@\n   selectedTickers: string[],\n   dateRange: DateRange,\n   priceType: StockPriceType,\n   multiplier?: number,\n-  timespan?: \n+  timespan?: AggregatesParams['timespan']\n ): UseQueryResult<{ x: number; y: number; ticker: string }[], unknown>[] => {\n   return useQueries({\n     queries: selectedTickers.map((ticker) => ({\n       queryKey: ['aggregates', ticker, dateRange, priceType],\n"
+                },
+                {
+                    "date": 1718170989817,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n ): UseQueryResult<{ x: number; y: number; ticker: string }[], unknown>[] => {\n   return useQueries({\n     queries: selectedTickers.map((ticker) => ({\n       queryKey: ['aggregates', ticker, dateRange, priceType],\n-      queryFn: () => fetchStockData(ticker, dateRange, priceType),\n+      queryFn: () => fetchStockData(ticker, dateRange, priceType, multiplier, timespan),\n       refetchOnMount: false,\n       refetchOnWindowFocus: false,\n       retryOnMount: false,\n       retry: false,\n"
+                },
+                {
+                    "date": 1718171007048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n   timespan?: AggregatesParams['timespan'],\n ): UseQueryResult<{ x: number; y: number; ticker: string }[], unknown>[] => {\n   return useQueries({\n     queries: selectedTickers.map((ticker) => ({\n-      queryKey: ['aggregates', ticker, dateRange, priceType],\n+      queryKey: ['aggregates', ticker, dateRange, priceType, multiplier, timespan],\n       queryFn: () =>\n         fetchStockData(ticker, dateRange, priceType, multiplier, timespan),\n       refetchOnMount: false,\n       refetchOnWindowFocus: false,\n"
+                },
+                {
+                    "date": 1718171070273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n   ticker: string,\n   dateRange: DateRange,\n   priceType: StockPriceType,\n   multiplier = 1,\n-  timespan: AggregatesParams['timespan'] = 'day',\n+  timespan: AggregatesParams['timespan'] = 'hour',\n ) => {\n   try {\n     const { start, end } = dateRange;\n     const params = {\n"
                 }
             ],
             "date": 1717903114963,

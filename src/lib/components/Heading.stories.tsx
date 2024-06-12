@@ -6,7 +6,7 @@ export default {
   title: 'lib/components/Heading',
   component: Heading,
   args: {
-    title: 'conspergo accusamus',
+    children: 'hbello',
   },
 } as Meta<typeof Heading>;
 
