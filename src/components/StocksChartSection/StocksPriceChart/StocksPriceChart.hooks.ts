@@ -51,9 +51,15 @@ const useStockPriceChartQuery = (
   priceType: StockPriceType,
   multiplier?: number,
   timespan?: AggregatesParams['timespan'],
+  getBarSize?: (dateRange: DateRange) => {
+    multiplier: number;
+    timespan: AggregatesParams['timespan'];
+  },
 ): UseQueryResult<{ x: number; y: number; ticker: string }[], unknown>[] => {
+  const getBarSizeFn = getBarSize ?? defaultGetBarSize;
+
   const { multiplier: defaultMultipler, timespan: defaultTimespan } =
-    getBarSize(dateRange);
+    getBarSizeFn(dateRange);
 
   const ownMultiplier = multiplier ?? defaultMultipler;
   const ownTimespan = timespan ?? defaultTimespan;
@@ -87,7 +93,7 @@ const useStockPriceChartQuery = (
 };
 
 // if date range is too short we want shorter interval bars
-function getBarSize(dateRange: DateRange): {
+function defaultGetBarSize(dateRange: DateRange): {
   multiplier: number;
   timespan: AggregatesParams['timespan'];
 } {
